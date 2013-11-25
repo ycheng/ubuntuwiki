@@ -1,0 +1,22 @@
+#title Ubuntu Touch Developer Preview
+
+<<Include(Touch/Menu)>>
+
+##||<tablestyle="float:right; font-size: 0.9em; width:40%; background:#F1F1ED; margin: 0 0 1em 1em;" style="padding:0.5em;"><<TableOfContents>>||
+
+{{attachment:App-dev-tablet-GoMobile.png}}
+
+'''The Touch Developer Preview project provides the open source code for enthusiasts and developers, to familiarise themselves with Ubuntu's phone and tablet experience and develop applications on spare devices'''
+
+The Ubuntu Touch Developer Preview is a collection of open source
+projects that bring Ubuntu to multiple devices and form factors.
+
+It is currently work in progress and intended for enthusiasts who want
+to contribute testing and building the platform.
+
+Learn more and get involved:
+ * For technical discussion: http://launchpad.net/~ubuntu-phone
+ * For real-time chat: http://webchat.freenode.net/?channels=ubuntu-touch
+ * Contribute: http://wiki.ubuntu.com/Touch/Contribute
+ * Got questions? http://askubuntu.com/questions/ask?tags=ubuntu-touch
+ * If you develop apps for the phone: http://developer.ubuntu.com

@@ -1,0 +1,134 @@
+<<Include(Touch/Menu)>>
+||<tablebgcolor="#F1F1ED" tablewidth="40%" tablestyle="float:right;font-size:0.9em;margin:0 0 1em 1em;"style="padding:0.25em;"><<BR>><<TableOfContents>> ||
+
+= Building Ubuntu Touch Android pieces from source =
+
+Whether you want to build Ubuntu Touch for the currently supported Nexus devices or want to port it to a new target, you need to set up your working environment to build Android from source. This setup is more or less the same whether you are building AOSP or a project based on it such as Cyanogen``Mod, SEAndroid or Ubuntu Touch.
+
+If you are new to building Android sources you may want to check out this document and others in the Getting Started section on the Google documentation site, as it covers the basics and terminology of AOSP building.
+While Ubuntu Touch uses some helper scripts as detailed below, if will nonetheless be helpful to understand what is going on under the hood especially if you want to work on this part of the project.
+
+http://source.android.com/source/initializing.html
+
+For Ubuntu Touch, you can find all the needed Android git repositories at http://phablet.ubuntu.com/gitweb. This is basically a mirror of Cyanogen``Mod 10.1, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
+
+For any Android related project on our git server, you'll find a branch named phablet-10.1. This branch contains a static known git HEAD and the required changes needed for Ubuntu, including [[http://phablet.ubuntu.com/gitweb?p=CyanogenMod/android.git;a=blob;f=default.xml;hb=refs/heads/phablet-10.1|our custom Android manifest]].
+
+== Set up your development environment ==
+
+To support a wide range of devices, we decided to use Cyanogen``Mod as a base for the Android system. You could safely use AOSP, as we don't use a lot of the customizations and improvements done at the App/Java side, but it's easier with Cyanogen``Mod due the scripts and build procedures available for it.
+
+Everything we take from Android is just C/C++, so you'll notice that your Android build environment will be way smaller than when comparing to the traditional Android builds.
+
+For development you can run any 64-bit Desktop version of Ubuntu between 12.04 LTS and 13.04.
+
+It's not strictly necessary, but it's helpful to install ccache.
+(http://source.android.com/source/initializing.html#ccache in the general Android Setup guide should help with this.)
+
+Additional packages which are used to build the host tools: 
+ {{{
+$ sudo apt-get install git gnupg flex bison gperf build-essential \
+  zip bzr curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
+  libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
+  libgl1-mesa-dev g++-multilib mingw32 tofrodos \
+  python-markdown libxml2-utils xsltproc zlib1g-dev:i386 schedtool
+}}}
+
+You'll also need to [[../Install#Step_1_-_Desktop_Setup|set up the tools PPA]]. This will also install the {{{repo}}} tool, used to sync the Android repositories. [[http://source.android.com/source/using-repo.html|Learn more about the repo tool]].
+
+You can check out the source code using the repo and git tools already familiar to Android ROM developers, as described here
+
+https://wiki.ubuntu.com/Touch/AndroidDevel
+
+Alternately, all the Android code can be downloaded using the phablet-dev-bootstrap tool provided by the phablet-tools package installed in the previous step. This tool is a Python wrapper around repo and used to also check out bzr repositories before all code was managed by repo and git. For the purposes of getting the source code for development it is no longer needed.
+
+To get the code setup run:
+ {{{
+phablet-dev-bootstrap [target_directory]
+}}}
+
+If for some reason the sync ends midway, you can continue the sync with the `-c` switch, so the command would be:
+ {{{
+phablet-dev-bootstrap -c [target_directory]}}}
+
+Alternatively, if you are just building an image for an already supported device, you can specify the `-v` switch:
+ {{{
+phablet-dev-bootstrap -v [device codenames] [target_directory]
+}}}
+
+The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch Preview custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
+
+== Getting the vendor blobs ==
+
+Several parts of the Android images in Cyanogen``Mod 10.1 are proprietary, and only available in binary form. These are not redistributable, so you need to seed your tree from your device. Ultimately these binaries come from the manufacturer (so in the case of the Nexus4/Mako that's [[https://developers.google.com/android/nexus/images|Google's developer site]]), but the convenient way to ensure you have a matching version is to use a Cyanogen``Mod 10.1 image for your device, from [[http://www.cyanogenmod.org/|CyanogenMod]].
+
+The files belong under vendor/<vendorname>/<devicename> (in our case vendor/lge/mako), and are put there by a script device/<vendorname>/<devicename>/extract-files.sh. This is run while adb is connected, and it copies the files over to the location the build requires:
+
+ {{{
+$ adb devices
+<your device appears here>
+$ cd device/lge/mako
+$ ./extract-files.sh
+}}}
+
+As of this edit, there is no stable build for the Nexus 4/mako, so use the most recent release candidate, eg [[http://download.cyanogenmod.org/?device=mako&type=RC|RC4]]
+
+
+== Building for an existing device ==
+
+Here's how to build Ubuntu Touch for the Nexus 4 (Android codename mako)
+
+Since only a subset of the whole Android tree is used and built for Ubuntu Touch, the build is much faster than a full AOSP or CyanogenMod build.
+Still using CCACHE can help if you are doing multiple builds or have multiple target devices
+Build for the target you want. Valid names are mako (Nexus 4) grouper (Nexus 7) manta (Nexus 10) maguro (Galaxy Nexus)
+
+ {{{
+$ export USE_CCACHE=1
+$ . build/envsetup.sh
+$ brunch mako
+}}}
+
+== Flashing the image ==
+
+After the build out/target/product/mako will have all device specific build artifacts such as boot.img, system.img, userdata.img, recovery.img which can be flashed using fastboot to the respective partitions like:
+
+ {{{
+$ fastboot flash boot boot.img
+$ fastboot flash system system.img
+$ fastboot flash recovery recovery.img
+$ fastboot flash userdata userdata.img
+}}}
+
+Another way of installing the system is by just flashing recovery.img (a Clockworkmod image with some Ubuntu changes):
+
+ {{{
+$ fastboot flash recovery recovery.img
+}}}
+
+via fastboot and then loading zip files via adb / Clockworkmod, either by explicitly installing from the menu, or pushing the image as autodeploy.zip. If you push it as autodeploy.zip, you can then reboot into recovery, and it will be automatically installed into the appropriate partitions. First install the Android image and then the Ubuntu image.
+The Android image is in the same out/target/produce/mako directory.
+The latest Ubuntu image can be found here:
+http://cdimage.ubuntu.com/ubuntu-touch-preview/daily-preinstalled/current/saucy-preinstalled-phablet-armhf.zip
+
+ {{{
+$ adb push cm-10.1-20130326-UNOFFICIAL-mako.zip /sdcard/autodeploy.zip
+$ adb reboot recovery
+$ adb push saucy-preinstalled-phablet-armhf.zip /sdcard/autodeploy.zip
+$ adb reboot recovery
+}}}
+
+Note that the android-only image may not boot successfully, which is OK - just reboot again into the recovery mode, and flash the ubuntu image.
+
+While development is active, you might find it useful to wipe the various user data / cache partitions when switching the device to Ubuntu. You can do this from fastboot:
+
+ {{{
+$ fastboot -w
+}}}
+
+Before flashing the modified Android and then Ubuntu images.
+
+== Porting ==
+
+Now that you are comfortable with building Ubuntu Touch and have tested it on an existing device, you may want to take another step and port it to new hardware.
+
+https://wiki.ubuntu.com/Touch/Porting

@@ -1,0 +1,146 @@
+<<Include(Touch/Menu)>>
+
+||<tablestyle="float:right; font-size: 0.9em; width:40%; background:#F1F1ED; margin: 0 0 1em 1em;" style="padding:0.5em;"><<TableOfContents>>||
+
+= Testing a ubuntu touch application =
+== Unit Testing ==
+Unit testing is a requirement for proper test-driven development. To learn how to utilize the tools Qt and the SDK make available for this, see [[https://wiki.ubuntu.com/Touch/Testing/QML|this page]].
+
+== Functional testing ==
+For functional testing you can utilize the autopilot tool. Originally developed for the testing unity, autopilot has become a useful tool for functionally testing many different types of applications; including QML! [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|See this page]] for more information on how to [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|get started using autopilot]].
+
+== Community Exploratory testing ==
+Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image as it is released until the 13.10 preview image is published.  
+
+= Testing your Ubuntu Touch Code before submission =
+To test your code before submitting use phablet-tools.
+
+(instructions as of Sep 19 2013)
+
+{{{
+# install the latest green imgae: on host run...
+sudo phablet-flash ubuntu-system
+
+# disable the intro
+phablet-config edges-intro --disable
+
+# make image RW and reboot; only do this for testing debs, if only testing
+# click packages this can be skipped.
+phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build
+
+# or add packages
+phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build \
+    -p camera-app-autopilot
+
+# alternatively install your software through apt-get install, dpkg -i or
+# by just copying the right binaries that you built to the right place
+# ...
+# example for camera-app and unity8 testing:
+apt-get install camera-app-autopilot unity8-autopilot
+reboot
+
+# when using Mir, unity8 testing requires a bit more work, see Running Unity8 tests on Mir
+
+# For click apps, this will download the tests for all your preinstalled apps
+# you can use --click for a specific package name
+phablet-click-test-setup
+
+# Enable autopilot to reach the confined click apps, running this can take 
+# a few to several minutes depending on the amount of click apps installed
+phablet-config autopilot --dbus-probe enable
+
+# when using surfaceflinger, unity8 tests we run like this:
+phablet-test-run -n unity8
+
+# for application autopilots, unlock the screen by hand; then, run on host...
+phablet-test-run camera_app
+}}}
+
+Sample tests you may run:
+{{{
+phablet-test-run -p address-book-app-autopilot address_book_app
+phablet-test-run -p camera-app-autopilot camera_app
+phablet-test-run -p cordova-ubuntu-autopilot cordova_ubuntu
+phablet-test-run -p dialer-app-autopilot dialer_app
+phablet-test-run -p gallery-app-autopilot gallery_app
+phablet-test-run -p friends-app-autopilot friends_app
+phablet-test-run -p ubuntu-keyboard-autopilot ubuntu_keyboard
+phablet-test-run -p ubuntu-ui-toolkit-autopilot ubuntuuitoolkit
+phablet-test-run -p unity-webapps-qml-autopilot unity_webapps_qml
+phablet-test-run -p webbrowser-app-autopilot webbrowser_app
+# NB: only use -n for unity8
+phablet-test-run -n -p unity8-autopilot unity8
+}}}
+
+== Running Unity8 tests on Mir ==
+
+{{{
+# 1. reboot the device
+# 2. wait for the device mount to settle (nautilus pops up, at that point adb connection breaks)
+phablet-test-run -n -p unity8-autopilot unity8
+}}}
+
+== Running Click tests ==
+
+{{{
+# allows autopilot to snoop on dbus
+phablet-config autopilot --dbus-probe enable
+
+# pulls tests                                                 # runs tests
+phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
+phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app
+phablet-click-test-setup --click com.ubuntu.dropping-letters; phablet-test-run dropping_letters_app
+phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run ubuntu_filemanager_app
+phablet-click-test-setup --click com.ubuntu.music;            phablet-test-run music_app
+phablet-click-test-setup --click com.ubuntu.notes;            phablet-test-run notes_app
+phablet-click-test-setup --click com.ubuntu.terminal;         phablet-test-run ubuntu_terminal_app
+phablet-click-test-setup --click com.ubuntu.weather;          phablet-test-run ubuntu_weather_app
+
+}}}
+
+== Start Applications through adb ==
+
+In almost all cases it is a good idea to also validate your work by using your phone by hand after adding your change. A convenient way for developers to do app testing is by starting them through adb. To make that convenient we are providing a cli tool, called {{{upstart-app-launch}}}.
+
+Syntax:
+{{{
+upstart-app-launch <DESKTOP-FILENAME>
+}}}
+
+Examples:
+{{{
+su - phablet
+
+upstart-app-launch com.ubuntu.music
+upstart-app-launch dialer-app
+}}}
+
+
+== Receipts for different Developer Roles ==
+
+For application developers, we highly recommend to run at least your own application autopilot before submitting code.
+{{{
+# install your autopilots (example if in a package); on target:
+apt-get install your-app-autopilot
+
+# unlock screen by hand and run on target through adb:
+phablet-test-run your_app
+}}}
+
+For indicator developers, we highly recommend to run at least your indicator tests, but also the unity8 test suite; also if your indicator collaborates with any application, also run their tests
+{{{
+# install unity8 autopilot and two apps; on target:
+apt-get install unity8-autopilot webbrowser-app-autopilot camera-app-autopilot
+
+# unlock screen by hand and run on target through adb:
+phablet-test-run webbrowser_app
+
+# unlock screen by hand and run on target through adb:
+phablet-test-run camera_app
+
+# run unity8 ( remember the -n)
+phablet-test-run -n unity8
+}}}
+
+
+For core developers, we highly recommend to run unity8, three random apps and whatever your own test suites are.
