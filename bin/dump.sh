@@ -1,4 +1,5 @@
 export P=https://wiki.ubuntu.com
+editmoin -d Touch/AOSPBuild.wiki $P/Touch/AOSPBuild
 editmoin -d Touch/Building.wiki $P/Touch/Building
 editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps
 editmoin -d Touch/Devices.wiki $P/Touch/Devices

@@ -1,0 +1,61 @@
+= Building an AOSP based system.img =
+
+This is an example of building the AOSP based Ubuntu for Phones tree to run on the Nexus 4.
+This only builds the Android parts, that is the system.img run within the LXC container and the Android initrd that is included in that system.img. The Ubuntu boot.img and root file system are independent of the Android source tree.
+
+== Prerequisites ==
+
+Flash the device with the official images. See https://wiki.ubuntu.com/Touch/Install#Flashing_the_device for details.
+Make sure you have all the prerequisite packages for building the Android ROM tree. Check the https://wiki.ubuntu.com/Touch/Building#Set_up_your_development_environment section.
+
+
+== Get the AOSP based tree ==
+
+Currently you can try either the phablet-4.2.2_r1 or phablet-4.4_r1 branches. The latter builds and boots but only the adb shell works, there still are bugs preventing Android and Ubuntu communicating (WIP as of Nov 21 2013)
+
+Check out the AOSP 4.2.2 based Ubuntu for Phones tree. It includes everything (including vendor blobs) needed to get a working system.img
+
+{{{
+         $ mkdir phablet-4.2.2 && cd $_
+         $ repo init -u git://phablet.ubuntu.com/aosp/platform/manifest.git -b phablet-4.2.2_r1 (here you can optionally pass --reference /path/to/aosp/mirror if you have an AOSP mirror set up.)
+         $ repo sync -j 4
+
+}}}
+
+== Build  ==
+
+{{{
+        $ ./build/envsetup.sh
+        $ lunch full_mako-userdebug
+        $ make -j 8
+}}}
+
+== Copy to the device ==
+
+Transform the system.img into a regular Ext4 filesystem. (android-tools-fsutils)
+{{{
+        $ simg2img $OUT/system.img tmp.img
+        $ resize2fs -M tmp.img
+}}}
+
+Boot the device in recovery mode
+
+{{{
+        $ adb reboot recovery
+}}}
+
+Wait until it boots into recovery
+
+{{{
+        $ adb shell mkdir /a
+        $ adb shell mount /data/system.img /a
+        $ adb push tmp.img /a/var/lib/lxc/android/system.img
+        $ adb reboot
+}}}
+
+At the moment (Nov 20 2013) the AOSP build of the Nexus 4 only boots into unity if Mir is disabled so this workaround is needed on first boot (adb works but there are no graphics)
+
+{{{
+        $ adb shell rm /home/phablet/.display-mir
+        $ adb shell reboot
+}}}
