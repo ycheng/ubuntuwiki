@@ -248,31 +248,6 @@ set up the mixer just a little, so that the PCM can open. (On desktops, PCM can 
 a PCM that actually plays back audio, because then you can get notification sounds while on the phone.
 
 
-==== suid ====
-
-
-The default {{{fstab}}} for the new device will have its {{{/data}}} partition mounted with {{{nosuid}}}, which needs to be removed, as certain Ubuntu applications/daemons require the use of ''setuid''. The path to {{{fstab}}} is:
- {{{
-device/[manufacturer]/[codename]/fstab.[codename]
-}}}
-
-If you don’t find any files there, grep for “nosuid”.
-
-Example:
- {{{#!highlight diff
-device/samsung/p3100$ git diff
-diff --git a/fstab.espresso b/fstab.espresso
-index 47a3ffc..ddbc9a7 100644
---- a/fstab.espresso
-+++ b/fstab.espresso
-@@ -6,5 +6,5 @@
-
- /dev/block/platform/omap/omap_hsmmc.1/by-name/FACTORYFS     	/system         	ext4  	ro,barrier=1                                                                          	wait
- /dev/block/platform/omap/omap_hsmmc.1/by-name/EFS           	/efs            	ext4  	nosuid,nodev,barrier=1                                                                	wait,check
--/dev/block/platform/omap/omap_hsmmc.1/by-name/DATAFS        	/data           	ext4  	noatime,nosuid,nodev,barrier=1,discard,noauto_da_alloc,journal_async_commit           	wait,check,encryptable=footer
-+/dev/block/platform/omap/omap_hsmmc.1/by-name/DATAFS        	/data           	ext4  	noatime,nodev,barrier=1,discard,noauto_da_alloc,journal_async_commit                  	wait,check,encryptable=footer
- /dev/block/platform/omap/omap_hsmmc.1/by-name/CACHE         	/cache          	ext4  	noatime,nosuid,nodev,barrier=1,discard,noauto_da_alloc,journal_async_commit           	wait,check}}}
-
 === Kernel ===
 As a requirement from the Ubuntu userspace, we need to add a few extra kernel configs that are usually not enabled by default for Android.
 

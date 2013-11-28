@@ -4,6 +4,7 @@ editmoin -d Touch/Building.wiki $P/Touch/Building
 editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps
 editmoin -d Touch/Devices.wiki $P/Touch/Devices
 editmoin -d Touch/Install.wiki $P/Touch/Install
+editmoin -d Touch/Porting.wiki $P/Touch/Porting
 editmoin -d Touch/PortingNewTree.wiki $P/Touch/PortingNewTree
 editmoin -d Touch/ReleaseNotes.wiki $P/Touch/ReleaseNotes
 editmoin -d Touch/SdkFeatureStatus.wiki $P/Touch/SdkFeatureStatus
