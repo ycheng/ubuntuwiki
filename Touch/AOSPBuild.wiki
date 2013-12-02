@@ -25,7 +25,7 @@ Check out the AOSP 4.2.2 based Ubuntu for Phones tree. It includes everything (i
 == Build  ==
 
 {{{
-        $ ./build/envsetup.sh
+        $ source ./build/envsetup.sh
         $ lunch full_mako-userdebug
         $ make -j 8
 }}}

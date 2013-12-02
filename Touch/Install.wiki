@@ -131,7 +131,7 @@ Currently available commands:
 
 To bootstrap on the `devel` channel or reinstall afresh (wiping everything) the recommended command is:
 {{{
-    phablet-flash ubuntu-system --channel devel --no-backup
+    phablet-flash ubuntu-system --channel devel --bootstrap
 }}}
 
 /!\ ''This step can take a very long time.''
