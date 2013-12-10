@@ -199,6 +199,17 @@ If you have a '''nexus 7 3G''', pass `-d grouper`:
     phablet-flash ubuntu-system --no-backup -d grouper
 }}}
 
+You can make your device read-write (a "developer mode") to allow editing system files directly. Doing this will stop your device from being updated, and is not recommended unless you're developing Ubuntu itself. 
+{{{
+    adb shell touch /userdata/.writable_image  && adb reboot
+}}}
+
+If you have a device which is already flashed and you've made it read-write as above ("developer mode"), but now want to re-enable OTA updates (go back to read-only):
+{{{
+    adb shell rm /userdata/.writable_image
+    adb shell system-image-cli --build 0
+}}}
+
 If you have a device which is already flashed and you've made it read-write, and want to update it and keep your data and retain read-write mode
 {{{
     adb shell system-image-cli --build 0

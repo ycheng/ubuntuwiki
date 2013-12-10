@@ -517,12 +517,12 @@ adb shell reboot -p
 
 == Ubuntu pieces ==
 
-The Ubuntu container is put together using Ubuntu packages, which either come from the official Ubuntu archive or a personal package archive (PPA). The [[http://developer.ubuntu.com/packaging/|Ubuntu Development guide]] will tell you more about modifying source packages and submitting them to Ubuntu for inclusion.
+The Ubuntu container is put together using Ubuntu packages, which either come from the official Ubuntu archive or a personal package archive (PPA). The [[http://packaging.ubuntu.com/|Ubuntu Development guide]] will tell you more about modifying source packages and submitting them to Ubuntu for inclusion.
 
 If you follow the following articles you should have a better idea of how to fix bugs in Ubuntu and which tools to use:
- * [[http://developer.ubuntu.com/packaging/html/introduction-to-ubuntu-development.html|Introduction to Ubuntu development]]
- * [[http://developer.ubuntu.com/packaging/html/getting-set-up.html|Getting Set Up]]
- * [[http://developer.ubuntu.com/packaging/html/fixing-a-bug.html|Fixing a bug in Ubuntu]]
+ * [[http://packaging.ubuntu.com/html/introduction-to-ubuntu-development.html|Introduction to Ubuntu development]]
+ * [[http://packaging.ubuntu.com/html/getting-set-up.html|Getting Set Up]]
+ * [[http://packaging.ubuntu.com/html/fixing-a-bug.html|Fixing a bug in Ubuntu]]
 
 Images are currently built in the Canonical data center and they are based on `saucy`.
 
@@ -533,7 +533,7 @@ pbuilder-dist saucy armhf build happyhello_0.1.dsc}}}
 
 This creates a native build chroot using `qemu-arm-static`; some programs may fail in this environment.  It is also possible to cross-build some packages, which is still somewhat experimental but can be used at least for many core packages; see CrossBuilding for details.
 
-The article to [[http://developer.ubuntu.com/packaging/html/fixing-a-bug.html|fix a bug in Ubuntu]] and [[http://developer.ubuntu.com/packaging/html/fixing-a-bug-example.html|the tutorial]] also cover how to get a fix sponsored into Ubuntu.
+The article to [[http://packaging.ubuntu.com/html/fixing-a-bug.html|fix a bug in Ubuntu]] and [[http://packaging.ubuntu.com/html/fixing-a-bug-example.html|the tutorial]] also cover how to get a fix sponsored into Ubuntu.
 
 == Contributing back ==
 
