@@ -98,6 +98,7 @@ Some notes:
 ''Please try to keep the tables sorted.''
 
 || '''Device''' || '''Code name''' || '''Unlocking instructions''' || '''Install instructions''' || '''Code/Image''' || '''Contact person''' ||
+|| Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
 || [[http://en.wikipedia.org/wiki/ASUS_Eee_Pad_Transformer|Asus Transformer]] || [[/tf101|tf101]] || WIP || WIP || WIP || ||
 || [[http://en.wikipedia.org/wiki/Advent_Vega|Advent Vega]] || p10an01 || WIP || WIP || [[http://www.tabletroms.com/forums/vega-rom-development/6154-what-about-ubuntu-touch-vega.html|TabletRoms Forum]] || [[http://www.tabletroms.com/forums/members/hyperturtle.html|HyperTurtle]] ||
 || [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || WIP || WIP || WIP || [[https://launchpad.net/~fonix232|~fonix232]] ||
