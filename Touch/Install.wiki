@@ -43,6 +43,8 @@ Whilst Canonical provides images for the above Nexus devices, other devices may 
 
 = Flashing the device =
 
+##StartDeviceSetup
+
 == Step 1 - Desktop Setup ==
 
 The following steps are required on your desktop system that you'll need in order to flash and communicate with the device.
@@ -57,15 +59,6 @@ On your computer, press Ctrl+Alt+T to start a terminal.
 {{{
 sudo add-apt-repository ppa:phablet-team/tools
 }}}
-
-or if add-apt-repository is not available, append the following to your sources.list:
-
-{{{
-deb http://ppa.launchpad.net/phablet-team/tools/ubuntu [dist-codename] main
-deb-src http://ppa.launchpad.net/phablet-team/tools/ubuntu [dist-codename] main
-}}}
-*Note: replace [dist-codename] with precise, quantal, raring or saucy.
-
 
 Then do the following:
 
@@ -118,6 +111,8 @@ Follow these initial steps on your device:
 
 Newer Nexus 10s have not booted fully after developer mode was enabled. If this occurs boot into the bootloader and do "fastboot -w", then proceed to the next step.
 
+##EndDeviceSetup
+
 == Step 4 - Downloading & Deploying Image to Device ==
 
 To install the Ubuntu Touch Developer Preview on your device, you will need to execute the command below. Please note, this will wipe the contents of the device so ensure you have made a back-up.  To install and get updates, you will have to run phablet-flash with a command and some flags; see `phablet-flash --help` for a list of commands `phablet-flash name-of-command --help` for a list of flags.
@@ -136,6 +131,7 @@ To bootstrap on the `devel` channel or reinstall afresh (wiping everything) the 
 
 /!\ ''This step can take a very long time.''
 
+<<Anchor(UbuntuChannels)>>
 Note that there are other channels available:
 || '''channel''' || '''description''' ||
 || `devel` || alias to current development channel (`trusty`) ||

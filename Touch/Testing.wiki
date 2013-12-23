@@ -17,8 +17,10 @@ To test your code before submitting use phablet-tools.
 
 (instructions as of Sep 19 2013)
 
+== Preparation ==
+
 {{{
-# install the latest green imgae: on host run...
+# install the latest green image: on host run...
 sudo phablet-flash ubuntu-system
 
 # disable the intro
@@ -32,15 +34,6 @@ phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build
 phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build \
     -p camera-app-autopilot
 
-# alternatively install your software through apt-get install, dpkg -i or
-# by just copying the right binaries that you built to the right place
-# ...
-# example for camera-app and unity8 testing:
-apt-get install camera-app-autopilot unity8-autopilot
-reboot
-
-# when using Mir, unity8 testing requires a bit more work, see Running Unity8 tests on Mir
-
 # For click apps, this will download the tests for all your preinstalled apps
 # you can use --click for a specific package name
 phablet-click-test-setup
@@ -48,15 +41,12 @@ phablet-click-test-setup
 # Enable autopilot to reach the confined click apps, running this can take 
 # a few to several minutes depending on the amount of click apps installed
 phablet-config autopilot --dbus-probe enable
-
-# when using surfaceflinger, unity8 tests we run like this:
-phablet-test-run -n unity8
-
-# for application autopilots, unlock the screen by hand; then, run on host...
-phablet-test-run camera_app
 }}}
 
-Sample tests you may run:
+== Running Deb tests ==
+
+Make sure you unlock the screen on your device prior to running these commands on the host:
+
 {{{
 phablet-test-run -p address-book-app-autopilot address_book_app
 phablet-test-run -p camera-app-autopilot camera_app
@@ -65,11 +55,10 @@ phablet-test-run -p dialer-app-autopilot dialer_app
 phablet-test-run -p gallery-app-autopilot gallery_app
 phablet-test-run -p friends-app-autopilot friends_app
 phablet-test-run -p ubuntu-keyboard-autopilot ubuntu_keyboard
+phablet-test-run -p ubuntu-system-settings-autopilot ubuntu_system_settings
 phablet-test-run -p ubuntu-ui-toolkit-autopilot ubuntuuitoolkit
 phablet-test-run -p unity-webapps-qml-autopilot unity_webapps_qml
 phablet-test-run -p webbrowser-app-autopilot webbrowser_app
-# NB: only use -n for unity8
-phablet-test-run -n -p unity8-autopilot unity8
 }}}
 
 == Running Unity8 tests on Mir ==
@@ -89,6 +78,7 @@ phablet-config autopilot --dbus-probe enable
 # pulls tests                                                 # runs tests
 phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
 phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app
+phablet-click-test-setup --click com.ubuntu.clock;            phablet-test-run ubuntu_clock_app
 phablet-click-test-setup --click com.ubuntu.dropping-letters; phablet-test-run dropping_letters_app
 phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run ubuntu_filemanager_app
 phablet-click-test-setup --click com.ubuntu.music;            phablet-test-run music_app
@@ -96,7 +86,13 @@ phablet-click-test-setup --click com.ubuntu.notes;            phablet-test-run n
 phablet-click-test-setup --click com.ubuntu.terminal;         phablet-test-run ubuntu_terminal_app
 phablet-click-test-setup --click com.ubuntu.weather;          phablet-test-run ubuntu_weather_app
 
+# (on the device)
+# clean up the downloaded tests (see notes below)
+rm -rf /home/phablet/autopilot
+
 }}}
+
+IMPORTANT NOTE: remember that after doing a phablet-click-test-setup, you are fetching some autopilot tests to the ~/autopilot directory on the device. The tests in this directory have priority over all other directories. This means that if a given click package test pulls in, for instance, unity8 autopilot tests (which most of them do), you need to remove the ~/autopilot directory to use the latest autopilot tests installed on the system.
 
 == Start Applications through adb ==
 
