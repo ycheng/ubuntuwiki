@@ -99,7 +99,6 @@ Some notes:
 ''Please try to keep the tables sorted.''
 
 || '''Device''' || '''Code name''' || '''Unlocking instructions''' || '''Install instructions''' || '''Code/Image''' || '''Contact person''' ||
-|| Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
 || [[http://en.wikipedia.org/wiki/ASUS_Eee_Pad_Transformer|Asus Transformer]] || [[/tf101|tf101]] || WIP || WIP || WIP || ||
 || [[http://en.wikipedia.org/wiki/Advent_Vega|Advent Vega]] || p10an01 || WIP || WIP || [[http://www.tabletroms.com/forums/vega-rom-development/6154-what-about-ubuntu-touch-vega.html|TabletRoms Forum]] || [[http://www.tabletroms.com/forums/members/hyperturtle.html|HyperTurtle]] ||
 || [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || WIP || WIP || WIP || [[https://launchpad.net/~fonix232|~fonix232]] ||
@@ -116,12 +115,15 @@ Some notes:
 || '''[[http://en.wikipedia.org/wiki/Huawei_Ascend_P1|Huawei Ascend P1]]''' || [[/u9200|u9200]] || None needed ||  [[/u9200|u9200]]|| WIP || https://launchpad.net/~jani ||
 || Intermatrix U7 || barton || WIP || WIP || WIP || [[https://launchpad.net/~pdey|~pdey]]||
 || [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 7" || tate || WIP || WIP || WIP || [[https://launchpad.net/~hashcode0f|~hashcode0f]] ||
-|| Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || ??? || WIP || WIP || WIP || ||
+|| [[http://www.gsmarena.com/lenovo_a390-5450.php|Lenovo A390]] || ??? || ??? || ??? || ??? || ||
+|| [[http://www.gsmarena.com/lenovo_k900-5241.php|Lenovo K900]] || ??? || ??? || ??? || ??? || ||
+|| Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || unlocked || ??? || ??? || ??? || ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_4X_HD|LG Optimus 4x HD]] || p880 || [[http://forum.xda-developers.com/showthread.php?t=2245836 | Click Here]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || ashley.johnson [at] madmedialabs [dot] com ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2162777|XDA Forums]]|| [[https://launchpad.net/~ruggles92|~rugglez]] ||
 || [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus || WIP || WIP || WIP || [[https://launchpad.net/~501st-alpha1|Scott Weldon]] ||
+|| [[http://www.gsmarena.com/motorola_moto_g-5831.php|Motorola Moto G]] || ??? || ??? || ??? || ??? || ||
 || [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo || WIP|| WIP || WIP || [[https://launchpad.net/~michaelevans|~michaelevans]] ||
-|| [[http://en.wikipedia.org/wiki/Nokia_N800|Nokia N800]]/[[http://en.wikipedia.org/wiki/Nokia_N900|N900]] || ??? || WIP || WIP || WIP || ||
+|| [[http://en.wikipedia.org/wiki/Nokia_N800|Nokia N800]]/[[http://en.wikipedia.org/wiki/Nokia_N900|N900]] || ??? || ??? || ??? || ??? || ||
 || Notion Ink Adam PQi 3G || adam_3g || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
 || Notion Ink Adam PQi Wifi || adam || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
 || [[https://en.wikipedia.org/wiki/Pantech Vega Racer|Pantech Vega Racer]]|| UT4VR || WIP || WIP || http://cafe.naver.com/skydevelopers/284127 ||  [[http://cafe.naver.com/skydevelopers|SDA Developing]] ||
@@ -132,6 +134,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm AT&T) || d2att|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?p=39156949|XDA Forums]] || [[https://launchpad.net/~dankzegriefer|~dankzegriefer]]||
 || [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora || WIP || WIP || WIP || [[https://launchpad.net/~firelmnt|~firelmnt]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm TMO) || d2tmo|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2186277|XDA Forums]] || ||
+|| Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
 || [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] || WIP || WIP || WIP || [[https://launchpad.net/~p3t3|P3T3]] ||
 || [[http://en.wikipedia.org/wiki/Toshiba_Thrive|Toshiba Thrive]] || [[/antares|antares]] || WIP || WIP || [[http://www.thriveforums.org/forum/pio_masaki-development/18090-wip-ubuntu-touch-thrive-development-4.html#post167696|ThriveForums.org page ]] || pio_masaki on thriveforums.org ||
 Please add this: http://forum.xda-developers.com/showthread.php?t=2226413

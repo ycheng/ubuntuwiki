@@ -1,0 +1,229 @@
+||<tablestyle="float:right; font-size: 0.9em; width:40%; background:#F1F1ED; margin: 0 0 1em 1em;" style="padding:0.5em;"><<TableOfContents>>||
+
+Ubuntu Dual Boot Installer is provided as a tech preview for developers who want to run Ubuntu and Android on a single device. It is not intended to be used by regular users, neither at this point nor as its ultimate goal. Those developers installing it should be familiar with the Ubuntu and Android partition layouts and should also feel at home with manually flashing partitions in case something goes wrong.
+
+Ubuntu Dual Boot Installer was born as an internal skunkworks project some Canonical Engineers dedicated a limited amount of their time to. Seeing the good progress, it was decided to release this preview for the developer community to test, study and contribute to.
+
+Dual boot is not part of the regular Ubuntu release.
+
+= What to expect after installation =
+
+ * A single device with the ability to switch between fully functional Android and Ubuntu images
+ * On Android: an Ubuntu Installer app to install Ubuntu, as well as to boot into Ubuntu
+ * On Android: the Super``User app to grant permissions to the Ubuntu Installer app
+ * On Ubuntu: an Ubuntu Dual Boot app to boot into Android
+ * Ubuntu system updates are not yet supported from the Ubuntu side, but they can be done via the Android app
+
+= Requirements =
+
+To install dual-boot, you'll need:
+
+ * '''A Nexus 4 device''' (other [[https://wiki.ubuntu.com/Touch/Devices#Working_with_phablet-flash|supported Nexus devices]] should in theory work but have not been tested at the time)
+ * '''Android 4.2 or higher''' running on the device, either stock firmware or based on Cyanogen``Mod or AOSP. Note that [[#Android4.4Radio|Android 4.4 requires additional steps to get phone calls working on the Ubuntu side]]
+ * '''2.7GB of free storage''' on the device to install Ubuntu
+ * '''ADB tools''' running on your desktop computer
+ * The device needs its '''bootloader to be unlocked and USB debugging enabled'''. Follow steps 1 to 3 below to do this, or alternatively, if your device is already unlocked and has USB debugging enabled, you can [[#Installation|skip to the installation process >]]
+
+<<Include(../Install, , , from="StartDeviceSetup", to="EndDeviceSetup")>>
+
+<<Anchor(Installation)>>
+= Dual boot installation instructions =
+
+== Installing the Ubuntu Installer app in Android ==
+ 1. On your computer, download the dual boot installation script into your home directory from: http://humpolec.ubuntu.com/latest/dualboot.sh
+ 1. Open a terminal on your computer pressing the Ctrl+Alt+T key combination
+ 1. Make the installation script executable by running this command:{{{
+chmod +x dualboot.sh
+}}}
+ 1. Ensure that your device:
+  * has booted normally into the Android user interface
+  * has USB debugging enabled
+  * has an unlocked bootloader 
+ 1. Connect your device via USB to your computer
+ 1. Install dual-boot by running one of these commands on a terminal:
+  * If it's the first-time dual-boot installation and you are using stock Android or AOSP firmware without the SuperUser app, run this command:{{{
+./dualboot.sh FULL
+}}}
+  * Alternatively, to update only the Ubuntu Installer Application or if you are running non-stock Android firmware (e.g. Cyanogen``Mod), run this command:{{{
+./dualboot.sh UPDATE
+}}}
+
+After installation, the phone will reboot several times. Once finished, it will boot into Android and you will find the dual boot app as “Ubuntu Dual Boot” in the Apps section.
+
+Now follow the instructions below to install Ubuntu from Android.
+
+== Installing Ubuntu from Android ==
+
+Note: 2.7GB of free memory space is required on your device for the Ubuntu installation.
+
+ 1. Optionally, on your desktop, and while your device is still connected via USB, issue the following command on the terminal to free up space (say "Yes" if you are asked to grant permissions on the device): {{{
+adb shell "su sh rm -rf /cache/*"
+}}}
+ 1. On the device, press the apps button in Android to bring up the list of apps
+ 1. Browse the apps to find the '''Ubuntu Dual Boot''' icon and press it to start the app
+ 1. When the app launches, press on '''Choose channel to install''' and choose a channel to download from (the recommended channel is '''Trusty''')
+ 1. Once download is completed you need to Grant SU permissions to the application for the install to be successful. Press the '''Grant''' button, when prompted.
+ 1. Press the '''Reboot to Ubuntu''' button to boot to Ubuntu. 
+ 1. A standard phone reboot with the hard key will always boot to Android.
+
+Notes:
+ * All channels supported by the {{{phablet-flash}}} tool are also supported by the Ubuntu Installer on Android
+ * When selecting an Ubuntu channel, the '''bootstrap''' checkbox lets you wipe user data from Ubuntu, otherwise it is kept between installations. Since you're installing for the first time now, it won't make a difference
+ * When selecting an Ubuntu channel, unticking the '''latest version''' checkbox will let you select a particular image number. Otherwise, if checked it will default to the latest image.
+ * If during installation the Ubuntu download finished while the phone was locked or when the Ubuntu Installer app was not on the foreground, the installation button will change to '''Resume install'''. This will resume installation to the point where Super``User permissions are requested.
+
+= Additional notes =
+
+<<Anchor(UbuntuUpdate)>>
+== Updating to a new Ubuntu image ==
+Because Dual Boot is a special set-up the standard update method for Ubuntu currently does not work (see Feature Roadmap).
+
+To update Ubuntu to a newer version, On the android Ubuntu dual boot application, select "Uninstall Ubuntu" from the menu options. Next you will be asked if you want to keep the user data from Ubuntu. If you do not select "Delete user data", the next installation of Ubuntu will preserve your contacts, installed applications, pictures, background settings, ...
+
+Once Ubuntu has been uninstalled, follow the same installation step to download a newer version of Ubuntu.
+
+<<Anchor(Android4.4Radio)>>
+== Getting phone calls to work in Ubuntu and Android 4.4 ==
+
+The radio image shipped with Android 4.4 is reused on the Ubuntu side to make phone calls or use WiFi or sound, and it is not yet supported in Ubuntu. Until Ubuntu gains support for the Android 4.4 radio, there is an easy workaround whereby an older radio firmware can be flashed in the modem partition. You can do this either before or after installing dual boot
+
+Follow these steps to downgrade the radio firmware and get Ubuntu calls to work:
+
+ 1. Download an Android 4.3 firmware for your device onto your PC. Follow the links on this table >
+ 1. Open a terminal with Ctrl+Alt+T
+ 1. Extract the firmware tarball and cd to its directory.
+ 1. Run the following command to reboot into the bootloader{{{
+adb reboot bootloader
+}}}
+ 1. Once in the bootloader, run this command to reflash the radio. Replace $RADIO_FIRMWARE by the name of the file containing the radio firmware for your device (it's easily recognizable, as it starts with radio-$DEVICECODENAME):{{{
+fastboot flash radio $RADIO_FIRMWARE.img
+}}}
+ 1. After flashing, reboot and phone calls should work in Ubuntu:{{{
+fastboot reboot
+}}}
+
+= If something goes wrong =
+
+If something goes wrong after the dual boot installation and you cannot boot either into Ubuntu or Android, you can revert the Android installation to the status it was before dual boot by reflashing the original boot and recovery images. Only the recovery partition is actually modified by dual boot, but you can choose to reflash the boot partition just in case.
+
+ 1. Download the Android firmware you are running on your device onto your PC.
+ 1. Open a terminal with Ctrl+Alt+T
+ 1. Extract the firmware tarball and cd to its directory.
+ 1. Run the following command to reboot into the bootloader{{{
+adb reboot bootloader
+}}}
+ 1. Once in the bootloader, run this command to reflash the boot partition:{{{
+fastboot flash boot boot.img
+}}}
+ 1. Without exiting the bootloader, run this command to reflash the recovery partition:{{{
+fastboot flash recovery recovery.img
+}}}
+ 1. After flashing, reboot and your phone should start into Android:{{{
+    fastboot reboot
+}}}
+
+= Contributing =
+
+The dual boot project, as with the rest of Ubuntu is open source and open for participation, you can help making it better too!
+
+ * [[https://bugs.launchpad.net/humpolec/+filebug|Report bugs >]]
+ * [[https://code.launchpad.net/humpolec|Contribute code >]]
+
+== Feature Roadmap ==
+The development team is planning to provide new feature updates after the end of year break, including:
+ * Improvements to the installation and download process 
+ * Enable localisation in the android app by moving string to a resource file
+ * Review error handling within the application
+ * Enable Ubuntu updates from the android app (instead of having to re-install the image)
+ * Restore the orginal Recovery partition from the ubuntu-side application.
+
+= FAQ =
+
+== How does dual boot work? ==
+
+An Android-based phone has multiple partitions which serve different purposes. Those relevant for dual booting are '''/boot''', '''/recovery''', '''/system''' and '''/data'''.
+
+ * The '''boot''' partition is loaded by the bootloader during a normal boot. The boot image in that partition is a combination of the kernel and a ramdisk. In short, the bootloader unpacks the boot image, creates a ramdisk and copies the content of the boot image's ramdisk into it. Then the kernel is started by executing the '''init process''' from ramdisk.
+ * The '''recovery partition''' contains the recovery image, which is just a different kind of boot image. It also includes a kernel and a ramdisk, where the init binary is replaced by a recovery binary inside the ramdisk.
+ * The '''system partition''' holds all the read-only system files (except the ones in ramdisk), and it is mounted by the init process.
+ * The '''data partition''' is then a writable partition used by the system for user data.
+
+Ubuntu uses partitions in a slightly different way:
+
+ * The '''boot''' and '''recovery''' partitions have the same functionality as in Android
+ * The '''system image''' holds the Android part of the system which is executed inside the LXC.
+ * The '''data partition''' contains the Ubuntu system under '''/data/ubuntu/'''
+
+In order to enable the user to choose their own flavour of Android, the Android boot image cannot be modified, as the original kernel needs to be preserved. '''Thus the recovery partition is used to boot into Ubuntu'''.
+
+== Which versions of Android does dual-boot work with? ==
+
+ * Stock Android or AOSP 4.2 or higher. See [[#Android4.4Radio|notes about Android 4.4]] 
+ * Cyanogen``Mod
+
+== Which devices does dual-boot work for? ==
+
+Dual boot has been tested with Nexus devices:
+
+ * Nexus 4 has seen the most exhaustive testing
+ * Some successful preliminary tests have been run for:
+  * Galaxy Nexus
+  * Nexus 7
+  * Nexus 10
+
+== Which Ubuntu releases does dual-boot support? ==
+
+Dual boot supports the same channels that phablet-flash supports.
+
+== How is the user data partition shared between Android and Ubuntu? ==
+
+The user data partition hosts also the Ubuntu system image at `/data/system.img` which is around 2 GB.
+
+The Ubuntu swap file is also present in the data partition at `/data/SWAP.img` (around (540 MB)
+
+The Ubuntu user and system data are also present at:
+ * `/data/user-data` 
+ * `/data/system-data`
+
+The Android data partition usage is unchanged.
+
+== Is booting into recovery no longer possible when dual-booting? ==
+
+The recovery partition when dual booting is currently used by the Ubuntu boot image. This means that when booting into recovery mode, Ubuntu will boot.
+
+Access of the recovery will be resolved in future releases. However when the Ubuntu image is uninstalled, the original (Android stock or CWM) recovery is restored by the Ubuntu Install android app.
+
+== Can I uninstall dual boot? ==
+Yes, when Ubuntu is uninstalled from the Android side via the dual boot app, the original Android recovery partition is restored to the original state before dual boot was installed.
+
+Uninstalling Ubuntu also deletes the Ubuntu system image and swap file. Optionally, also the Ubuntu user data can be deleted.
+
+== The dual boot app installs a copy of the the SuperUser app. Can I use another SuperUser app instead? ==
+
+Yes indeed! The supplied SuperUser app is only for those who don't have it installed yet.
+
+However, one word of caution: tests were only performed only with the SuperUser app version from the CyanogenMod build and with the one installed by dualboot.sh script. But as long as you own SuperUser app behaves in similar way of those two tested, you should be fine.
+
+== When installing Ubuntu, can I switch channels without deleting user data? ==
+
+Yes you can, but this is something that hasn't been thoroughly tested. Therefore some applications might not function properly. The same applies for switching between different versions.
+
+== Can I make boot to Ubuntu the default and move the Android boot to the recovery partition? ==
+
+Right now swapping the default boot OS is not possible. However, this is something we might look to support if there is demand for it.
+
+== Why do you use the recovery partition to boot Ubuntu, rather than a combined boot image for Android and Ubuntu? ==
+
+One of the initial principles when designing dual boot was not to tie it to a particular Android flavour and version and leave the user the flexibility to use their own choice. Thus the Android boot image and the kernel it contains are left untouched.
+
+The choice was then to reuse the recovery partition, and instead focus on restoring it back to its original state if it's necessary to go back to single boot with Android.
+
+== I already have CWM recovery installed and know how to use it, can I use a zip file and flash manually instead? ==
+
+Absolutely, we provide dualboot.sh to make it easy to install the apps and the custom recovery. If you prefer to install the recovery manually yourself, it's also possible. Check out the source code for the dualboot.sh script to see exactly what it's doing.
+
+== Why does the Ubuntu Installer app need to be installed to the system partition via recovery? ==
+
+The Ubuntu Installer app needs to be installed as an Android (preinstalled) system app. Unlike use-installed apps, which live in the data partition, system apps always live in system partition and are granted additional privileges on top of the standard permissions set available to 3rd party applications.
+
+The extra permissions that the Ubuntu installer app needs are just two: '''cache partition write access''' to store the downloaded files for Ubuntu installation and '''power management''' capability to reboot the system.
