@@ -89,8 +89,6 @@ The Developer Preview comes with the following functional applications:
  * Calculator
  * Weather app
 
-Other non-functional sample applications are included for demonstration purposes only: Ski Safari
-
 === Installing new apps ===
 
 See the [[#SdkAlpha|SDK documentation]] for information on how to install apps on the device with Qt Creator.
@@ -217,6 +215,7 @@ These SMS features are not yet implemented:
 === Nexus 4 ===
 
  * In rare circumstances, '''the Nexus4 may get into a state where it may not boot at all after the battery is drained''' (even into recovery).  If this happens, the only way to restore it is to disassemble the back of the phone and unplug/plug the battery connector. See [[#PowerConsumption|Power Consumption]] to learn how to avoid discharging the phone completely.
+ * Radio firmware above {{{radio-mako-m9615a-cefwmazm-2.0.1700.84}}} not supported.
 
 === Nexus 10 ===
 

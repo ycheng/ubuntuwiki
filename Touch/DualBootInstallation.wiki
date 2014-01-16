@@ -89,7 +89,7 @@ The radio image shipped with Android 4.4 is reused on the Ubuntu side to make ph
 
 Follow these steps to downgrade the radio firmware and get Ubuntu calls to work:
 
- 1. Download an Android 4.3 firmware for your device onto your PC. Follow the links on this table >
+ 1. Download an Android 4.3 firmware for your device onto your PC. Follow the links [[../Install#Supported_devices_and_codenames|on this table >]]
  1. Open a terminal with Ctrl+Alt+T
  1. Extract the firmware tarball and cd to its directory.
  1. Run the following command to reboot into the bootloader{{{

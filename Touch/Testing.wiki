@@ -10,7 +10,7 @@ Unit testing is a requirement for proper test-driven development. To learn how t
 For functional testing you can utilize the autopilot tool. Originally developed for the testing unity, autopilot has become a useful tool for functionally testing many different types of applications; including QML! [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|See this page]] for more information on how to [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|get started using autopilot]].
 
 == Community Exploratory testing ==
-Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image as it is released until the 13.10 preview image is published.  
+Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image.
 
 = Testing your Ubuntu Touch Code before submission =
 To test your code before submitting use phablet-tools.
@@ -85,6 +85,7 @@ phablet-click-test-setup --click com.ubuntu.music;            phablet-test-run m
 phablet-click-test-setup --click com.ubuntu.notes;            phablet-test-run notes_app
 phablet-click-test-setup --click com.ubuntu.terminal;         phablet-test-run ubuntu_terminal_app
 phablet-click-test-setup --click com.ubuntu.weather;          phablet-test-run ubuntu_weather_app
+phablet-click-test-setup --click com.ubuntu.shorts;           phablet-test-run ubuntu_rssreader_app
 
 # (on the device)
 # clean up the downloaded tests (see notes below)

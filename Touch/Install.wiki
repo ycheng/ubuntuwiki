@@ -243,16 +243,16 @@ Your device should boot into Android after the process is finished.
 
 = Manual Download & Installation =
 
- * Get the hardware specific zip and img files for your device from the Ubuntu cdimage server [[http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/|here]], i.e. for a Nexus7 this is saucy-preinstalled-touch-armel+grouper.zip
+ * Get the hardware specific zip and img files for your device from the Ubuntu cdimage server [[http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/|here]], i.e. for a Nexus7 this is trusty-preinstalled-touch-armel+grouper.zip
 
 
 * Install the bootloader, recovery and system images using the android `fastboot` tool
 
 {{{
 adb reboot fastboot
-fastboot flash recovery saucy-preinstalled-recovery-armel+grouper.img
-fastboot flash boot saucy-preinstalled-boot-armhf+grouper.img
-fastboot flash system saucy-preinstalled-system-armel+grouper.img
+fastboot flash recovery trusty-preinstalled-recovery-armel+grouper.img
+fastboot flash boot trusty-preinstalled-boot-armhf+grouper.img
+fastboot flash system trusty-preinstalled-system-armel+grouper.img
 }}}
 
  * Boot your device into recovery mode
@@ -262,7 +262,7 @@ adb reboot recovery
  * Copy the zip file to the /sdcard/ directory naming it "autodeploy.zip" on the device using adb
 
 {{{
-adb push /path/to/your/downloaded/saucy-preinstalled-touch-armel+grouper.zip /sdcard/autodeploy.zip
+adb push /path/to/your/downloaded/trusty-preinstalled-touch-armel+grouper.zip /sdcard/autodeploy.zip
 }}}
 
  * Reboot into recovery mode
@@ -274,11 +274,11 @@ adb reboot recovery
 }}}
 
  * Make sure you are in recovery mode again for the second step
- * Get the saucy-preinstalled-touch-armhf.zip file
+ * Get the trusty-preinstalled-touch-armhf.zip file
  * Copy the zip file to the /sdcard/ directory naming it "autodeploy.zip" on the device using adb
 
 {{{
-adb push /path/to/your/downloaded/saucy-preinstalled-touch-armhf.zip /sdcard/autodeploy.zip
+adb push /path/to/your/downloaded/trusty-preinstalled-touch-armhf.zip /sdcard/autodeploy.zip
 }}}
 
  * Reboot into recovery mode
