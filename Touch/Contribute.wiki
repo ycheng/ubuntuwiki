@@ -1,0 +1,108 @@
+<<Include(Touch/Menu)>>
+||<tablebgcolor="#F1F1ED" tablewidth="40%" tablestyle="float:right;font-size:0.9em;margin:0 0 1em 1em;"style="padding:0.25em;"><<BR>><<TableOfContents>> ||
+Contribute to development of Ubuntu on mobile devices. Join us and be part of the revolution! 
+
+If you want to port the Touch Developer Preview to other devices than those currently supported, Friday, 22nd February 2013 we are going to kick off the Ubuntu Touch Port-A-Thon, be sure to check out our [[../Porting|Porting guide]].
+
+The following sections describe how to the code and infrastructure for the Touch Preview is currently published and used.
+
+= Code overview =
+
+The Touch Developer Preview is currently built from Ubuntu 13.10 combined with some modified and new packages and some Android components to enable specific devices. In the coming weeks development will start being based on the current Ubuntu development version, codenamed Raring Ringtail.
+
+== Source code ==
+
+The Touch Developer Preview currently consists of a collection of open source projects in Launchpad and an Android layer. 
+
+=== Ubuntu code ===
+
+Some Ubuntu 13.04 packages are unmodified, and their source code is found directly in the Ubuntu archive.  Contributions should [[http://packaging.ubuntu.com/html/fixing-a-bug.html|follow the usual patch submission guidelines for these packages]].
+
+New software and packages are developed in using the [[https://help.launchpad.net/Code|Bazaar]] distributed version control system, in various [[https://launchpad.net/|Launchpad]] sub-projects from the '''[[http://launchpad.net/ubuntu-touch-preview|Ubuntu Touch Developer Preview project group]]'''. The Ubuntu Touch Developer Preview project group provides a list of those projects used to build the preview. From there you can easily find the code and everything else.
+
+To hack on these ''system apps'', you can pick the one you're interested in from [[http://launchpad.net/ubuntu-touch-preview|the list]], check out the code using Bazaar and submit a merge proposal in Launchpad.
+
+=== Android layer ===
+
+You can find all the needed Android code on the [[http://phablet.ubuntu.com/|Android layer's public git repositories]]. This is essentially a mirror of !CyanogenMod 10.1, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
+
+For any Android related project at our git server, you'll find a branch named `phablet-10.1`. This branch contains a static known git HEAD and the required changes needed for Ubuntu, including [[http://phablet.ubuntu.com/gitweb?p=CyanogenMod/android.git;a=blob;f=default.xml;hb=refs/heads/phablet-10.1|our custom Android manifest]].
+
+A porting guide for adapting this layer to other devices is coming soon; stay tuned!
+
+== Image building ==
+
+=== Building and publishing Touch Preview images ===
+
+Images are currently built in the Canonical data center, they are saucy-based images. Full builds are published on `cdimage.ubuntu.com`.
+
+The images are built from an internal Jenkins instance and are automatically copied to cdimage.ubuntu.com. 
+
+If you have any questions about the images or would like to get images added, [[#Discuss|ask us on the mailing list]].
+
+The [[../Porting|Porting Guide]] will contain more information about this.
+
+=== Making changes to an Image ===
+
+If you want to change the system image in order to test a bug (for example), use the following steps after building the image.
+
+First reboot into recovery. Then mount the system image into a temp folder.
+
+{{{
+mkdir foo
+mount /data/system.img foo
+}}}
+
+From the host copy the small system.img that you built into it.
+
+{{{
+adb push system.img /foo/var/lib/lxc/android/
+}}}
+
+Reboot when done
+{{{
+adb reboot
+}}}
+
+When ubuntu starts up you can check it is the new one by:
+
+{{{
+adb shell grep ro.build.display.id /system/build.prop
+ro.build.display.id=cm_mako-userdebug 4.2.2 JDQ39E eng.<your-username>.20131011.133002 test-keys
+}}}
+
+
+= How to report bugs =
+
+We expect a large amount of feedback and will do our best to go through it!
+
+For general bugs, please use https://bugs.launchpad.net/ubuntu-touch-preview/+filebug to open a new bug. When you file a new bug, we need several pieces of information in order to make progress on fixing it.
+
+If you flashed with phablet-flash, please include the contents of /var/log/installer/media-info. You can get this file by running:
+{{{
+adb pull /var/log/installer/media-info media-info
+}}}
+
+Also, please include the output of 
+{{{
+adb shell getprop ro.cm.device
+}}} otherwise it will be difficult or impossible for a developer to make progress on it. 
+
+If possible, also include the steps to reproduce, an automated testcase (if possible) and the frequency of the bug. 
+
+Generally, please try to do your best to make sure you put enough information so we can track the hardware and build.
+
+However, if you have bugs which concern the image tools (phablet-tools), bug tracking is open and bugs are welcome; go to https://bugs.launchpad.net/phablet-tools/+filebug to open a new bug.
+
+If you want to help out with triaging bugs, that's great. Ask on IRC or the mailing list if you're unsure. We've got to work all together on this to make Ubuntu Touch truly rock!
+
+= Where to discuss =
+<<Anchor(Discuss)>>
+
+If you got lost somewhere, you found a bug or need some help, we're happy to help you. Ubuntu [[Touch]] is put together by a community of many, who are eager to work together with you on this.
+
+Simply:
+ * Join us on '''IRC''' in [[http://webchat.freenode.net/?channels=ubuntu-touch|#ubuntu-touch]] on irc.freenode.net and/or
+ * Join our '''mailing list''' by
+  1. Joining the [[https://launchpad.net/~ubuntu-phone|ubuntu-phone team]] on Launchpad and
+  1. leaving the "Subscribe me to the team's mailing list" option checked.
