@@ -146,8 +146,9 @@ Note that there are other channels available:
 This will deploy the latest build onto your device. Your device should reboot into the Ubuntu Unity shell.
 
 Notes:
- * '''Be patient''' - some steps like pushing the files over USB to the device take time. Just wait through any screens looking like input is required. Carefully read messages on the host and the device.
- * the files are saved in `Downloads/phablet-flash`.
+ * '''Be patient''' - some steps (like pushing the files) take time. Pogress is normally shown in the terminal. Some screens on the device seem to require input, but they actually don't: Just wait.
+    * However, Nexus 10 may prompt "ROM may flash stock recovery on boot. Fix?". Here it seems you have to select "+++Go back+++" on the tablet screen (using tablet buttons).
+ * The files are saved in `Downloads/phablet-flash`.
  * If the deploy fails(ex boots to black screen), try wiping the /data partition on your device and redeploy
  * `phablet-flash` will '''not''' work unless you have booted your device (it must not be displaying the boot loader screen and "`adb devices`" should list your device).
  * if you get stuck at ' < waiting for device > ' and your phablet reboots into android, you may have to run phablet-flash under sudo

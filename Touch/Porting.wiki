@@ -110,6 +110,12 @@ For development you can run any 64-bit Desktop version of Ubuntu between 12.04 L
 It's not strictly necessary, but it's helpful to install ccache.
 (http://source.android.com/source/initializing.html#ccache in the general Android Setup guide should help with this.)
 
+ * Enable installation of i386 debs (needed for the Android build) on x86_64 hosts:
+{{{
+ $ sudo dpkg --add-architecture i386
+ $ sudo apt-get update
+}}}
+
 Additional packages which are used to build the host tools: {{{
 $ sudo apt-get install git gnupg flex bison gperf build-essential \
   zip bzr curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
@@ -230,7 +236,7 @@ This command should copy the needed files to `vendor/[manufacturer]/[codename]`.
 
 === Device changes ===
 
-=== Audio ===
+==== Audio ====
 You need to write UCM mixer files and UCM is lacking good documentation, but it's the closest we have to a standard for setting up mixers on embedded devices right now.
 
 To get a two-minute crash course in UCM and how it's used in Ubuntu Touch - start by having a look in
@@ -248,10 +254,10 @@ set up the mixer just a little, so that the PCM can open. (On desktops, PCM can 
 a PCM that actually plays back audio, because then you can get notification sounds while on the phone.
 
 
-=== Kernel ===
+==== Kernel ====
 As a requirement from the Ubuntu userspace, we need to add a few extra kernel configs that are usually not enabled by default for Android.
 
-==== Config ====
+===== Config =====
 
 You can find your kernel config at {{{kernel/[manufacturer]/[codename]/arch/arm/configs/ cyanogenmod_[codename]_defconfig}}}. Please double check that it is indeed the default config file name in {{{device/[manufacturer]/[codename]/*.mk}}} (look for the TARGET_KERNEL_CONFIG variable).
 
@@ -290,13 +296,13 @@ CONFIG_ANDROID_RAM_CONSOLE=y
 
 The Ubuntu boot image and initramfs may not work at first so these two help read /proc/last_kmsg in case of a boot loop due to a kernel panic from the recovery image - which should work already, being more or less standard Android based.
 
-==== Patches ====
+===== Patches =====
 
 The patch that was needed when Ubuntu was running inside container is no longer needed in the flipped model where Android is in an LXC container.
 
 TODO: Describe the additional kernel patches missing here.
 
-==== AppArmor ====
+===== AppArmor =====
 
 AppArmor is an integral part of Ubuntu Touch and is required to use click packages. Currently you are able to use Ubuntu Touch without enabling !AppArmor, but you will not be able to use click packages and the port will not be complete without backporting the !AppArmor v3 patchset to older kernels. !AppArmor has been backported to the following kernels in the Ubuntu archive already:
  * [[https://launchpad.net/ubuntu/+source/linux-maguro|linux-maguro (3.0.0)]]
@@ -338,6 +344,19 @@ While porting, it might be useful to disable !AppArmor:
 
 '''IMPORTANT''': disabling !AppArmor for click packages in this manner means that you are disabling important security protections and allowing untrusted, unreviewed arbitrary code to run on your system. While this may be fine while developing the port, it is not enough to finish the port.
 
+==== Screen definition ====
+
+In order to provide a consistent layout across different screen sizes and resolutions we define a grid unit to be used by developers. This is set in:
+
+/etc/ubuntu-touch-session.d/hammerhead.conf
+
+For mako it is defined as:
+{{{
+GRID_UNIT_PX=25
+QTWEBKIT_DPR=2.5
+}}}
+For example GRID_UNIT_PX should be 27 for 1080p to be 40GU-wide. More information may be found in the description of [[http://design.ubuntu.com/apps/get-started/screen-sizes | resolution independence]] on the design site.
+
 === Build changes ===
 ==== main.mk ====
 
@@ -346,6 +365,7 @@ The main build file needs to be checked if updates are required to it to support
 The part of interest are the {{{subdirs}}} included in the build and if special treatment for devices need to be made, i.e.; make sure the new vendor subdirs are added.
 
 This will eventually not be needed.
+
 
 ==== Brightness indicator ====
 Due to the incorrect default permission at the sys brightness file, a change is needed to allow any user to change the display brightness. We need to `chmod` it to the proper permissions.
