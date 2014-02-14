@@ -20,8 +20,10 @@ To test your code before submitting use phablet-tools.
 == Preparation ==
 
 {{{
-# install the latest green image: on host run...
-sudo phablet-flash ubuntu-system
+# install the latest green image: on host run something like...
+sudo phablet-flash ubuntu-system 
+NOTE: please check which channel your last green image is actually
+in and also which version it is, use "phablet-flash ubuntu-system --help" for the necessary options
 
 # disable the intro
 phablet-config edges-intro --disable
@@ -41,6 +43,11 @@ phablet-click-test-setup
 # Enable autopilot to reach the confined click apps, running this can take 
 # a few to several minutes depending on the amount of click apps installed
 phablet-config autopilot --dbus-probe enable
+
+# Run this in another terminal window and leave it running to make sure display 
+# stays on for the tests
+adb shell
+powerd-cli display on bright
 }}}
 
 == Running Deb tests ==

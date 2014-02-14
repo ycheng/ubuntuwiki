@@ -4,7 +4,7 @@
 
 = Work in Progress =
 
-'''Attention:''' this tutorial is still a work in progress, as we keep changing and adding more requirements for the 13.10 release. For any question or issue, please get in contact via #ubuntu-touch.
+'''Attention:''' this tutorial is still a work in progress, as we keep changing and adding more requirements for the 14.04 release. For any question or issue, please get in contact via #ubuntu-touch.
 
 == TODO ==
 

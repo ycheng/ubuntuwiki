@@ -67,6 +67,9 @@ sudo apt-get update
 sudo apt-get install phablet-tools android-tools-adb android-tools-fastboot
 }}}
 
+
+Note: This requires that you have [[https://help.ubuntu.com/community/Repositories/CommandLine#Adding_the_Universe_and_Multiverse_Repositories|Universe repository enabled]].
+
 == Step 1.5 - Optional Android Backup ==
 
  * If not enabled, enable developer mode, by tapping Settings -> About phone -> Build number (x 7 times)
@@ -115,33 +118,21 @@ Newer Nexus 10s have not booted fully after developer mode was enabled. If this 
 
 == Step 4 - Downloading & Deploying Image to Device ==
 
-To install the Ubuntu Touch Developer Preview on your device, you will need to execute the command below. Please note, this will wipe the contents of the device so ensure you have made a back-up.  To install and get updates, you will have to run phablet-flash with a command and some flags; see `phablet-flash --help` for a list of commands `phablet-flash name-of-command --help` for a list of flags.
+To install the Ubuntu Touch Developer Preview on your device, you will need to execute the command below. Please note, this will wipe the contents of the device so ensure you have made a back-up.  To install and get updates, you will have to run ubuntu-device-flash with a command and some flags; see `ubuntu-device-flash --help` for a list of commands `man ubuntu-device-flash` for additional usage information.
 
-Currently available commands:
-||'''ubuntu-system'''|| * '''official images'''<<BR>> * system is read-only <<BR>> * updates are done over-the-air <<BR>> * supports multiple channels ||
-||'''community'''|| * if you have a community supported build, you can use this to flash it to your device ||
-||'''cdimage-touch'''|| * '''deprecated'''; previous official images <<BR>> * read-write by default <<BR>> * no OTA update ||
-||'''cdimage-legacy'''|| * '''deprecated'''; old pre-flipped images <<BR>> * boots into Android and launches Ubuntu bits as a container (current images do the opposite) ||
-
-
-To bootstrap on the `devel` channel or reinstall afresh (wiping everything) the recommended command is:
+To bootstrap on the `devel` channel or reinstall afresh (wiping everything) the recommended command is to
+be run from the bootloader:
 {{{
-    phablet-flash ubuntu-system --channel devel --bootstrap
+    ubuntu-device-flash --channel devel --bootstrap
 }}}
 
 /!\ ''This step can take a very long time.''
 
 <<Anchor(UbuntuChannels)>>
-Note that there are other channels available:
-|| '''channel''' || '''description''' ||
-|| `devel` || alias to current development channel (`trusty`) ||
-|| `devel-proposed` || alias to -proposed version of development channel (`trusty-proposed`) ||
-|| `devel-customized` || alias to -customized version of development channel (`trusty-customized`) ||
-|| `trusty` || latest development image which passed QA ||
-|| `trusty-proposed` || latest development image before QA ||
-|| `stable` || alias to current stable channel (saucy) ||
-|| `saucy` || stable channel ||
-
+Note that there are other channels available, to see them, run:
+{{{
+ubuntu-device-flash --list-channels
+}}}
 
 This will deploy the latest build onto your device. Your device should reboot into the Ubuntu Unity shell.
 
@@ -156,49 +147,24 @@ Notes:
 
 === Further Examples ===
 
-First run of phablet-flash on a newly rooted and developer-enabled device:
+Running bleeding edge / untested images while keeping user data:
 {{{
-    phablet-flash ubuntu-system --channel devel --no-backup
-}}}
-
-For the '''deprecated''' cdimage-touch images, use:
-{{{
-    phablet-flash cdimage-touch -b
-}}}
-
-Conversion of device from cdimage-touch (flipped) to ubuntu-system (read only):
-{{{
-    phablet-flash ubuntu-system
-}}}
-
-Running bleeding edge / untested images:
-{{{
-    phablet-flash ubuntu-system --channel devel-proposed
-}}}
-
-or, for the '''deprecated''' images:
-{{{
-    phablet-flash cdimage-touch --pending
+    ubuntu-device-flash --channel devel-proposed
 }}}
 
 Re-flash with a clean start, removing all apps and data:
 {{{
-    phablet-flash ubuntu-system --no-backup
+    ubuntu-device-flash --wipe
 }}}
 
-or, for the '''deprecated''' images:
+If you have a '''nexus 7 3G''', pass `-d grouper` while booted into the bootloader:
 {{{
-    phablet-flash cdimage-touch --wipe
+    ubuntu-device-flash --bootstrap -d grouper
 }}}
 
-If you have a '''nexus 7 3G''', pass `-d grouper`:
+You can make your device read-write (a "sytem image developer mode") to allow editing system files directly. Doing this will stop your device from being updated, and is not recommended unless you're developing Ubuntu itself. 
 {{{
-    phablet-flash ubuntu-system --no-backup -d grouper
-}}}
-
-You can make your device read-write (a "developer mode") to allow editing system files directly. Doing this will stop your device from being updated, and is not recommended unless you're developing Ubuntu itself. 
-{{{
-    adb shell touch /userdata/.writable_image  && adb reboot
+    phablet-config writable-image
 }}}
 
 If you have a device which is already flashed and you've made it read-write as above ("developer mode"), but now want to re-enable OTA updates (go back to read-only):
@@ -216,10 +182,14 @@ Switch from Saucy to Trusty
 {{{
     adb shell system-image-cli --channel trusty -b 0
 }}}
-
-If you didn't assign revision, you will get information like "INFO:phablet-flash:Flashing revision 100 from channel saucy" as installing. If you want to install other version, you can do
+or
 {{{
-    phablet-flash ubuntu-system --channel saucy --bootstrap --revision 99
+   ubuntu-device-flash --channel trusty
+}}}
+
+If you want to install other version, you can do
+{{{
+    ubuntu-device-flash --channel saucy --revision 99
 }}}
 
 = Restoring Android =
