@@ -5,6 +5,7 @@ editmoin -d Touch/Contribute.wiki $P/Touch/Contribute
 editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps
 editmoin -d Touch/Devices.wiki $P/Touch/Devices
 editmoin -d Touch/DualBootInstallation.wiki $P/Touch/DualBootInstallation
+editmoin -d Touch/Gerrit.wiki $P/Touch/Gerrit
 editmoin -d Touch/Install.wiki $P/Touch/Install
 editmoin -d Touch/Porting.wiki $P/Touch/Porting
 editmoin -d Touch/PortingNewTree.wiki $P/Touch/PortingNewTree

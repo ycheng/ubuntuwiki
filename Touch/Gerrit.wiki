@@ -1,0 +1,231 @@
+= Ubuntu Touch Gerrit Howto =
+
+This is [[https://code-review.phablet.ubuntu.com|Ubuntu Touch Gerrit]] documentation/instructions, written in the form of how-to. ''It is not intended to replace or duplicate [[http://gerrit-documentation.googlecode.com/svn/Documentation/2.7/index.html|official Gerrit documentation]].''
+
+More upstream references:
+ * [[http://source.android.com/source/version-control.html|Version Control with Repo and Git]]
+ * [[http://source.android.com/source/submit-patches.html|Submitting Patches]]
+ * [[http://source.android.com/source/life-of-a-patch.html|Life of a Patch (diagram)]]
+
+<<TableOfContents>>
+
+== Normal Development Workflow Actions ==
+=== Creating Gerrit Account ===
+ 1. Go to https://code-review.phablet.ubuntu.com
+ 1. Click "Sign In"
+ 1. Enter your Launchpad ID and password
+ 1. Set your public SSH key (use one from Launchpad). Click on "Settings" in the upper right-hand corner. Then click on "SSH Public Keys".
+ 1. Now set your username, it will be used for SSH access. You probably want this to match Launchpad username to avoid confusion, but it can be something else too (but once it is set, it cannot be changed). We'll refer to it as <GERRIT_USERNAME> below. Click "Settings" and select "Profile". Edit the "Username" field.
+ 1. Let the repo tool know this username by executing:
+  . {{{
+git config --global review.code-review.phablet.ubuntu.com.username <GERRIT_USERNAME>
+}}}
+ 1. Verify that you can access Gerrit by SSH:
+  . {{{
+$ ssh <GERRIT USERNAME@code-review.phablet.ubuntu.com -p 29418 gerrit version
+}}}
+  You'll see this if the command executed successfully:
+  {{{
+gerrit version 2.7
+}}}
+ 1. Verify that you don't have untrusted OpenIDs associated with your account. If there're any untrusted identity, your group permissions will be void, and you won't have permissions even for basic operations. Go to Settings -> Identities. If you see any identities marked as "UNTRUSTED", remove them. If your current identity is marked as "UNTRUSTED", so you cannot remove it, instead click "Link Another Identity", and link your https://launhpad.net/~ identity, then login with it and remove the untrusted identity.
+
+=== Setting up your environment for submitting ===
+Before you start submitting code, it is preferable and highly recommended that you add a "commit-msg" file to your ".git/hooks" directory in order to generated a "Change-Id" automatically.
+
+{{{
+$ wget http://people.canonical.com/~rsalveti/commit-msg
+--2014-02-03 23:21:07--  http://people.canonical.com/~rsalveti/commit-msg
+Resolving people.canonical.com (people.canonical.com)... 91.189.89.62
+Connecting to people.canonical.com (people.canonical.com)|91.189.89.62|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4363 (4.3K)
+Saving to: ‘commit-msg’
+
+100%[================================================================================================================>] 4,363       --.-K/s   in 0.001s  
+
+2014-02-03 23:21:08 (8.06 MB/s) - ‘commit-msg’ saved [4363/4363]
+
+$ mv commit-msg /path/yourproject/.git/hooks/
+$ chmod 755 /path/yourproject/.git/hooks/commit-msg
+}}}
+
+You should also have a good ~/.gitconfig. Something like:
+{{{
+[color]
+	ui = auto
+[user]
+	name = Foo Bar
+	email = foo@bar.org
+[review "code-review.phablet.ubuntu.com"]
+	username = foobar
+}}}
+...but with your own values.
+
+=== Submit changes for review - repo tool ===
+The easiest way to submit changes for review is by using {{{repo}}}. The process is:
+
+ 1. Go to a directory of component you want to change
+ 1. Create a new local topic branch:
+  . {{{
+repo start my-cool-feature .
+}}}
+  Note the dot, it means the current project. Alternatively, you can specify explicit project path from the top directory of the phablet tree.
+ 1. Make your changes and commit them, following rule of thumb that each commit should deal with one feature-change, be reasonably simple, but at the same time self-containing. Each commit will become a separate change review in Gerrit. Mind the commit message, it should provide all needed information both for review and for understanding the change by looking thru the project history.
+ 1. Once all needed changes are committed, submit them to Gerrit with:
+  . {{{
+repo upload
+}}}
+  As output of that command, URL of a change review in Gerrit will be provided.
+
+=== Submit changes for review - raw git ===
+
+Sometimes, changes to a standalone git repository need to be reviewed. Good example is some repo manifest repository, which itself is managed with raw git.
+
+ 1. Clone/go to existing checkout.
+ 1. Check out branch you want to make change against:
+  . {{{
+git checkout phablet-trusty
+}}}
+ 1. Create local topic branch:
+  . {{{
+git checkout -b my-change
+}}}
+ 1. Make changes and commit them following the commit guidelines above.
+ 1. Once ready, push change for the review:
+  . {{{
+git push ssh://<GERRIT_USERNAME>@code-review.phablet.ubuntu.com:29418/platform/manifest.git HEAD:refs/for/phablet-trusty
+}}}
+  Note that it's important to correctly specify target branch in {{{refs/for/...}}} construct. Change URL will be provided as output of the command.
+
+=== Submit changes for review - known git ===
+
+Ex. modify device.mk and push changes
+Add test scripts to device.mk file
+ 1. Clone the git
+  . {{{
+git clone https://code-review.phablet.ubuntu.com/CyanogenMod/android_device_asus_grouper
+}}}
+ 1. enter in to project folder
+  . {{{
+cd android_device_asus_grouper
+}}}
+ 1. choose and checkout the branch
+  . {{{
+git branch -a
+git checkout phablet-trusty
+}}}
+ 1. modify/change required files which you are interested
+  . {{{
+vim BoardConfig.mk
+}}}
+ 1. make sure that you have right commit-msg
+
+  . {{{
+$ wget http://people.canonical.com/~rsalveti/commit-msg
+$ mv commit-msg .git/hooks/
+$ chmod 755 .git/hooks/commit-msg
+}}}
+ 1. commit and push to right project and right branch. if you are not sure ask #linaro-android
+  . {{{
+git commit -as
+git push git clone ssh://rsalveti@code-review.phablet.ubuntu.com:29418/CyanogenMod/android_device_asus_grouper HEAD:refs/for/phablet-trusty
+}}}
+
+=== Managing a review ===
+
+A change review has URL like http://code-review.phablet.ubuntu.com/#change,1 . On this page, submitter may add specific reviewers which should review the patch (they will receive email), but any registered user can add comments also. Review system is vote-based, a change should get +2 to be accepted (note that it's not enough to get two +1's for this). Exact vote weight depends on project (component) configuration and group membership of the reviewer.
+
+It's possible to abandon a change, or manually set it as merged. The latter is not required though, Gerrit will notice that itself. Actually, so far it seems that Gerrit is too unpicky regarding where change is committed, and will mark a change as merged on it just going to any branch in the repository, for example on pushing local topic branch to the main repository. So, don't do that for now, while it's being figured out ;-). Instead, it's possible to "download" change for other parties to try, see below.
+
+=== Testing somebody else's change ===
+
+Change's page in Gerrit contains number of sample commands which may be used to fetch a change into the local checkout for peers to test. With repo, it's even easier:
+
+{{{
+cd <project>
+repo download <project> <change>
+}}}
+
+TODO: Try different downloads and elaborate on these instructions.
+
+=== Merging a change ===
+
+Once a change has passed through review and testing, and, approved with sufficient score (+2), and verified (+1) it can be merged. If you're in Phabletgit-Users group (see below), you will see button "Submit Patch Set N" on the change review page. N is a version of the change (latest is shown by default, as that's apparently what you want to merge most of the time).
+
+== Administrative Configuration and Actions ==
+
+Most actions described here require Administrators group membership.
+
+=== Group Setup ===
+
+To remind, all permissions in Gerrit are assigned on group level. Groups may recursively include other groups, which allows for flexible and structured membership vs permission management of which we take advantage.
+
+ 1. '''Group "Phabletgit-Users"'''. This group and its membership is synchronized from Launchpad with the members of [[http://launchpad.net/~phablet-team|phablet-team]]. Members of this group can give review score in range -2..+2 and "verified" score -1..+1, i.e. have powers to approve change for merge or veto it.
+ 1. '''Group "Importers"'''. Members of this group may import (and sync) existing codebases into Gerrit, bypassing most of checks and restrictions Gerrit enforces for normal development workflow. Memebers include Ricardo Salveti and Sergio Schvezov.
+ 1. '''Group "Administrators"'''. Members of this group may review and change Gerrit configuration as well as perform other administrative actions. Note that members of this group don't implicitly get any other permissions (i.e. it doesn't act as "root" user) - instead, they should be added as members of corresponding groups. In other words, Developer and Administrator has the same permissions as just Developer regarding the code changes (unless Administrator group was given extra permission which is bad practice).  Members include Ricardo Salveti.
+
+=== Create and delete a project ===
+
+Project (and associated repository) creation is performed via SSH interface. Project deletion is '''not supported''', so think twice about a name, make sure you select good "path".
+
+{{{
+ssh -p 29418 code-review.phablet.ubuntu.com gerrit create-project --name device/foobar
+}}}
+
+=== Importing repository ===
+
+First create a corresponding project (take chance to clean up the naming). To perform import, a user must be in "Importers" group.
+
+=== Create and delete a branch ===
+
+It's possible to give "Push branch" permission to normal users so they were able to create and push branches via git command line. If it is "Push branch" with "Force Push" option, users also will be able to force-push commits involving history rewriting and delete branches.
+
+However, in normal Gerrit workflow branch creation is administrative action performed as follows: Admin -> Projects -> <project> -> Branches. It is accessible to Project Owner group and Administrators.
+
+To create a new branch, enter initial revision for branch (usually name of another branch). Remember, branches in git are always created from some revision! If you don't specify one, Gerrit will create a branch from master and that's rarely correct setup (where master usually belongs to upstream). If you made a mistake and created a branch with wrong base, delete it immediately and re-create again.
+
+To delete a branch, follow steps in previous paragraph to access Branches menu for a project and use checkboxes and Delete button.
+
+=== List registered users ===
+
+{{{
+ssh <GERRIT_USERNAME>@code-review.phablet.ubuntu.com -p 29418 gerrit gsql
+gerrit> select full_name, preferred_email from accounts;
+}}}
+
+=== Manual mirroring and syncing upstream project ===
+
+Phablet tree is a proper subset of AOSP tree. That means that it has all content from AOSP, plus Ubuntu Touch specific changes and developments. 
+
+Initial mirror create:
+{{{
+cd /mnt/gerrit-mirror
+mkdir -p git.omapzoom.org/kernel
+cd git.omapzoom.org/kernel/
+git clone --mirror git://git.omapzoom.org/kernel/omap.git
+cd omap.git
+git push ssh://rsalveti@code-review.phablet.ubuntu.com:29418/kernel/omap-omapzoom.git 'refs/heads/*' 'refs/tags/*'
+}}}
+
+Syncing it (at regular intervals):
+{{{
+cd /mnt/gerrit-mirror/git.omapzoom.org/kernel/omap.git
+git fetch
+git push ssh://rsalveti@code-review.phablet.ubuntu.com:29418/kernel/omap-omapzoom.git 'refs/heads/*' 'refs/tags/*'
+}}}
+
+== Known Issues ==
+
+=== Diff viewing is done file by file and each file opens in a new window ===
+
+When "Diff All Side-by-side" or "Diff All Unified" button is pressed on change page, the patch is split file by file and each file's chunk is opened in a seprate browser tab/window. One may only wonder how that will behave if applied to change affecting 100 files. Some people may find more convenient to use "(gitweb)" links to open old good gitweb to look at the patch at whole. However, it won't be possible to leave per-line comments in this case, it seems there's currently no way to review complete patch with per-line comment capability in Gerrit.
+
+=== Inconsistent terminology for submit and merge actions ===
+
+There are two main and distinct actions in Gerrit related to change life cycle:
+
+ 1. At first, patch is submitted for review
+ 1. Then, it is merged into target branch
+
+One may thing that it would be intuitive to call those actions "submit" and "merge", but that's not how it is in Gerrit. In particular, permission for 2nd action is called "Submit", UI button which initiates action 2 is named "Submit Patch Set", however change which have undergone action action 2 is called "Merged".
