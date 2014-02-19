@@ -60,6 +60,11 @@ On your computer, press Ctrl+Alt+T to start a terminal.
 sudo add-apt-repository ppa:phablet-team/tools
 }}}
 
+On Ubuntu 12.04, you will also need to run:
+{{{
+sudo add-apt-repository ppa:ubuntu-sdk-team/ppa
+}}}
+
 Then do the following:
 
 {{{
