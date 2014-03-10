@@ -29,13 +29,14 @@ For detailed information [[../ReleaseNotes|check the release notes]]
 
 The table below lists the supported devices and their corresponding factory images, should you want to switch back to Android. The images can be found [[https://developers.google.com/android/nexus/images|here]].
 
-/!\ '''Note''': We currently do not support the newer '2013' Nexus 7.
-
 ||'''Device'''||'''Codename'''||'''Factory firmware from Google'''||'''Status'''||
-||Galaxy Nexus||maguro|| [[https://developers.google.com/android/nexus/images#takju|takju]] or [[https://developers.google.com/android/nexus/images#yakju|yakju]]|| Stable (build #100) ||
-||Nexus 4||mako|| [[https://developers.google.com/android/nexus/images#occam|occam]] || Stable (build #100) ||
-||Nexus 7||grouper|| [[https://developers.google.com/android/nexus/images#nakasi|nakasi]] or [[https://developers.google.com/android/nexus/images#nakasig|nakasig]] || Pre-release ||
-||Nexus 10||manta|| [[https://developers.google.com/android/nexus/images#mantaray|mantaray]] || Pre-release ||
+||Nexus 4||mako|| [[https://developers.google.com/android/nexus/images#occam|occam]] || Active development ||
+||Nexus 10||manta|| [[https://developers.google.com/android/nexus/images#mantaray|mantaray]] || Active development ||
+||Nexus 7 2013 WiFi||flo|| [[https://developers.google.com/android/nexus/images|flo]] or [[https://developers.google.com/android/nexus/images|flo]] || Active development ||
+||Galaxy Nexus||maguro|| [[https://developers.google.com/android/nexus/images#takju|takju]] or [[https://developers.google.com/android/nexus/images#yakju|yakju]]|| Maintenance ||
+||Nexus 7||grouper|| [[https://developers.google.com/android/nexus/images#nakasi|nakasi]] or [[https://developers.google.com/android/nexus/images#nakasig|nakasig]] || Deprecated||
+
+Latest status can be found [[https://docs.google.com/a/canonical.com/spreadsheet/ccc?key=0ArLs7UPtu-hJdDZDNWliMmV1YUJ3Zk1pQlpDdGp4VFE&usp=sharing#gid=0 | here]]
 
 = Community support devices =
 
@@ -69,7 +70,7 @@ Then do the following:
 
 {{{
 sudo apt-get update
-sudo apt-get install phablet-tools android-tools-adb android-tools-fastboot
+sudo apt-get install ubuntu-device-flash
 }}}
 
 
@@ -128,10 +129,11 @@ To install the Ubuntu Touch Developer Preview on your device, you will need to e
 To bootstrap on the `devel` channel or reinstall afresh (wiping everything) the recommended command is to
 be run from the bootloader:
 {{{
-    ubuntu-device-flash --channel devel --bootstrap
+    ubuntu-device-flash --channel=devel --bootstrap
 }}}
 
 /!\ ''This step can take a very long time.''
+/!\ ''Bootstrap requires the device is in the bootloader - adb reboot bootloader''
 
 <<Anchor(UbuntuChannels)>>
 Note that there are other channels available, to see them, run:
@@ -144,17 +146,17 @@ This will deploy the latest build onto your device. Your device should reboot in
 Notes:
  * '''Be patient''' - some steps (like pushing the files) take time. Pogress is normally shown in the terminal. Some screens on the device seem to require input, but they actually don't: Just wait.
     * However, Nexus 10 may prompt "ROM may flash stock recovery on boot. Fix?". Here it seems you have to select "+++Go back+++" on the tablet screen (using tablet buttons).
- * The files are saved in `Downloads/phablet-flash`.
+ * The files are saved in `~/.cache/ubuntuimages`.
  * If the deploy fails(ex boots to black screen), try wiping the /data partition on your device and redeploy
- * `phablet-flash` will '''not''' work unless you have booted your device (it must not be displaying the boot loader screen and "`adb devices`" should list your device).
- * if you get stuck at ' < waiting for device > ' and your phablet reboots into android, you may have to run phablet-flash under sudo
+ * `ubuntu-device-flash` will '''not''' work unless you have booted your device (it must not be displaying the boot loader screen and "`adb devices`" should list your device).
+ * if you get stuck at ' < waiting for device > ' and your phablet reboots into android, you may have to run ubuntu-device-flash under sudo
 
 
 === Further Examples ===
 
 Running bleeding edge / untested images while keeping user data:
 {{{
-    ubuntu-device-flash --channel devel-proposed
+    ubuntu-device-flash --channel=devel-proposed
 }}}
 
 Re-flash with a clean start, removing all apps and data:
@@ -164,12 +166,13 @@ Re-flash with a clean start, removing all apps and data:
 
 If you have a '''nexus 7 3G''', pass `-d grouper` while booted into the bootloader:
 {{{
-    ubuntu-device-flash --bootstrap -d grouper
+    ubuntu-device-flash --bootstrap --device=grouper
 }}}
 
 You can make your device read-write (a "sytem image developer mode") to allow editing system files directly. Doing this will stop your device from being updated, and is not recommended unless you're developing Ubuntu itself. 
 {{{
     phablet-config writable-image
+    adb reboot
 }}}
 
 If you have a device which is already flashed and you've made it read-write as above ("developer mode"), but now want to re-enable OTA updates (go back to read-only):
@@ -189,12 +192,12 @@ Switch from Saucy to Trusty
 }}}
 or
 {{{
-   ubuntu-device-flash --channel trusty
+   ubuntu-device-flash -channel=trusty
 }}}
 
 If you want to install other version, you can do
 {{{
-    ubuntu-device-flash --channel saucy --revision 99
+    ubuntu-device-flash -channel=saucy -revision=99
 }}}
 
 = Restoring Android =

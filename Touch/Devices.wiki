@@ -120,13 +120,14 @@ Some notes:
 || Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || unlocked || ??? || ??? || ??? || ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_4X_HD|LG Optimus 4x HD]] || p880 || [[http://forum.xda-developers.com/showthread.php?t=2245836 | Click Here]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || ashley.johnson [at] madmedialabs [dot] com ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2162777|XDA Forums]]|| [[https://launchpad.net/~ruggles92|~rugglez]] ||
+|| [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ||
 || [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus || WIP || WIP || WIP || [[https://launchpad.net/~501st-alpha1|Scott Weldon]] ||
 || [[http://www.gsmarena.com/motorola_moto_g-5831.php|Motorola Moto G]] || ??? || ??? || ??? || ??? || ||
 || [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo || WIP|| WIP || WIP || [[https://launchpad.net/~michaelevans|~michaelevans]] ||
 || [[http://en.wikipedia.org/wiki/Nokia_N800|Nokia N800]]/[[http://en.wikipedia.org/wiki/Nokia_N900|N900]] || ??? || ??? || ??? || ??? || ||
 || Notion Ink Adam PQi 3G || adam_3g || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
 || Notion Ink Adam PQi Wifi || adam || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
-|| [[https://en.wikipedia.org/wiki/Pantech Vega Racer|Pantech Vega Racer]]|| UT4VR || WIP || WIP || http://cafe.naver.com/skydevelopers/284127 ||  [[http://cafe.naver.com/skydevelopers|SDA Developing]] ||
+|| [[https://en.wikipedia.org/wiki/Pantech Vega Racer|Pantech Vega Racer]]|| VR || WIP || WIP || http://cafe.naver.com/skydevelopers/284127 ||  [Alteration] ||
 || [[https://en.wikipedia.org/wiki/Samsung_Galaxy_S#Epic_4G|Samsung Galaxy S Epic 4G ]] || [[/epicmtd|epicmtd]] || WIP || WIP || WIP || [[https://launchpad.net/~annerjb|~annerajb]] ||
 || Samsung Galaxy S SCL (GT-I9003) || `galaxysl` || WIP || WIP || WIP || [[LaunchpadHome:dpm|David Planella]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_II|Samsung Galaxy S II]] || i777 || WIP || WIP || WIP || [[https://launchpad.net/~vanhoof|~vanhoof]] ||

@@ -34,20 +34,7 @@ gerrit version 2.7
 Before you start submitting code, it is preferable and highly recommended that you add a "commit-msg" file to your ".git/hooks" directory in order to generated a "Change-Id" automatically.
 
 {{{
-$ wget http://people.canonical.com/~rsalveti/commit-msg
---2014-02-03 23:21:07--  http://people.canonical.com/~rsalveti/commit-msg
-Resolving people.canonical.com (people.canonical.com)... 91.189.89.62
-Connecting to people.canonical.com (people.canonical.com)|91.189.89.62|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 4363 (4.3K)
-Saving to: ‘commit-msg’
-
-100%[================================================================================================================>] 4,363       --.-K/s   in 0.001s  
-
-2014-02-03 23:21:08 (8.06 MB/s) - ‘commit-msg’ saved [4363/4363]
-
-$ mv commit-msg /path/yourproject/.git/hooks/
-$ chmod 755 /path/yourproject/.git/hooks/commit-msg
+$ scp -p -P 29418 code-review.phablet.ubuntu.com:hooks/commit-msg /path/yourproject/.git/hooks/
 }}}
 
 You should also have a good ~/.gitconfig. Something like:
@@ -122,9 +109,7 @@ vim BoardConfig.mk
  1. make sure that you have right commit-msg
 
   . {{{
-$ wget http://people.canonical.com/~rsalveti/commit-msg
-$ mv commit-msg .git/hooks/
-$ chmod 755 .git/hooks/commit-msg
+$ scp -p -P 29418 rsalveti@code-review.phablet.ubuntu.com:hooks/commit-msg .git/hooks/
 }}}
  1. commit and push to right project and right branch. if you are not sure ask #linaro-android
   . {{{

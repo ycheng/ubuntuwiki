@@ -21,9 +21,9 @@ To test your code before submitting use phablet-tools.
 
 {{{
 # install the latest green image: on host run something like...
-sudo phablet-flash ubuntu-system 
-NOTE: please check which channel your last green image is actually
-in and also which version it is, use "phablet-flash ubuntu-system --help" for the necessary options
+ubuntu-device-flash -channel="devel"
+NOTE: please check in which channel your last green image actually is.
+also check the exact version, use "ubuntu-device-flash -h" for the necessary flashing options.
 
 # disable the intro
 phablet-config edges-intro --disable
