@@ -104,6 +104,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || WIP || WIP || WIP || [[https://launchpad.net/~fonix232|~fonix232]] ||
 || [[http://en.wikipedia.org/wiki/Nook_Color|Nook Color]] || encore || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2160703&page=2]] || ||
 || [[http://en.wikipedia.org/wiki/Nook_HD+|B&N Nook HD+]] || [[/ovation|ovation]] || WIP || WIP || TBA || [[https://launchpad.net/~jldegelia|dejello]] ||
+|| [[http://cat-sound.com/tablet-produkte/8-zoll-tablets/cat-phoenix|Cat® Phoenix Tablet PC 4]] || WIP || WIP || WIP || WIP || [[https://launchpad.net/~torsten.franz | Torsten Franz]] ||
 || [[http://en.wikipedia.org/wiki/HTC_Butterfly|HTC DNA]] || [[/dlx|dlx]] || WIP || WIP || || ||
 || [[http://en.wikipedia.org/wiki/HP_Touchpad|HP Touchpad]] || [[/tenderloin|tenderloin]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2175277]] || ||
 || [[http://en.wikipedia.org/wiki/HTC_One|HTC One]] || [[/m7spr|m7spr]] || [[http://www.youtube.com/watch?v=0zdhyDky2MI|HTCOneRoot]] || WIP || WIP || [[https://launchpad.net/~vthompson|~vthompson]]||

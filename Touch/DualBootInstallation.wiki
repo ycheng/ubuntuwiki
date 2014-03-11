@@ -85,6 +85,10 @@ Once Ubuntu has been uninstalled, follow the same installation step to download 
 <<Anchor(Android4.4Radio)>>
 == Getting phone calls to work in Ubuntu and Android 4.4 ==
 
+{{{#!wiki note
+'''NOT NEEDED ANYMORE FOR IMAGES >= 226'''
+}}}
+
 The radio image shipped with Android 4.4 is reused on the Ubuntu side to make phone calls or use WiFi or sound, and it is not yet supported in Ubuntu. Until Ubuntu gains support for the Android 4.4 radio, there is an easy workaround whereby an older radio firmware can be flashed in the modem partition. You can do this either before or after installing dual boot
 
 Follow these steps to downgrade the radio firmware and get Ubuntu calls to work:
