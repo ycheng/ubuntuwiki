@@ -50,6 +50,12 @@ chmod +x dualboot.sh
 
 After installation, the phone will reboot several times. Once finished, it will boot into Android and you will find the dual boot app as “Ubuntu Dual Boot” in the Apps section.
 
+'''NOTE''': there is a known issue with the latest release on the Nexus 4. Until it's fixed, and if you get stuck in the Recovery screen, you can choose the reboot option to go back to Android and then:
+
+ 1. In the dualboot.sh script, find the line that says: `"URL_CMW_PATH_MAKO="http://download2.clockworkmod.com/recoveries/recovery-clockwork-6.0.4.7-mako.img"`
+ 1. Then replace the version to `recovery-clockwork-6.0.4.3-mako.img`
+ 1. Then execute the `dualboot.sh` script again, as described above
+
 Now follow the instructions below to install Ubuntu from Android.
 
 == Installing Ubuntu from Android ==

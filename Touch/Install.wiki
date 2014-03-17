@@ -192,12 +192,12 @@ Switch from Saucy to Trusty
 }}}
 or
 {{{
-   ubuntu-device-flash -channel=trusty
+   ubuntu-device-flash --channel=trusty
 }}}
 
 If you want to install other version, you can do
 {{{
-    ubuntu-device-flash -channel=saucy -revision=99
+    ubuntu-device-flash --channel=saucy --revision=99
 }}}
 
 = Restoring Android =

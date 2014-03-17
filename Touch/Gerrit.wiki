@@ -64,6 +64,10 @@ repo start my-cool-feature .
 repo upload
 }}}
   As output of that command, URL of a change review in Gerrit will be provided.
+  In case you get a 'remote phablet does not have a review URL' error from repo do this in the project tree.
+{{{
+git config --local remote.phablet.review code-review.phablet.ubuntu.com
+}}}
 
 === Submit changes for review - raw git ===
 
