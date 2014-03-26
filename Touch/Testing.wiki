@@ -83,7 +83,11 @@ phablet-test-run -n -p unity8-autopilot unity8
 {{{
 # allows autopilot to snoop on dbus
 phablet-config autopilot --dbus-probe enable
+}}}
 
+Note: This is not a comprehensive list of preinstalled click packages. For that list see http://people.canonical.com/~ubuntu-archive/click_packages/click_list
+
+{{{
 # pulls tests                                                 # runs tests
 phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
 phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app

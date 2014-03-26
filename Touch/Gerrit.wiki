@@ -115,7 +115,7 @@ vim BoardConfig.mk
   . {{{
 $ scp -p -P 29418 rsalveti@code-review.phablet.ubuntu.com:hooks/commit-msg .git/hooks/
 }}}
- 1. commit and push to right project and right branch. if you are not sure ask #linaro-android
+ 1. commit and push to right project and right branch. if you are not sure ask #ubuntu-touch
   . {{{
 git commit -as
 git push git clone ssh://rsalveti@code-review.phablet.ubuntu.com:29418/CyanogenMod/android_device_asus_grouper HEAD:refs/for/phablet-trusty
