@@ -10,13 +10,13 @@ There might be multiple frameworks on a single image.  Framework xyz is present 
 
 '''This table is subject to change and lists existing and planned frameworks at the time of writing.'''
 
-||'''release'''              ||'''framework'''             ||'''framework base name''' ||'''framework base version'''||'''contents'''||
-||Ubuntu for phones 13.10    ||ubuntu-sdk-13.10            ||ubuntu-sdk                ||13.10             ||all QML modules and C libraries directly pulled by ubuntu-sdk-libs||
-||Ubuntu trusty (development)||ubuntu-sdk-14.04-*-dev1 etc.||ubuntu-sdk                ||14.04             ||Temporary frameworks over the development of 14.04; will be removed if their ABIs are broken||
-||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-qml        ||ubuntu-sdk                ||14.04             ||QML/Qt modules only; list and versions to be finalized||
-||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-papi       ||ubuntu-sdk                ||14.04             ||Platform API and blessed C/C++ libraries only; list of included APIs to be finalized||
-||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-html       ||ubuntu-sdk                ||14.04             ||Cordova and HTML runtime only||
-||Ubuntu for phones 14.04    ||ubuntu-sdk-13.10            ||ubuntu-sdk                ||13.10             ||support for 13.10 apps will be provided in 14.04 with the same libraries and modules; in rare circumstances, apps using qreal or qreal-derived APIs might break and need to switch to a 14.04 framework ||
+||'''release'''              ||'''framework'''             ||'''framework base name''' ||'''framework base version'''||'''Available'''||'''contents'''||
+||Ubuntu for phones 13.10    ||ubuntu-sdk-13.10            ||ubuntu-sdk                ||13.10             ||<bgcolor="#00FF00;">Yes ||all QML modules and C libraries directly pulled by ubuntu-sdk-libs||
+||Ubuntu trusty (development)||ubuntu-sdk-14.04-*-dev1 etc.||ubuntu-sdk                ||14.04             ||<bgcolor="#00FF00;">Yes ||Temporary frameworks over the development of 14.04; will be removed if their ABIs are broken||
+||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-qml        ||ubuntu-sdk                ||14.04             ||<bgcolor="#FF0000;">No ||QML/Qt modules only; list and versions to be finalized||
+||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-papi       ||ubuntu-sdk                ||14.04             ||<bgcolor="#FF0000;">No ||Platform API and blessed C/C++ libraries only; list of included APIs to be finalized||
+||Ubuntu for phones 14.04    ||ubuntu-sdk-14.04-html       ||ubuntu-sdk                ||14.04             ||<bgcolor="#FF0000;">No ||Cordova and HTML runtime only||
+||Ubuntu for phones 14.04    ||ubuntu-sdk-13.10            ||ubuntu-sdk                ||13.10             ||<bgcolor="#00FF00;">Yes ||support for 13.10 apps will be provided in 14.04 with the same libraries and modules; in rare circumstances, apps using qreal or qreal-derived APIs might break and need to switch to a 14.04 framework ||
 
 '''Note''': The 'base name' of the framework is here to permit click to support a wider range of underlying software than Ubuntu for phones in future; consider for example apps delivered for Xubuntu.  Frameworks with different base names are not comparable, so the phone stack should never change its base name.
 '''Note''': The 'base version' of the framework is determined by the release of Ubuntu that the framework first targeted.
