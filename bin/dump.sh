@@ -4,6 +4,7 @@ editmoin -d Touch/AOSPBuild.wiki $P/Touch/AOSPBuild ; sleep 5
 editmoin -d Touch/Building.wiki $P/Touch/Building ; sleep 5
 editmoin -d Touch/Contribute.wiki $P/Touch/Contribute ; sleep 5
 editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps ; sleep 5
+editmoin -d Touch/DailyDriver.wiki $P/Touch/DailyDriver ; sleep 5
 editmoin -d Touch/Devices.wiki $P/Touch/Devices ; sleep 5
 editmoin -d Touch/DualBootInstallation.wiki $P/Touch/DualBootInstallation ; sleep 5
 editmoin -d Touch/Gerrit.wiki $P/Touch/Gerrit ; sleep 5
