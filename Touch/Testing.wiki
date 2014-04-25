@@ -1,5 +1,6 @@
 <<Include(Touch/Menu)>>
 
+
 ||<tablestyle="float:right; font-size: 0.9em; width:40%; background:#F1F1ED; margin: 0 0 1em 1em;" style="padding:0.5em;"><<TableOfContents>>||
 
 = Testing a ubuntu touch application =
@@ -15,46 +16,37 @@ Interested in helping prevent regressions and ensure new features land bugfree e
 = Testing your Ubuntu Touch Code before submission =
 To test your code before submitting use phablet-tools.
 
-(instructions as of Sep 19 2013)
+(instructions as of April 2014)
 
 == Preparation ==
 
-{{{
-# install the latest green image: on host run something like...
-ubuntu-device-flash -channel="devel"
-NOTE: please check in which channel your last green image actually is.
-also check the exact version, use "ubuntu-device-flash -h" for the necessary flashing options.
+These commands are to be run on the host computer (not the phone itself):
 
-# disable the intro
+
+{{{#!highlight bash
+# install the latest image:
+ubuntu-device-flash --channel=trusty-proposed
+
+# NOTE: please check in which channel your last green image actually is.
+# also check the exact version, use "ubuntu-device-flash -h" for the necessary flashing options.
+
+# Disable the intro:
 phablet-config edges-intro --disable
 
-# make image RW and reboot; only do this for testing debs, if only testing
-# click packages this can be skipped.
-phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build
+# Make image writable and reboot; only do this for testing debs,
+# if only testing click packages this can be skipped:
+phablet-config writable-image --ppa ppa:ci-train-ppa-service/landing-###
 
-# or add packages
-phablet-config writable-image --ppa ppa:ubuntu-unity/daily-build \
-    -p camera-app-autopilot
-
-# For click apps, this will download the tests for all your preinstalled apps
-# you can use --click for a specific package name
-phablet-click-test-setup
-
-# Enable autopilot to reach the confined click apps, running this can take 
-# a few to several minutes depending on the amount of click apps installed
-phablet-config autopilot --dbus-probe enable
-
-# Run this in another terminal window and leave it running to make sure display 
-# stays on for the tests
-adb shell
-powerd-cli display on bright
+# Run this in another terminal window and leave it running to
+# make sure display stays on for the tests:
+adb shell powerd-cli display on bright
 }}}
 
 == Running Deb tests ==
 
 Make sure you unlock the screen on your device prior to running these commands on the host:
 
-{{{
+{{{#!highlight bash
 phablet-test-run -p address-book-app-autopilot address_book_app
 phablet-test-run -p camera-app-autopilot camera_app
 phablet-test-run -p cordova-ubuntu-autopilot cordova_ubuntu
@@ -72,7 +64,7 @@ phablet-test-run -p webbrowser-app-autopilot webbrowser_app
 
 == Running Unity8 tests on Mir ==
 
-{{{
+{{{#!highlight bash
 # 1. reboot the device
 # 2. wait for the device mount to settle (nautilus pops up, at that point adb connection breaks)
 phablet-test-run -n -p unity8-autopilot unity8
@@ -80,14 +72,19 @@ phablet-test-run -n -p unity8-autopilot unity8
 
 == Running Click tests ==
 
-{{{
-# allows autopilot to snoop on dbus
+{{{#!highlight bash
+# For click apps, this will download the tests for all your
+# preinstalled apps you can use --click for a specific package name:
+phablet-click-test-setup
+
+# Enable autopilot to reach the confined click apps, running this can
+# take a few to several minutes depending on the amount of click apps installed:
 phablet-config autopilot --dbus-probe enable
 }}}
 
 Note: This is not a comprehensive list of preinstalled click packages. For that list see http://people.canonical.com/~ubuntu-archive/click_packages/click_list
 
-{{{
+{{{#!highlight bash
 # pulls tests                                                 # runs tests
 phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
 phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app
@@ -110,7 +107,7 @@ IMPORTANT NOTE: remember that after doing a phablet-click-test-setup, you are fe
 
 == Running Security tests ==
 
-{{{
+{{{#!highlight bash
 # (on the local machine)
 bzr branch lp:ubuntu-test-cases/touch
 cd touch/tests/security
@@ -134,12 +131,12 @@ cd /tmp/qrt_tests
 In almost all cases it is a good idea to also validate your work by using your phone by hand after adding your change. A convenient way for developers to do app testing is by starting them through adb. To make that convenient we are providing a cli tool, called {{{upstart-app-launch}}}.
 
 Syntax:
-{{{
+{{{#!highlight bash
 upstart-app-launch <DESKTOP-FILENAME>
 }}}
 
 Examples:
-{{{
+{{{#!highlight bash
 su - phablet
 
 upstart-app-launch com.ubuntu.music
@@ -150,7 +147,7 @@ upstart-app-launch dialer-app
 == Receipts for different Developer Roles ==
 
 For application developers, we highly recommend to run at least your own application autopilot before submitting code.
-{{{
+{{{#!highlight bash
 # install your autopilots (example if in a package); on target:
 apt-get install your-app-autopilot
 
@@ -159,7 +156,7 @@ phablet-test-run your_app
 }}}
 
 For indicator developers, we highly recommend to run at least your indicator tests, but also the unity8 test suite; also if your indicator collaborates with any application, also run their tests
-{{{
+{{{#!highlight bash
 # install unity8 autopilot and two apps; on target:
 apt-get install unity8-autopilot webbrowser-app-autopilot camera-app-autopilot
 

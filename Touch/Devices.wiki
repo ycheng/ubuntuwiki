@@ -4,9 +4,7 @@
 = General =
 Ubuntu Touch Developer is currently running on the devices listed below.
 
-Images are currently built in the Canonical data center and they are based on `quantal`. Over the next days all necessary changes for Ubuntu Touch are going to go into Ubuntu `raring` and images will be built using `raring` as a basis. They are published on `cdimages.ubuntu.com`.
-
-Currently the images are built from an internal Jenkins instance and are manually copied to cdimages.ubuntu.com. In the next few days, we'll be working on moving away from this internal instance and fully automate the build process.
+Images are currently built in the Canonical data center and they are based on `trusty`. Over the next days all necessary changes for Ubuntu Touch are going to go into Ubuntu `utopic` and images will be built using `utopic` as a basis. They are published on `cdimages.ubuntu.com` and `system-image.ubuntu.com`
 
 == Adding your image ==
 
@@ -19,19 +17,44 @@ A few points to bear in mind are:
  * if you upload an image or code, bear in mind that many might be interested in it, so make sure the quality of the image is good and that it is hosted in a place that can withstand a potential surge of visitors
  * announce it [[../Contribute#Discuss|on the mailing list]]
 
-= Working with phablet-flash =
+= Working with ubuntu-device-flash =
 
-'''The following devices all are working with `phablet-flash cdimage-touch`, Install instructions can be found [[Touch/Install|here]]. The latest status for what is working is [[Touch/Devices/Nexus|here]]'''
+The following devices all are working with `ubuntu-device-flash` script as explained in Install instructions [[Touch/Install|here]]. The latest status for what is working is [[Touch/Devices/Nexus|here]]. They are using system-image system for installation and support OTA updates. They are hosted at https://system-image.ubuntu.com
 
-|| '''Device''' || '''Code name''' ||
-|| [[http://en.wikipedia.org/wiki/Galaxy_Nexus|Galaxy Nexus]] || maguro (GSM/HSPA+ Variant) ||
+|| '''Device''' || '''Board name''' ||
 || [[http://en.wikipedia.org/wiki/Nexus_4|Nexus 4]] || mako ||
-|| [[http://en.wikipedia.org/wiki/Nexus_7|Nexus 7]] || grouper ||
+|| [[http://en.wikipedia.org/wiki/Nexus_7_(2013_version)|Nexus 7 2013 (WiFi only)]] || flo ||
 || [[http://en.wikipedia.org/wiki/Nexus_10|Nexus 10]] || manta ||
+|| Emulator (ARM) || generic ||
+|| Emulator (x86) || generic_x86 ||
+|| [[http://en.wikipedia.org/wiki/Galaxy_Nexus|Galaxy Nexus]] '''(deprecated)''' || maguro (GSM/HSPA+ Variant) ||
+|| [[http://en.wikipedia.org/wiki/Nexus_7|Nexus 7 2012 WiFi]] '''(deprecated)''' || grouper ||
+
+= Working ports w/ system-image server =
+These ports have their own system-image server owned by some community member, which means they support OTA updates and can be installed using `ubuntu-device-flash` script with `--server="<url>"` parameter.
+
+=== Server at http://system-image.tasemnice.eu ===
+This server belongs to [[http://launchpad.net/~vbocek|Vojtech Bocek]] (Tassadar on irc.freenode.net). It is configured to follow `devel` and `devel-proposed` channels of system-image.ubuntu.com server and builds releases for following devices:
+
+|| '''Device''' || '''Board name''' || '''Notes''' ||
+|| [[http://en.wikipedia.org/wiki/Nexus_5|Nexus 5]] || hammerhead || Sound is not working very well; Bluetooth doesn't work ||
+|| [[http://en.wikipedia.org/wiki/Nexus_7_(2013_version)|Nexus 7 2013 (WiFi+LTE)]] || deb || Works as well as official flo builds, but supports mobile data on LTE version of N7 ||
 
 
-= Working, but not available from cdimage.ubuntu.com =
-'''The following devices have been contributed by a variety of Ubuntu Touch lovers. They however do not live on cdimage.ubuntu.com.''' This is due to three primary reasons:
+'''To install Ubuntu Touch from this server on your device, ''' see instructions at [[Touch/Install|the Touch/Install page]], except when invoking `ubuntu-device-flash` command, add a `--server="http://system-image.tasemnice.eu"` argument to it, like this:
+
+    ubuntu-device-flash --channel="ubuntu-touch/devel" --bootstrap --server="http://system-image.tasemnice.eu"
+
+Due to lack of disk space, it only hosts hosts two channels: `ubuntu-touch/devel` and `ubuntu-touch/devel-proposed`, which are aliases for current release name, e.g. `ubuntu-touch/devel` is currently alias for `ubuntu-touch/trusty`. You can always get current list of channels on the server by using this command:
+
+    ubuntu-device-flash --list-channels --server="http://system-image.tasemnice.eu"
+
+Version numbers at `system-image.tasemnice.eu` should be in sync with official builds at `system-image.ubuntu.com`. When new version appears at `system-image.ubuntu.com`, it will take approximatelly one or two hours for tasemnice to process and publish it, depending on what exactly has changed.
+
+The server is simple VPS with unlimited traffic on a 100Mbit/s line located in Czech Republic (Central Europe). It might get a bit slow if too many people use it, so be a bit tolerant about its speed :)
+
+= Working ports, but w/o system-image server =
+'''The following devices have been contributed by a variety of Ubuntu Touch lovers. They however do not live on system-image.ubuntu.com or any other system-image server.''' This is due to three primary reasons:
  * Redistributability: For every bit of firmware we need to know that we are absolutely allowed to redistribute it through its license.
  * We need to know which code changes need to be done and they need to be integrated.
  * We need to be able to create the image easily.
@@ -123,7 +146,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2162777|XDA Forums]]|| [[https://launchpad.net/~ruggles92|~rugglez]] ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ||
 || [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus || WIP || WIP || WIP || [[https://launchpad.net/~501st-alpha1|Scott Weldon]] ||
-|| [[http://www.gsmarena.com/motorola_moto_g-5831.php|Motorola Moto G]] || ??? || ??? || ??? || ??? || ||
+|| [[http://www.gsmarena.com/motorola_moto_g-5831.php|Motorola Moto G]] || falcon || ??? || ??? || ??? || ||
 || [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo || WIP|| WIP || WIP || [[https://launchpad.net/~michaelevans|~michaelevans]] ||
 || [[http://en.wikipedia.org/wiki/Nokia_N800|Nokia N800]]/[[http://en.wikipedia.org/wiki/Nokia_N900|N900]] || ??? || ??? || ??? || ??? || ||
 || Notion Ink Adam PQi 3G || adam_3g || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||

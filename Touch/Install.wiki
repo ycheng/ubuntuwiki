@@ -25,18 +25,22 @@ For detailed information [[../ReleaseNotes|check the release notes]]
  1. Functional camera (front and back)
  1. Device accessible through the Android Developer Bridge tool (`adb`)
 
-= Supported devices and codenames =
+= Target devices =
 
-The table below lists the supported devices and their corresponding factory images, should you want to switch back to Android. The images can be found [[https://developers.google.com/android/nexus/images|here]].
+This table lists current and previous target devices.
 
-||'''Device'''||'''Codename'''||'''Factory firmware from Google'''||'''Status'''||
-||Nexus 4||mako|| [[https://developers.google.com/android/nexus/images#occam|occam]] || Active development ||
-||Nexus 10||manta|| [[https://developers.google.com/android/nexus/images#mantaray|mantaray]] || Active development ||
-||Nexus 7 2013 WiFi||flo|| [[https://developers.google.com/android/nexus/images|flo]] or [[https://developers.google.com/android/nexus/images|flo]] || Active development ||
-||Galaxy Nexus||maguro|| [[https://developers.google.com/android/nexus/images#takju|takju]] or [[https://developers.google.com/android/nexus/images#yakju|yakju]]|| Maintenance ||
-||Nexus 7||grouper|| [[https://developers.google.com/android/nexus/images#nakasi|nakasi]] or [[https://developers.google.com/android/nexus/images#nakasig|nakasig]] || Deprecated||
+Use the appropriate Android Image link to download files needed to restore your device to Android.
 
-Latest status can be found [[https://docs.google.com/a/canonical.com/spreadsheet/ccc?key=0ArLs7UPtu-hJdDZDNWliMmV1YUJ3Zk1pQlpDdGp4VFE&usp=sharing#gid=0 | here]]
+||'''Device'''||'''Android Drivers'''||'''Android Images'''||'''Status'''||
+||Nexus 4||[[https://developers.google.com/android/nexus/drivers#mako|mako]]|| [[https://developers.google.com/android/nexus/images#occam|occam]] || Active development ||
+||Nexus 10||[[https://developers.google.com/android/nexus/drivers#manta|manta]]|| [[https://developers.google.com/android/nexus/images#mantaray|mantaray]] || Active development ||
+||Nexus 7 2013 !WiFi||[[https://developers.google.com/android/nexus/drivers#flo|flo]]|| [[https://developers.google.com/android/nexus/images#razor|razor]]|| Active development ||
+||Galaxy Nexus||[[https://developers.google.com/android/nexus/drivers#maguro|maguro]]|| [[https://developers.google.com/android/nexus/images#takju|takju]] or [[https://developers.google.com/android/nexus/images#yakju|yakju]]|| Maintenance ||
+||Nexus 7||[[https://developers.google.com/android/nexus/drivers#grouper|grouper]]|| [[https://developers.google.com/android/nexus/images#nakasi|nakasi]] or [[https://developers.google.com/android/nexus/images#nakasig|nakasig]] || Deprecated||
+||Emulator||goldfish|| || ||
+
+
+Status for active images is [[https://docs.google.com/a/canonical.com/spreadsheet/ccc?key=0ArLs7UPtu-hJdDZDNWliMmV1YUJ3Zk1pQlpDdGp4VFE&usp=sharing#gid=0 | here]].
 
 = Community support devices =
 
@@ -52,7 +56,9 @@ The following steps are required on your desktop system that you'll need in orde
 
 === Set up the Touch Developer Preview Tools PPA ===
 
-The PPA has the tools and dependencies to support Precise, Quantal, Raring and Saucy.
+The PPA is a small mini repository which contains additional software required by this install process. The following section details how to enable and use it.
+
+The PPA has the tools and dependencies to support Ubuntu releases including 12.04, 12.10, 13.04 and 13.10.
 Add the Ubuntu Touch PPA by adding the following custom source list entry to your `/etc/apt/sources.list` file.
 
 On your computer, press Ctrl+Alt+T to start a terminal.
@@ -186,7 +192,7 @@ If you have a device which is already flashed and you've made it read-write, and
     adb shell system-image-cli --build 0
 }}}
 
-Switch from Saucy to Trusty
+Switch from 13.10 to 14.04
 {{{
     adb shell system-image-cli --channel trusty -b 0
 }}}
@@ -222,52 +228,35 @@ Your device should boot into Android after the process is finished.
 
 = Manual Download & Installation =
 
- * Get the hardware specific zip and img files for your device from the Ubuntu cdimage server [[http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/|here]], i.e. for a Nexus7 this is trusty-preinstalled-touch-armel+grouper.zip
+ * Get the hardware specific img files (boot,recovery and system) for your device from the Ubuntu cdimage server [[http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/|here]] as well as the armhf rootfs tarball (trusty-preinstalled-touch-armhf.tar.gz).
 
+ * Install required packages
 
-* Install the bootloader, recovery and system images using the android `fastboot` tool
+{{{
+sudo apt-get install android-tools-fsutils android-tools-adb android-tools-fastboot
+}}}
+
+ * Install the bootloader, recovery and system images using the android `fastboot` tool
 
 {{{
 adb reboot fastboot
-fastboot flash recovery trusty-preinstalled-recovery-armel+grouper.img
-fastboot flash boot trusty-preinstalled-boot-armhf+grouper.img
-fastboot flash system trusty-preinstalled-system-armel+grouper.img
+fastboot flash recovery /path/to/trusty-preinstalled-recovery-armel+mako.img
+fastboot flash boot /path/to/trusty-preinstalled-boot-armhf+mako.img
 }}}
 
  * Boot your device into recovery mode
 {{{
 adb reboot recovery
 }}}
- * Copy the zip file to the /sdcard/ directory naming it "autodeploy.zip" on the device using adb
+ * Get the bzr branch of project-rootstock-ng and run the rootstock-touch-install script.
 
 {{{
-adb push /path/to/your/downloaded/trusty-preinstalled-touch-armel+grouper.zip /sdcard/autodeploy.zip
+bzr branch lp:project-rootstock-ng
+cd project-rootstock-ng
+./rootstock-touch-install /path/to/trusty-preinstalled-touch-armhf.tar.gz /path/to/trusty-preinstalled-system-armhf+mako.img
 }}}
 
- * Reboot into recovery mode
-(This will install the file you copied in the previous step)
-
-
-{{{
-adb reboot recovery
-}}}
-
- * Make sure you are in recovery mode again for the second step
- * Get the trusty-preinstalled-touch-armhf.zip file
- * Copy the zip file to the /sdcard/ directory naming it "autodeploy.zip" on the device using adb
-
-{{{
-adb push /path/to/your/downloaded/trusty-preinstalled-touch-armhf.zip /sdcard/autodeploy.zip
-}}}
-
- * Reboot into recovery mode
-(This will install the file you copied in the previous step)
-
-{{{
-adb reboot recovery
-}}}
-
- * The device should automatically reboot into the Ubuntu Touch UI
+ * The device will automatically reboot into the Ubuntu Touch UI
 
 
 = Check version after install =
@@ -280,13 +269,7 @@ Android Side
 grep ro.build.date= /system/build.prop
 }}}
 
-Ubuntu Side
-
-{{{
-/var/log/installer/media-info (link to /etc/media-info)
-}}}
-
-or run this command:
+Ubuntu Side:
 
 {{{
 $ system-image-cli --info
