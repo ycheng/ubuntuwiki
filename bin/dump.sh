@@ -7,6 +7,7 @@ editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps ; sleep 5
 editmoin -d Touch/DailyDriver.wiki $P/Touch/DailyDriver ; sleep 5
 editmoin -d Touch/Devices.wiki $P/Touch/Devices ; sleep 5
 editmoin -d Touch/DualBootInstallation.wiki $P/Touch/DualBootInstallation ; sleep 5
+editmoin -d Touch/Emulator.wiki $P/Touch/Emulator ; sleep 5
 editmoin -d Touch/Gerrit.wiki $P/Touch/Gerrit ; sleep 5
 editmoin -d Touch/Install.wiki $P/Touch/Install ; sleep 5
 editmoin -d Touch/MakingPortsAvailable.wiki $P/Touch/MakingPortsAvailable.wiki ; sleep 5

@@ -1,1 +1,1 @@
-git commit -m "`date -R`"
+git commit -a -m "`date -R`"

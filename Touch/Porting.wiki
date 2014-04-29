@@ -123,12 +123,6 @@ $ sudo apt-get install git gnupg flex bison gperf build-essential \
   libgl1-mesa-dev g++-multilib mingw32 ubuntu-dev-tools tofrodos \
   python-markdown libxml2-utils xsltproc zlib1g-dev:i386 schedtool bsdiff}}}
 
-Additionally, to build the Android pieces, you will need a Java 6 JDK installed: {{{
-$ sudo apt-get install openjdk-6-jdk
-}}}
-
-Using the OpenJDK will generate a warning, but the build still will proceed. Attempting to use OpenJDK version 7 will cause the build to fail.
-
 You'll also need to [[../Install#Step_1_-_Desktop_Setup|set up the tools PPA]]. This will also install the {{{repo}}} tool, used to sync the Android repositories. [[http://source.android.com/source/using-repo.html|Learn more about the repo tool]].
 
 You can check out the source code using the repo and git tools already familiar to Android ROM developers, as
@@ -140,19 +134,16 @@ Alternately, all the Android code can be downloaded using the `phablet-dev-boots
 
 To get the code setup run:
  {{{
-phablet-dev-bootstrap [target_directory]
+phablet-dev-bootstrap --sources aosp --repo-branch phablet-4.4.2_r1 [target_directory]
 }}}
 
 If for some reason the sync ends midway, you can continue the sync with the `-c` switch, so the command would be:
  {{{
-phablet-dev-bootstrap -c [target_directory]}}}
+phablet-dev-bootstrap --sources aosp --repo-branch phablet-4.4.2_r1 -c [target_directory]}}}
 
-Alternatively, if you are just building an image for an already supported device, you can specify the `-v` switch:
- {{{
-phablet-dev-bootstrap -v [device codenames] [target_directory]
-}}}
+Supported devices are downloaded with the sources following AOSPs development workflow
 
-The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch Preview custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
+The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
 
 
 === Enabling a new device ===
@@ -160,24 +151,6 @@ The `phablet-dev-bootstrap` command will automatically use the `repo` tool with 
 As we're using !CyanogenMod, we can easily take advantage of all the devices that are officially supported there.
 
 You can find codenames and devices by looking at http://wiki.cyanogenmod.org/w/Devices
-
-==== Automatic ====
-
-If your device is already supported by !CyanogenMod, you can use the same repositories available at github, and get them automatically by calling ''breakfast'', like:
-
- {{{
-breakfast codename
-}}}
-
-Then breakfast will automatically set up your device specific repos at the local manifest file ''.repo/local_manifests/roomservice.xml''.
-
-Then to download all extra repositories, run the following command from the root directory:
-
- {{{
-repo sync
-}}}
-
-==== Manual ====
 
 From the individual device wiki page, grab the git repositories that are specific to your device, and update your local `.repo/local_manifests/roomservice.xml` file including them, such as:
 
@@ -221,7 +194,9 @@ repo sync
 
 Ubuntu Touch Preview uses some pre-compiled binary drivers from the Android layer for rapid enablement of devices. These are referred to as binary or proprietary blobs, as their source code is not available for the build, and are included in binary form.
 
-As we're using Cyanogen``Mod 10.1 as the base for our Android part, the easier way to retrieve working binary blobs (drivers, etc) is by flashing a working CM 10.1 based image. Here is an example of the list of [[https://raw.github.com/CyanogenMod/android_device_samsung_galaxysmtd/cm-10.1/proprietary-files.txt|binary blob files included in the image for the `galaxysmtd` device]].
+Since we use AOSP as a base, for supported devices all you need to do is to download and extract and run as mentioned in the downloads from https://developers.google.com/android/nexus/drivers
+
+If porting for a device not available on AOSP and basing out of CyanogenMod, you can take advantage of it's `./extract-files.sh` script.
 
 {*} '''Tip''': you can alternatively extract these binaries from the image (which is essentially a `.zip` file containing, amongst others, these binary files), but flashing it first helps as you can see if CM is working properly in the device.
 
@@ -395,18 +370,21 @@ index cae5772..4e7df71 100755
 Example for the mako target.
  {{{
 . build/envsetup.sh
-brunch mako
+lunch mako
+make -j8
 }}}
 
-Sourcing the envsetup.sh file adds brunch and other functions useful when working with the Android source tree and building from scratch. See http://wiki.cyanogenmod.org/w/Envsetup_help
+Sourcing the envsetup.sh file adds lunch and other functions useful when working with the Android source tree and building from scratch. See http://wiki.cyanogenmod.org/w/Envsetup_help
 
-Calling brunch with no arguments will present a list of valid target names and you can pick one. That list prefixes each target with cm_ that is unnecessary when specifying it on the command line.
+Calling lunch with no arguments will present a list of valid target names and you can pick one.
 
-At the end of the build process a zip file will be generated in `out/target/product/<codename>`, that you can deploy to the phone through recovery.
+At the end of the build process a couple of img files will be generated in `out/target/product/<codename>`, you can use rootstock to easy push your device, described bellow assuming trusty
 
- {{{
-adb push out/target/product/<codename>/*.zip /sdcard/autodeploy.zip
-adb reboot recovery
+{{{
+bzr branch lp:project-rootstock-ng [rootsock_trunk_path]
+ROOTFS="trusty-preinstalled-touch-armhf.tar.gz"
+wget -c "http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/$ROOTFS" -O "$OUT/$ROOTFS"
+$ROOTSTOCK_DIR/rootstock-touch-install "$OUT/$ROOTFS" "$OUT/system.img"
 }}}
 
 ##=== Working on and testing fixes ===
@@ -446,22 +424,25 @@ Prerequisites:
 
 This is required if you are not working from the Android source tree, as `fastboot` and `adb` should be built as part of system build for the host part, they should be in your path and located here:
 
- {{{
+{{{
 out/host/linux-x86/bin/
 }}}
 
-If not installing a personal build, make sure you have `ppa:phablet-team` added, if not
- {{{
+If not installing a personal build and not using trusty, make sure you have `ppa:phablet-team` added, if not
+
+{{{
 add-apt-repository ppa:phablet-team/tools
 }}}
 
 Then make sure to install `adb` and `fastboot`. You can do so by installing the following packages:
- {{{
+
+{{{
 apt-get install android-tools-adb android-tools-fastboot
 }}}
 
 To get packages to your phone's chroot execute the following from your desktop:
- {{{
+
+{{{
 adb root
 adb push [filename|directory name] [ubuntu path]
 }}}
@@ -513,9 +494,18 @@ root@localhost:/#}}}
 Files that were copied into `/data/ubuntu` above will show up in this root level directory. Packages can be installed using `dpkg -i`, or `apt-get install`.
 
 ===== SSH =====
-Although this shell can be used to access the Ubuntu file system in the chroot, for any serious debugging it’s advised that you install openssh-server and use an ssh client to access the container.  This is due to the fact that the Ubuntu container uses its own PID namespace.
+To enable ssh run
 
-[[../ReleaseNotes#SshAccess|Learn how to connect over SSH >]]
+{{{
+adb shell start ssh
+}}}
+
+To make it start on every boot, run
+
+{{{
+adb shell setprop persist.service.ssh true
+adb reboot
+}}}
 
 You can use adb port forwarding to easily connect to the container via SSH over USB.  To do so, run the following commands:
  {{{

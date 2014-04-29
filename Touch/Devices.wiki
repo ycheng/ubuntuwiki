@@ -4,6 +4,8 @@
 = General =
 Ubuntu Touch Developer is currently running on the devices listed below.
 
+For the list of supported devices (not including ports), please see [[http://developer.ubuntu.com/start/ubuntu-for-devices/devices/ | developer.ubuntu.com/start ]].
+
 Images are currently built in the Canonical data center and they are based on `trusty`. Over the next days all necessary changes for Ubuntu Touch are going to go into Ubuntu `utopic` and images will be built using `utopic` as a basis. They are published on `cdimages.ubuntu.com` and `system-image.ubuntu.com`
 
 == Adding your image ==
