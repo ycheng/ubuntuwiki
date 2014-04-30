@@ -418,6 +418,8 @@ The simplest solution given that you have a UI available is to use the networkin
 
 An alternate means of configuring networking is via the '''phablet-network-setup''' tool which is part of the phablet-tools package.  This script can be used to copy an active Network Manager system settings file from an Ubuntu Desktop ( >= 12.04 LTS ) to the device.  It also has some extra options which cause the tool to install network-related packages such as iw and openssh-server.
 
+If you have difficulty enabling the wifi drivers on your platform, you can still get network on your phone with reverse USB tethering over adb. See [[../AdbNetworking | AdbNetworking]] for details.
+
 ==== Copying files to the phone ====
 
 Prerequisites:

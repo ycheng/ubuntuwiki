@@ -1,0 +1,43 @@
+When porting Ubuntu to a new platform, making adb work is one important step to achieve. Bringing up a full networking stack might be difficult, so if you want the convenience of networking on the phone before enabling the wifi chips, you can use the following steps to have your phone use your laptop's internet connection via adb.
+
+This is similar to reverse tethering.
+
+== ensure ppp is enabled on host and target kernel ==
+{{{
+CONFIG_PPP=y
+CONFIG_PPP_ASYNC=y
+CONFIG_PPP_SYNC_TTY=y
+CONFIG_SLHC=y
+}}} 
+
+This might not be the minimal set, but it works.
+
+== install ppp on both host and target ==
+
+You will need both the ''ppp'' and ''libpcap0.8'' packages.
+
+== On Ubuntu ==
+
+{{{
+sudo sysctl net.ipv4.ip_forward=1
+sudo iptables -t nat -I POSTROUTING -s 192.168.0.2 -j MASQUERADE -o eth0
+sudo iptables -I FORWARD 1 --in-interface ppp0 -j ACCEPT
+sudo iptables -I INPUT 1 --in-interface ppp0 -j ACCEPT
+
+sudo adb ppp "shell:pppd nodetach noauth noipdefault defaultroute /dev/tty" nodetach noauth noipdefault notty 192.168.0.1:192.168.0.2
+}}}
+
+This will create network device ppp0. You can verify it exists on both host and target by issuing ''/sbin/ifconfig''.
+
+== Set DNS on target ==
+
+{{{
+echo nameserver 8.8.8.8 >> /etc/resolv.conf
+}}}
+
+"8.8.8.8" is Google nameserver, replace by any nameserver you want to use.
+
+After all those steps, your phone has full internet access.
+
+== Final steps ==
+If you mount root filesystem as RW by ''mount -o rw,remount /'', you will be able to do something like ''apt-get install gdb'', which will make it much easier to do development.

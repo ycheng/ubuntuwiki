@@ -1,5 +1,6 @@
 export P=https://wiki.ubuntu.com
 editmoin -d Click/Frameworks.wiki $P/Click/Frameworks ; sleep 5
+editmoin -d Touch/AdbNetworking.wiki $P/Touch/AdbNetworking ; sleep 5
 editmoin -d Touch/AOSPBuild.wiki $P/Touch/AOSPBuild ; sleep 5
 editmoin -d Touch/Building.wiki $P/Touch/Building ; sleep 5
 editmoin -d Touch/Contribute.wiki $P/Touch/Contribute ; sleep 5
