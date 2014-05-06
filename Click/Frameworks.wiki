@@ -4,7 +4,7 @@
 
 Click Frameworks are "contracts" between the platform (OS) and apps.  These were introduced by the Click packaging tool in Ubuntu Touch / Ubuntu for phones images to ensure apps shipped from the application store were compatible with installed devices.  While it was introduced along the first Ubuntu for phone images for Unity 8 / QML / Qt apps, Click is not specific to these technologies and is applicable to other images / stacks.
 
-There might be multiple frameworks on a single image.  Framework xyz is present when /usr/share/click/frameworks/xyz.framework exists, however this should be tested with the proper libclick call or click command (see [[https://bugs.launchpad.net/ubuntu/+source/click/+bug/1271633|LP #1271633]] to track this requirement).
+There might be multiple frameworks on a single image.  Framework xyz is present when /usr/share/click/frameworks/xyz.framework exists, however this should be tested with `click_framework_has_framework` (see [[https://bugs.launchpad.net/ubuntu/+source/click/+bug/1271633|LP #1271633]] to track this requirement).
 
 = Available frameworks =
 
