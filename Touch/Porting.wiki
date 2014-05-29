@@ -236,7 +236,8 @@ As a requirement from the Ubuntu userspace, we need to add a few extra kernel co
 
 You can find your kernel config at {{{kernel/[manufacturer]/[codename]/arch/arm/configs/ cyanogenmod_[codename]_defconfig}}}. Please double check that it is indeed the default config file name in {{{device/[manufacturer]/[codename]/*.mk}}} (look for the TARGET_KERNEL_CONFIG variable).
 
-Extra configs that need to be added
+Extra configs that need to be added '''AT THE END OF THE CONFIG FILE SO THEY DO NOT GET OVERRIDEN'''
+
  {{{
 CONFIG_SYSVIPC=y
 CONFIG_NAMESPACES=y
@@ -256,7 +257,7 @@ CONFIG_FANOTIFY_ACCESS_PERMISSIONS=y
 CONFIG_SWAP=y
 # CONFIG_ANDROID_PARANOID_NETWORK is not set
 CONFIG_VT=y
-CONFIG_VT_CONSOLE=y.
+CONFIG_VT_CONSOLE=y
 }}}
 
 Reasons:

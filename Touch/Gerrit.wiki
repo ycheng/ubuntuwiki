@@ -22,7 +22,7 @@ git config --global review.code-review.phablet.ubuntu.com.username <GERRIT_USERN
 }}}
  1. Verify that you can access Gerrit by SSH:
   . {{{
-$ ssh <GERRIT USERNAME@code-review.phablet.ubuntu.com -p 29418 gerrit version
+$ ssh <GERRIT USERNAME>@code-review.phablet.ubuntu.com -p 29418 gerrit version
 }}}
   You'll see this if the command executed successfully:
   {{{
@@ -34,7 +34,7 @@ gerrit version 2.7
 Before you start submitting code, it is preferable and highly recommended that you add a "commit-msg" file to your ".git/hooks" directory in order to generated a "Change-Id" automatically.
 
 {{{
-$ scp -p -P 29418 code-review.phablet.ubuntu.com:hooks/commit-msg /path/yourproject/.git/hooks/
+$ scp -p -P 29418 <GERRIT USERNAME>@code-review.phablet.ubuntu.com:hooks/commit-msg /path/yourproject/.git/hooks/
 }}}
 
 You should also have a good ~/.gitconfig. Something like:
@@ -85,7 +85,7 @@ git checkout -b my-change
  1. Make changes and commit them following the commit guidelines above.
  1. Once ready, push change for the review:
   . {{{
-git push ssh://<GERRIT_USERNAME>@code-review.phablet.ubuntu.com:29418/platform/manifest.git HEAD:refs/for/phablet-trusty
+git push ssh://<GERRIT_USERNAME>@code-review.phablet.ubuntu.com:29418/platform/manifest.git HEAD:refs/for/phablet-4.4.2_r1
 }}}
   Note that it's important to correctly specify target branch in {{{refs/for/...}}} construct. Change URL will be provided as output of the command.
 
@@ -113,12 +113,12 @@ vim BoardConfig.mk
  1. make sure that you have right commit-msg
 
   . {{{
-$ scp -p -P 29418 rsalveti@code-review.phablet.ubuntu.com:hooks/commit-msg .git/hooks/
+$ scp -p -P 29418 <GERRIT_USERNAME>@code-review.phablet.ubuntu.com:hooks/commit-msg .git/hooks/
 }}}
  1. commit and push to right project and right branch. if you are not sure ask #ubuntu-touch
   . {{{
 git commit -as
-git push git clone ssh://rsalveti@code-review.phablet.ubuntu.com:29418/CyanogenMod/android_device_asus_grouper HEAD:refs/for/phablet-trusty
+git push ssh://<GERRIT_USERNAME>@code-review.phablet.ubuntu.com:29418/aosp/device/asus/grouper HEAD:refs/for/phablet-4.4.2_r1
 }}}
 
 === Managing a review ===

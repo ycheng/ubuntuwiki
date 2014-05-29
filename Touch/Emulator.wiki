@@ -10,32 +10,10 @@
 
 == Installing the pre-built emulator ==
 
-=== /!\ If you are on amd64 ===
-
- A word of warning though: if you are on amd64, take care if you uninstall the emulator and run apt-get autoremove to automatically clean the dependencies, this will break your system. Issue was fixed with android-emulator 20131120-0225-0ubuntu2, but you could still have the issue (in case you installed a previous version of the emulator, so check if you have libc6-amd64 installed in your system).
-
-If that happens to you:
-
-From still running system, initramfs / break-bottom, or elsehow:
-{{{
-/lib/x86_64-linux-gnu/ld-2.18.so /bin/ln -s /lib/x86_64-linux-gnu/ld-2.18.so /lib64/ld-linux-x86-64.so.2
-}}}
-
-Alternatively you can do:
-
- 1. reboot and eventually press shift to get to grub
- 1. press e to edit your command line
- 1. on the line "linux <…>", remove "quiet splash" and replace with break=bottom
- 1. press F10 or Ctrl-x to start, you will be dropped in the initramfs busybox
- 1. mkdir /mnt
- 1. you need to know your FS layout and mount /dev/<your root partition> in /mnt
- 1. cd /mnt/lib64/ && rm ld-linux-x86-64.so.2 && ln -s ../lib/x86_64-linux-gnu/ld-2.17.so ld-linux-x86-64.so.2
- 1. reboot 
-
 === Instructions ===
 
- * Install the ubuntu-emulator package in Trusty
- * Create an instance
+ * Install the ubuntu-emulator package
+ * Create an instance (and select the desired arch to use)
  * Run the emulator
 
 {{{
@@ -44,9 +22,15 @@ sudo ubuntu-emulator create myinstance
 ubuntu-emulator run myinstance
 }}}
 
+To create a X86 instance, just give ''--arch=i386'' to ''ubuntu-emulator create'':
+{{{
+sudo ubuntu-emulator create --arch=i386 myinstance
+ubuntu-emulator run myinstance
+}}}
+
 ==== Notes ====
 
- * By default the latest built image from devel-proposed channel is used.
+ * By default the latest built image from devel channel is used.
    This can be changed during creation with the --channel and --revision options.
  * XDG_CACHE_DIR/ubuntuimage is used to download images; it is shared with ubuntu-device-flash.
  * Images are stored in XDG_DATA_DIR/ubuntu-emulator.
@@ -58,15 +42,8 @@ ubuntu-emulator run myinstance
 
 ==== Maintenance ====
 
-Until system-image works in the emulator, you can do the following to rebuild the image using the cached ubuntu-rootfs.tar.xz:{{{
-$ cd ~/emulator/
-$ ./build-emulator-sdcard.sh
-}}}
-
-To update the image to the newest version of ubuntu-rootfs.tar.xz:{{{
-$ cd ~/emulator/
-$ rm -f ./out/target/product/generic/ubuntu-rootfs.tar.xz
-$ ./build-emulator-sdcard.sh
+Until system-image works in the emulator, you can do the following to rebuild the image using the cached image:{{{
+$ sudo ubuntu-emulator create myoldinstance
 }}}
 
 == Building from scratch ==
@@ -91,28 +68,18 @@ $ mkdir -p emulator/
 $ phablet-dev-bootstrap emulator
 $ cd emulator
 $ source build/envsetup.sh
-$ lunch cm_goldfish-eng
-$ mka
+$ lunch aosp_arm-userdebug # or aosp_x86-userdebug for the x86 emulator
+$ make -j<n>
 }}}
 
-To generate sdcard with the ubuntu rootfs
+To use the '''system.img''' that you just created, create an instance with ''ubuntu-emulator create --use-raw-disk'' and replace the ''system.img'' file available in the generated ''sdcard.img'' file (under ''~/.local/share/ubuntu-emulator/<my instance>'':
 {{{
-$ ./build/tools/build-emulator-sdcard.sh
-}}}
-
-Launch the emulator with the run-emulator script:
-{{{
-$ ./build/tools/run-emulator.sh
-}}}
-
-You can also launch the emulator using your own arguments and options:
-{{{
-$ emulator -verbose -gpu on -system $OUT/system.img -memory 512 -show-kernel -shell -no-jni -qemu -cpu cortex-a8
-}}}
-
-As of 2013/11/05 there is a bug in the goldfish kernel wrt !AppArmor, so you may want to launch with !AppArmor disabled until this issue is resolved:
-{{{
-$ emulator -verbose -gpu on -system $OUT/system.img -memory 512 -show-kernel -shell -no-jni -qemu -cpu cortex-a8 -append 'apparmor=0'
+$ simg2img out/target/product/generic_x86/system.img out/target/product/generic_x86/system.raw
+$ sudo mount ~/.local/share/ubuntu-emulator/myinstance/sdcard.img /tmp/mount1
+$ sudo mount /tmp/mount1/system.img /tmp/mount2
+$ sudo cp out/target/product/generic_x86/system.raw /tmp/mount2/var/lib/lxc/android/system.img
+$ sudo umount /tmp/mount2
+$ sudo umount /tmp/mount1
 }}}
 
 Username & password are:
@@ -125,6 +92,10 @@ To update your existing working tree to pull in new changes from the server, run
 
 For more information about how to use the repo command to manage your android working tree, see [[http://source.android.com/source/using-repo.html|this page]].
 
+= Support Status =
+
+Please check [[/Support|Support status]] to better know what is the current state of the emulator.
+
 = Using the emulator =
 
 After starting the emulator with the wrapper script following should be available:
@@ -135,9 +106,6 @@ After starting the emulator with the wrapper script following should be availabl
 $ adb shell
   }}}
   access into ubuntu.
-
- * Serial console
-  The terminal will start an Ubuntu console by default, which can be used as any virtual console. Just be aware that hiiting Control + C will stop the emulator.
 
  * SSH access
   SSH is enabled by default in the emulator, but you can only access it via localhost (QEMU handles the routes and NAT internally). All you need is to forward the target SSH port to a known port at your host:
@@ -192,6 +160,13 @@ emulator-5556 device
 
 == Handling disk snapshots ==
 
+Being able to create a snapshot and roll back to it is very useful for developers. Eg, developers can
+ * develop features, etc on the image, then package them up, roll back the image and test on a pristine image
+ * save time on system-image upgrade testing
+ * do multiple test runs, reverting to the pristine image between runs to cut down on variances
+ * verify bugs in the image easily
+ * etc
+
 === Instructions ===
 
 ubuntu-emulator handles disk snapshots:{{{
@@ -234,56 +209,6 @@ $ ubuntu-emulator snapshot --create=pristine trusty
 
 The above boots the emulator, cleanly shuts it down and then updates the pristine snapshot. See `ubuntu-emulator snapshot --help` for more details.
 
-=== Legacy instructions ===
-Since 20131126-0210-0ubuntu1, the run-emulator.sh script also supports disk snapshots.
-
-Being able to create a snapshot and roll back to it is very useful for developers. Eg, developers can
- * develop features, etc on the image, then package them up, roll back the image and test on a pristine image
- * save time on system-image upgrade testing
- * do multiple test runs, reverting to the pristine image between runs to cut down on variances
- * verify bugs in the image easily
- * etc
-
-Snapshotting can be complicated, but most of the time you just want to have a pristine snapshot that you can rollback to with the option of committing changes.
-
-Run emulator usage:
-{{{
-$ ./run-emulator.sh help
-
-Usage: run-emulator.sh
-       run-emulator.sh [COMMAND]
-
-Commands:
- use-disk-snapshots Convert images to qcow2 and create 'pristine' snapshot
- convert-disk DISK Convert DISK to qcow2 and create 'pristine' snapshot
- snapshot-disks Update 'pristine' snapshot to current state
- revert-disks Revert current images to 'pristine' snapshot
- info-disks Show disk information for current images
-
-Without arguments, run the emulated image.
-
-Note: these commands only manipulate the qemu qcow2 disk images and are
-      unrelated to the -snapshot* and -no-snapshot* emulator command line
-      options
-}}}
-
-Basic workflow:
-{{{
-$ ./build-emulator-sdcard.sh # create image like normal, skip if already have image
-$ ./run-emulator.sh use-disk-snapshots
-$ ./run-emulator.sh
-<do work>
-$ ./run-emulator.sh revert-disks
-$ ./run-emulator.sh
-<perform tests in pristine environment>
-$ ./run-emulator.sh revert-disks
-}}}
-
-If need to rebuild the image after using snapshots:{{{
-$ for i in system.img userdata.img cache.img ; do cp -f /usr/share/android/emulator/out/target/product/generic/$i out/target/product/generic/ ; done
-$ ./build-emulator-sdcard.sh
-}}}
-
 == Keyboard Commands ==
 
 || '''Emulated Device Key''' || '''Keyboard Key''' ||
@@ -295,8 +220,6 @@ $ ./build-emulator-sdcard.sh
 
 == Known Issues ==
 
- * Powerd is disabled by default as suspending & resuming corrupts the root filesystem.
- * A few other services might also be disabled by default until everything is working properly with the emulator. Please check '''build-emulator-sdcard.sh''' to see the extra customization done for the emulator image.
  * The first boot might take a few minutes as it generates the ssh key, install the click packages and so on. It shouldn't take too much though, always check with adb if the emulator is still running correctly (e.g. check with top).
  * It's quite common for Qemu to hang while booting (like an I/O-type hang), just abort and restart the emulator (still needs proper debugging).
  * If Unity8 fails to start, make sure your i386 GL driver is properly in place (check for ''error libGL.so.1: cannot open shared object file: No such file or directory'' when starting the emulator). If everything goes well, you should see 'qemu.gles=1' in the qemu kernel parameters.

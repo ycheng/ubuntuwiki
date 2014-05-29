@@ -16,7 +16,7 @@ This might not be the minimal set, but it works.
 
 You will need both the ''ppp'' and ''libpcap0.8'' packages.
 
-== On Ubuntu ==
+== On host ==
 
 {{{
 sudo sysctl net.ipv4.ip_forward=1
@@ -27,7 +27,11 @@ sudo iptables -I INPUT 1 --in-interface ppp0 -j ACCEPT
 sudo adb ppp "shell:pppd nodetach noauth noipdefault defaultroute /dev/tty" nodetach noauth noipdefault notty 192.168.0.1:192.168.0.2
 }}}
 
-This will create network device ppp0. You can verify it exists on both host and target by issuing ''/sbin/ifconfig''.
+This will create network devices ppp0 on both host and target.
+
+In the commands above, you will create a new private network between the host and the target, where the host ppp0 device will be assigned address 192.168.0.1 and the target ppp0 device will have 192.168.0.2. You may select different addresses if your host already uses the 192.168.0.x range.
+
+You can verify the ppp0 devices exist on both host and target by issuing ''ifconfig''.
 
 == Set DNS on target ==
 

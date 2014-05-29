@@ -19,7 +19,7 @@ Dual boot is not part of the regular Ubuntu release.
 To install dual-boot, you'll need:
 
  * '''A Nexus 4 device''' (other [[https://wiki.ubuntu.com/Touch/Devices#Working_with_phablet-flash|supported Nexus devices]] should in theory work but have not been tested at the time)
- * '''Android 4.2 or higher''' running on the device, either stock firmware or based on Cyanogen``Mod or AOSP. Note that [[#Android4.4Radio|Android 4.4 requires additional steps to get phone calls working on the Ubuntu side]]
+ * '''Android 4.4.2 or higher''' running on the device, either stock firmware or based on Cyanogen``Mod or AOSP.
  * '''2.7GB of free storage''' on the device to install Ubuntu
  * '''ADB tools''' running on your desktop computer
  * The device needs its '''bootloader to be unlocked and USB debugging enabled'''. Follow steps 1 to 3 below to do this, or alternatively, if your device is already unlocked and has USB debugging enabled, you can [[#Installation|skip to the installation process >]]
@@ -27,9 +27,14 @@ To install dual-boot, you'll need:
 <<Include(../Install, , , from="StartDeviceSetup", to="EndDeviceSetup")>>
 
 <<Anchor(Installation)>>
-= Dual boot installation instructions =
+= Dual boot installation or upgrade instructions =
+
+The procedure at this point is effectively the same for both new installations and upgrades of an existing dual boot installation.
 
 == Installing the Ubuntu Installer app in Android ==
+
+{*} Note: if you had installed a previous version of Ubuntu dual boot, please make sure to uninstall Ubuntu from the Android app before upgrading to the new Ubuntu dual boot. You can keep the user data, only uninstallation of the base system is recommended.
+
  1. On your computer, download the dual boot installation script into your home directory from: http://humpolec.ubuntu.com/latest/dualboot.sh
  1. Open a terminal on your computer pressing the Ctrl+Alt+T key combination
  1. Make the installation script executable by running this command:{{{
@@ -40,21 +45,13 @@ chmod +x dualboot.sh
   * has USB debugging enabled
   * has an unlocked bootloader 
  1. Connect your device via USB to your computer
- 1. Install dual-boot by running one of these commands on a terminal:
-  * If it's the first-time dual-boot installation and you are using stock Android or AOSP firmware without the SuperUser app, run this command:{{{
-./dualboot.sh FULL
-}}}
-  * Alternatively, to update only the Ubuntu Installer Application or if you are running non-stock Android firmware (e.g. Cyanogen``Mod), run this command:{{{
-./dualboot.sh UPDATE
+ 1. Install dual-boot by running this command on a terminal:{{{
+./dualboot.sh
 }}}
 
 After installation, the phone will reboot several times. Once finished, it will boot into Android and you will find the dual boot app as “Ubuntu Dual Boot” in the Apps section.
 
-'''NOTE''': there is a known issue with the latest release on the Nexus 4. Until it's fixed, and if you get stuck in the Recovery screen, you can choose the reboot option to go back to Android and then:
-
- 1. In the dualboot.sh script, find the line that says: `"URL_CMW_PATH_MAKO="http://download2.clockworkmod.com/recoveries/recovery-clockwork-6.0.4.7-mako.img"`
- 1. Then replace the version to `recovery-clockwork-6.0.4.3-mako.img`
- 1. Then execute the `dualboot.sh` script again, as described above
+Optionally, for alternative ways of using the installer script, [[#DualBootInstallerReference|check out the installer reference >]].
 
 Now follow the instructions below to install Ubuntu from Android.
 
@@ -67,7 +64,7 @@ adb shell "su sh rm -rf /cache/*"
 }}}
  1. On the device, press the apps button in Android to bring up the list of apps
  1. Browse the apps to find the '''Ubuntu Dual Boot''' icon and press it to start the app
- 1. When the app launches, press on '''Choose channel to install''' and choose a channel to download from (the recommended channel is '''Trusty''')
+ 1. When the app launches, press on '''Choose channel to install''' and choose a channel to download from (the recommended channel is '''utopic'''). Make sure you tick on the "bootstrap" option.
  1. Once download is completed you need to Grant SU permissions to the application for the install to be successful. Press the '''Grant''' button, when prompted.
  1. Press the '''Reboot to Ubuntu''' button to boot to Ubuntu. 
  1. A standard phone reboot with the hard key will always boot to Android.
@@ -82,35 +79,51 @@ Notes:
 
 <<Anchor(UbuntuUpdate)>>
 == Updating to a new Ubuntu image ==
-Because Dual Boot is a special set-up the standard update method for Ubuntu currently does not work (see Feature Roadmap).
 
-To update Ubuntu to a newer version, On the android Ubuntu dual boot application, select "Uninstall Ubuntu" from the menu options. Next you will be asked if you want to keep the user data from Ubuntu. If you do not select "Delete user data", the next installation of Ubuntu will preserve your contacts, installed applications, pictures, background settings, ...
+The rule of thumb for dual boot is:
+ * Installation of a new Ubuntu version needs to be done from the Android side via the Dualboot app
+ * Download of a new Ubuntu version can happen on either the Ubuntu or Android side
 
+This effectively means there are two possible ways to upgrade your Ubuntu image:
+ * '''If you are running Android''', use the Dualboot app to check and install new versions of Ubuntu by selecting "Uninstall Ubuntu" from the menu options. Next you will be asked if you want to keep the user data from Ubuntu. If you do want to keep the data, contacts, installed applications, pictures, background settings and such will be kept across Ubuntu installations. Additionally, every time there is a new Ubuntu version available, you'll get an Android notification:
+  * For stable channels, the app polls for new versions every 2 days
+  * For proposed channels, the app polls for new versions every 10 hours
+ * '''If you are running Ubuntu''', use the standard upgrade mechanism to download new images via System Settings, but do not choose to install the image after having downloaded it. Instead, once the dowload has finished, reboot to Android and the Dualboot app there will resume the installation. Once finished, you can then reboot to Ubuntu.
+
+To update Ubuntu to a newer version, On the android Ubuntu dual boot application, 
 Once Ubuntu has been uninstalled, follow the same installation step to download a newer version of Ubuntu.
 
-<<Anchor(Android4.4Radio)>>
-== Getting phone calls to work in Ubuntu and Android 4.4 ==
+<<Anchor(DualBootInstallerReference)>>
+== Dual boot installer command reference ==
 
-{{{#!wiki note
-'''NOT NEEDED ANYMORE FOR IMAGES >= 226'''
-}}}
+For the majority of cases, running the installer script in auto mode with no arguments will suffice. For more advanced usage, additional commands can be used.
 
-The radio image shipped with Android 4.4 is reused on the Ubuntu side to make phone calls or use WiFi or sound, and it is not yet supported in Ubuntu. Until Ubuntu gains support for the Android 4.4 radio, there is an easy workaround whereby an older radio firmware can be flashed in the modem partition. You can do this either before or after installing dual boot
+{{{dualboot.sh}}}
+ * Auto mode: it detects if the SuperUser app installation is required and instals or updates the Dualboot application on Android
 
-Follow these steps to downgrade the radio firmware and get Ubuntu calls to work:
+{{{dualboot.sh full}}}
+ * Full mode: it installs the SuperUser and Dualboot apps on Android
 
- 1. Download an Android 4.3 firmware for your device onto your PC. Follow the links [[../Install#Supported_devices_and_codenames|on this table >]]
- 1. Open a terminal with Ctrl+Alt+T
- 1. Extract the firmware tarball and cd to its directory.
- 1. Run the following command to reboot into the bootloader{{{
-adb reboot bootloader
-}}}
- 1. Once in the bootloader, run this command to reflash the radio. Replace $RADIO_FIRMWARE by the name of the file containing the radio firmware for your device (it's easily recognizable, as it starts with radio-$DEVICECODENAME):{{{
-fastboot flash radio $RADIO_FIRMWARE.img
-}}}
- 1. After flashing, reboot and phone calls should work in Ubuntu:{{{
-fastboot reboot
-}}}
+{{{dualboot.sh update}}}
+ * Update mode: it installs or updates the Dualboot app on Android
+
+{{{dualboot.sh channel $CHANNEL}}}
+ * Sideload mode: it downloads the latest from the specified Ubuntu $CHANNEL and sideloads the files to the phone. It then starts the Dualboot app on Android to resume the Ubuntu installation with the sideloaded files.
+
+{{{dualboot.sh push ubuntu.tar.xz device.tar.xz version.tar.xz
+ * Sideload push mode: it sideloads the downloaded files passed as a parameter and it starts the Dualboot app to resume installation with them on the Android side.
+
+The script also takes a device ID in case there are more devices connected to the computer. The device ID is the first parameter passed to the script. If it is not provided first connected device is used. E.g.
+
+{{{dualboot.sh <device-id> channel devel-customized}}}
+
+== Using a custom image server ==
+
+If you need to use a custom image server that provides ported images for those devices outside of the officially supported, you can use a custom image server with the Dualboot app. To do so, open a terminal, and with your device connected over USB, issue the following command (replacing {{{$CUSTOM_SERVER_URL}}} with the URL or your custom server):
+
+{{{adb shell "su sh 'cd /data/data/com.canonical.ubuntu.installer/files/ && echo $CUSTOM_SERVER_URL > custom_server &&  chmod 777 custom_server'"}}}
+
+The next time you start the Dualboot app on Android, it will use that server to fetch and install images instead of the official Ubuntu one.
 
 = If something goes wrong =
 
@@ -139,14 +152,6 @@ The dual boot project, as with the rest of Ubuntu is open source and open for pa
  * [[https://bugs.launchpad.net/humpolec/+filebug|Report bugs >]]
  * [[https://code.launchpad.net/humpolec|Contribute code >]]
 
-== Feature Roadmap ==
-The development team is planning to provide new feature updates after the end of year break, including:
- * Improvements to the installation and download process 
- * Enable localisation in the android app by moving string to a resource file
- * Review error handling within the application
- * Enable Ubuntu updates from the android app (instead of having to re-install the image)
- * Restore the orginal Recovery partition from the ubuntu-side application.
-
 = FAQ =
 
 == How does dual boot work? ==
@@ -168,18 +173,16 @@ In order to enable the user to choose their own flavour of Android, the Android 
 
 == Which versions of Android does dual-boot work with? ==
 
- * Stock Android or AOSP 4.2 or higher. See [[#Android4.4Radio|notes about Android 4.4]] 
- * Cyanogen``Mod
+ * Stock Android or AOSP 4.4.2 or higher.
+ * Cyanogen``Mod (based on Android 4.4.2 or higher).
 
 == Which devices does dual-boot work for? ==
 
-Dual boot has been tested with Nexus devices:
+Dual boot has been tested to work with the following devices:
 
- * Nexus 4 has seen the most exhaustive testing
- * Some successful preliminary tests have been run for:
-  * Galaxy Nexus
-  * Nexus 7
-  * Nexus 10
+ * Nexus 4
+ * Nexus 7
+ * Nexus 10
 
 == Which Ubuntu releases does dual-boot support? ==
 
@@ -202,6 +205,12 @@ The Android data partition usage is unchanged.
 The recovery partition when dual booting is currently used by the Ubuntu boot image. This means that when booting into recovery mode, Ubuntu will boot.
 
 Access of the recovery will be resolved in future releases. However when the Ubuntu image is uninstalled, the original (Android stock or CWM) recovery is restored by the Ubuntu Install android app.
+
+== If dual boot replaces the recovery partition, can I do an Android upgrade with dual boot installed? ==
+
+Yes. Use the "Prepare for Android update" option in the Dual boot app menu on Android. This will recover your original Android recovery partition, ready for the Android upgrade. This will obviously delete the Ubuntu installation in the recovery partition, but you can easily reinstall it after the Android upgrade from the Dual boot app.
+
+In any case, you can always uninstall dual boot, which will restore your original recovery partition.
 
 == Can I uninstall dual boot? ==
 Yes, when Ubuntu is uninstalled from the Android side via the dual boot app, the original Android recovery partition is restored to the original state before dual boot was installed.

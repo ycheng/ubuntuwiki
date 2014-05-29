@@ -25,7 +25,7 @@ These commands are to be run on the host computer (not the phone itself):
 
 {{{#!highlight bash
 # install the latest image:
-ubuntu-device-flash --channel=trusty-proposed
+ubuntu-device-flash --channel="ubuntu-touch/devel-proposed"
 
 # NOTE: please check in which channel your last green image actually is.
 # also check the exact version, use "ubuntu-device-flash -h" for the necessary flashing options.
@@ -48,10 +48,8 @@ Make sure you unlock the screen on your device prior to running these commands o
 
 {{{#!highlight bash
 phablet-test-run -p address-book-app-autopilot address_book_app
-phablet-test-run -p camera-app-autopilot camera_app
 phablet-test-run -p cordova-ubuntu-autopilot cordova_ubuntu
 phablet-test-run -p dialer-app-autopilot dialer_app
-phablet-test-run -p gallery-app-autopilot gallery_app
 phablet-test-run -p friends-app-autopilot friends_app
 phablet-test-run -p messaging-app-autopilot messaging_app
 phablet-test-run -p ubuntu-keyboard-autopilot ubuntu_keyboard
@@ -95,9 +93,11 @@ phablet-click-test-setup --click com.ubuntu.music;            phablet-test-run m
 phablet-click-test-setup --click com.ubuntu.notes;            phablet-test-run notes_app
 phablet-click-test-setup --click com.ubuntu.terminal;         phablet-test-run ubuntu_terminal_app
 phablet-click-test-setup --click com.ubuntu.weather;          phablet-test-run ubuntu_weather_app
-phablet-click-test-setup --click com.ubuntu.shorts;           phablet-test-run ubuntu_rssreader_app
+phablet-click-test-setup --click com.ubuntu.shorts;           phablet-test-run shorts_app
+phablet-click-test-setup --click com.ubuntu.gallery;          phablet-test-run gallery_app
+phablet-click-test-setup --click com.ubuntu.camera;           phablet-test-run camera_app
 
-# (on the device)
+# (on the device after finishing running all the tests)
 # clean up the downloaded tests (see notes below)
 rm -rf /home/phablet/autopilot
 

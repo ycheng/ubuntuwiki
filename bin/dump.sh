@@ -8,11 +8,15 @@ bin/editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps ; sleep 5
 bin/editmoin -d Touch/DailyDriver.wiki $P/Touch/DailyDriver ; sleep 5
 bin/editmoin -d Touch/Devices.wiki $P/Touch/Devices ; sleep 5
 bin/editmoin -d Touch/DualBootInstallation.wiki $P/Touch/DualBootInstallation ; sleep 5
-sleep 120
+
+sleep 300
+
 bin/editmoin -d Touch/Emulator.wiki $P/Touch/Emulator ; sleep 5
 bin/editmoin -d Touch/Gerrit.wiki $P/Touch/Gerrit ; sleep 5
 bin/editmoin -d Touch/Install.wiki $P/Touch/Install ; sleep 5
 bin/editmoin -d Touch/MakingPortsAvailable.wiki $P/Touch/MakingPortsAvailable.wiki ; sleep 5
+
+sleep 300
 
 bin/editmoin -d Touch/Porting.wiki $P/Touch/Porting ; sleep 5
 bin/editmoin -d Touch/PortingNewTree.wiki $P/Touch/PortingNewTree ; sleep 5

@@ -63,7 +63,7 @@ The following steps are required on your desktop system that you'll need in orde
 
 The PPA is a small mini repository which contains additional software required by this install process. The following section details how to enable and use it.
 
-The PPA has the tools and dependencies to support Ubuntu releases including 12.04, 12.10, 13.04 and 13.10.
+The PPA has the tools and dependencies to support Ubuntu releases including 12.04, 12.10, 13.04, 13.10 and 14.04.
 Add the Ubuntu Touch PPA by adding the following custom source list entry to your `/etc/apt/sources.list` file.
 
 On your computer, press Ctrl+Alt+T to start a terminal.
@@ -83,9 +83,6 @@ Then do the following:
 sudo apt-get update
 sudo apt-get install ubuntu-device-flash
 }}}
-
-
-Note: This requires that you have [[https://help.ubuntu.com/community/Repositories/CommandLine#Adding_the_Universe_and_Multiverse_Repositories|Universe repository enabled]].
 
 == Step 1.5 - Optional Android Backup ==
 
