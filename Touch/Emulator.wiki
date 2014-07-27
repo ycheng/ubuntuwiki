@@ -48,7 +48,10 @@ $ sudo ubuntu-emulator create myoldinstance
 
 == Building from scratch ==
 
-To build
+The Ubuntu emulator is composed of two parts: the runtime (what gets the emulator running) and the manager (the set of commands to start/stop and manage emulator instances).
+
+To build the runtime:
+
 {{{
 $ sudo apt-get install phablet-tools git bzr
 
@@ -72,6 +75,8 @@ $ lunch aosp_arm-userdebug # or aosp_x86-userdebug for the x86 emulator
 $ make -j<n>
 }}}
 
+ * '''Note''': If you're using Ubuntu Trusty (14.04) as your host, make sure you don't have the package ''gcc-i686-linux-android'' installed in your system. This toolchain has a bug that breaks the emulator init system, and you should either use the Android pre-build one (by removing the package), or downloading the latest ''gcc-i686-linux-android'' from Ubuntu Utopic (14.10).
+
 To use the '''system.img''' that you just created, create an instance with ''ubuntu-emulator create --use-raw-disk'' and replace the ''system.img'' file available in the generated ''sdcard.img'' file (under ''~/.local/share/ubuntu-emulator/<my instance>'':
 {{{
 $ simg2img out/target/product/generic_x86/system.img out/target/product/generic_x86/system.raw
@@ -80,6 +85,16 @@ $ sudo mount /tmp/mount1/system.img /tmp/mount2
 $ sudo cp out/target/product/generic_x86/system.raw /tmp/mount2/var/lib/lxc/android/system.img
 $ sudo umount /tmp/mount2
 $ sudo umount /tmp/mount1
+}}}
+
+To build the manager:
+
+{{{
+sudo apt-get install golang-go
+export GOPATH=$HOME/go
+mkdir $GOPATH
+export PATH=$PATH:$GOPATH/bin
+go get launchpad.net/goget-ubuntu-touch/ubuntu-emulator
 }}}
 
 Username & password are:
@@ -145,6 +160,9 @@ Android console command help:
 try 'help <command>' for command-specific help
 OK
   }}}
+
+ * Accessing your host device from the emulator:
+  You can access your host machine by using the IP ''10.0.2.2'' from inside the emulator. During development you can either use that to ssh your host, or access any other service running in your host machine, such as a web server.
 
  * Autopilot
    1. Start up emulator with `ubuntu-emulator` as per above.

@@ -9,3 +9,5 @@ Welcome to the '''Ubuntu Touch Core Apps Project'''!
 After the announcement of [[http://www.ubuntu.com/devices/phone|the Ubuntu Phone]] and as part of the phone platform we are inviting our community to participate in building the core set of apps that will ship with the phone. This provides a fantastic opportunity to create software that could run on millions of handsets!
 
 To get started, click one of the apps listed above and get involved. If you have any queries, be sure to join [[http://webchat.freenode.net/?channels=ubuntu-touch|#ubuntu-touch]] on Freenode.
+
+Core apps are installed by default on mobile devices. You can also install them on your desktop by [[/PPA|adding the core apps PPA]].

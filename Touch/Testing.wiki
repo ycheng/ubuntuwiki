@@ -50,7 +50,7 @@ Make sure you unlock the screen on your device prior to running these commands o
 phablet-test-run -p address-book-app-autopilot address_book_app
 phablet-test-run -p cordova-ubuntu-autopilot cordova_ubuntu
 phablet-test-run -p dialer-app-autopilot dialer_app
-phablet-test-run -p friends-app-autopilot friends_app
+phablet-test-run -p mediaplayer-app-autopilot mediaplayer_app
 phablet-test-run -p messaging-app-autopilot messaging_app
 phablet-test-run -p ubuntu-keyboard-autopilot ubuntu_keyboard
 phablet-test-run -p ubuntu-system-settings-autopilot ubuntu_system_settings
@@ -88,7 +88,7 @@ phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run u
 phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app
 phablet-click-test-setup --click com.ubuntu.clock;            phablet-test-run ubuntu_clock_app
 phablet-click-test-setup --click com.ubuntu.dropping-letters; phablet-test-run dropping_letters_app
-phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run ubuntu_filemanager_app
+phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run filemanager
 phablet-click-test-setup --click com.ubuntu.music;            phablet-test-run music_app
 phablet-click-test-setup --click com.ubuntu.notes;            phablet-test-run notes_app
 phablet-click-test-setup --click com.ubuntu.terminal;         phablet-test-run ubuntu_terminal_app
@@ -128,19 +128,19 @@ cd /tmp/qrt_tests
 
 == Start Applications through adb ==
 
-In almost all cases it is a good idea to also validate your work by using your phone by hand after adding your change. A convenient way for developers to do app testing is by starting them through adb. To make that convenient we are providing a cli tool, called {{{upstart-app-launch}}}.
+In almost all cases it is a good idea to also validate your work by using your phone by hand after adding your change. A convenient way for developers to do app testing is by starting them through adb. To make that convenient we are providing a cli tool, called {{{ubuntu-app-launch}}}.
 
 Syntax:
 {{{#!highlight bash
-upstart-app-launch <DESKTOP-FILENAME>
+ubuntu-app-launch <DESKTOP-FILENAME>
 }}}
 
 Examples:
 {{{#!highlight bash
 su - phablet
 
-upstart-app-launch com.ubuntu.music
-upstart-app-launch dialer-app
+ubuntu-app-launch com.ubuntu.music
+ubuntu-app-launch dialer-app
 }}}
 
 

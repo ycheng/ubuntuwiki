@@ -383,7 +383,7 @@ At the end of the build process a couple of img files will be generated in `out/
 
 {{{
 bzr branch lp:project-rootstock-ng [rootsock_trunk_path]
-ROOTFS="trusty-preinstalled-touch-armhf.tar.gz"
+ROOTFS="utopic-preinstalled-touch-armhf.tar.gz"
 wget -c "http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/$ROOTFS" -O "$OUT/$ROOTFS"
 $ROOTSTOCK_DIR/rootstock-touch-install "$OUT/$ROOTFS" "$OUT/system.img"
 }}}

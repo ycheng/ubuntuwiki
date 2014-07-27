@@ -206,11 +206,16 @@ The recovery partition when dual booting is currently used by the Ubuntu boot im
 
 Access of the recovery will be resolved in future releases. However when the Ubuntu image is uninstalled, the original (Android stock or CWM) recovery is restored by the Ubuntu Install android app.
 
-== If dual boot replaces the recovery partition, can I do an Android upgrade with dual boot installed? ==
+== How can I do an Android upgrade with dual boot installed? ==
 
-Yes. Use the "Prepare for Android update" option in the Dual boot app menu on Android. This will recover your original Android recovery partition, ready for the Android upgrade. This will obviously delete the Ubuntu installation in the recovery partition, but you can easily reinstall it after the Android upgrade from the Dual boot app.
+If there is an Android system upgrade available (e.g. from Android 4.4.2 to 4.4.3), extra steps should be taken to ensure it works correctly and that dual boot is functional after the upgrade.
 
-In any case, you can always uninstall dual boot, which will restore your original recovery partition.
+ 1. Use the "Prepare for Android update" option in the Dual boot app menu on Android. This will recover your original Android recovery partition, ready for the Android upgrade. User data and the previous Ubuntu installation will be preserved.
+ 1. Do the Android update
+ 1. Download and re-run the dualboot.sh script to ensure the SuperSU app is reinstalled (as Android upgrades tend to remove it) and thus the Ubuntu Dual Boot app can be executed. Make sure to run dualboot.sh full to make sure SuperSU is installed
+ 1. To reboot to your previous Ubuntu installation, go to the Ubuntu Dual Boot app as usual. 
+
+Note: if you simply want to restore your original recovery partition on Android, you can always uninstall the Ubuntu installation from within the Dual Boot app. While you are doing this, you can also choose to remove its user data.
 
 == Can I uninstall dual boot? ==
 Yes, when Ubuntu is uninstalled from the Android side via the dual boot app, the original Android recovery partition is restored to the original state before dual boot was installed.

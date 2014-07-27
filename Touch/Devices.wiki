@@ -29,6 +29,12 @@ The following devices all are working with `ubuntu-device-flash` script as expla
 || [[http://en.wikipedia.org/wiki/Nexus_10|Nexus 10]] || manta ||
 || Emulator (ARM) || generic ||
 || Emulator (x86) || generic_x86 ||
+
+== Obsolete ==
+The following two devices used to be supported and are still installable by using the ubuntu-device-flash procedure, but are no-longer supported by the OTA update mechanism. The version which is currently installable on these is very outdated and incompatible with most apps developed against the [[http://developer.ubuntu.com/apps/platform/|Ubuntu App Platform]] guidlines.
+
+The Touch team has announced that these two devices are [[https://lists.launchpad.net/ubuntu-phone/msg05889.html|no longer supported]] by the project as of January 2014 and therefore the community needs to step-in to continue their maintenance.
+
 || [[http://en.wikipedia.org/wiki/Galaxy_Nexus|Galaxy Nexus]] '''(deprecated)''' || maguro (GSM/HSPA+ Variant) ||
 || [[http://en.wikipedia.org/wiki/Nexus_7|Nexus 7 2012 WiFi]] '''(deprecated)''' || grouper ||
 
@@ -115,7 +121,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Sony_Ericsson_Xperia_neo_V|Sony Xperia Neo V]] || [[/haida|haida]] ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_S|Sony Xperia S]] || [[/nozomi|nozomi]] ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_T|Sony Xperia T]] || [[/mint|mint]] ||
-|| '''[[http://en.wikipedia.org/wiki/Sony_Xperia_Tablet_Z|Sony Xperia Tablet Z]]''' || [[/pollux|pollux]], flipped ||
+|| '''[[http://en.wikipedia.org/wiki/Sony_Xperia_Tablet_Z|Sony Xperia Tablet Z]]''' || [[/pollux|pollux]], flipped, 4.4.2 ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_Z|Sony Xperia Z]] || [[/yuga|yuga]], flipped ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_ZL|Sony Xperia ZL]] || [[/odin|odin]], flipped ||
 || VZ SGSIII || [[/d2vzw|d2vzw]] ||

@@ -10,13 +10,13 @@ While Ubuntu Touch uses some helper scripts as detailed below, if will nonethele
 
 http://source.android.com/source/initializing.html
 
-For Ubuntu Touch, you can find all the needed Android git repositories at http://phablet.ubuntu.com/gitweb. This is basically a mirror of Cyanogen``Mod 10.1, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
+For Ubuntu Touch, you can find all the needed Android git repositories at https://code-review.phablet.ubuntu.com/#/admin/projects/. This is basically a mirror of AOSP 4.4.2_r1, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
 
-For any Android related project on our git server, you'll find a branch named phablet-10.1. This branch contains a static known git HEAD and the required changes needed for Ubuntu, including [[http://phablet.ubuntu.com/gitweb?p=CyanogenMod/android.git;a=blob;f=default.xml;hb=refs/heads/phablet-10.1|our custom Android manifest]].
+For any Android related project on our git server, you'll find a branch named phablet-4.4.2_r1. This branch contains a static known git HEAD and the required changes needed for Ubuntu, including [[https://code-review.phablet.ubuntu.com/gitweb?p=aosp%2Fplatform%2Fmanifest.git;a=shortlog;h=refs%2Fheads%2Fphablet-4.4.2_r1|our custom Android manifest]].
 
 == Set up your development environment ==
 
-To support a wide range of devices, we decided to use Cyanogen``Mod as a base for the Android system. You could safely use AOSP, as we don't use a lot of the customizations and improvements done at the App/Java side, but it's easier with Cyanogen``Mod due the scripts and build procedures available for it.
+At this moment we're using the Android code base provided by Android AOSP.
 
 Everything we take from Android is just C/C++, so you'll notice that your Android build environment will be way smaller than when comparing to the traditional Android builds.
 
@@ -58,74 +58,47 @@ phablet-dev-bootstrap -v [device codenames] [target_directory]
 
 The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch Preview custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
 
-== Getting the vendor blobs ==
-
-Several parts of the Android images in Cyanogen``Mod 10.1 are proprietary, and only available in binary form. These are not redistributable, so you need to seed your tree from your device. Ultimately these binaries come from the manufacturer (so in the case of the Nexus4/Mako that's [[https://developers.google.com/android/nexus/images|Google's developer site]]), but the convenient way to ensure you have a matching version is to use a Cyanogen``Mod 10.1 image for your device, from [[http://www.cyanogenmod.org/|CyanogenMod]].
-
-The files belong under vendor/<vendorname>/<devicename> (in our case vendor/lge/mako), and are put there by a script device/<vendorname>/<devicename>/extract-files.sh. This is run while adb is connected, and it copies the files over to the location the build requires:
-
- {{{
-$ adb devices
-<your device appears here>
-$ cd device/lge/mako
-$ ./extract-files.sh
-}}}
-
-As of this edit, there is no stable build for the Nexus 4/mako, so use the most recent release candidate, eg [[http://download.cyanogenmod.org/?device=mako&type=RC|RC4]]
-
-
 == Building for an existing device ==
 
 Here's how to build Ubuntu Touch for the Nexus 4 (Android codename mako)
 
-Since only a subset of the whole Android tree is used and built for Ubuntu Touch, the build is much faster than a full AOSP or CyanogenMod build.
+Since only a subset of the whole Android tree is used and built for Ubuntu Touch, the build is much faster than a full AOSP build.
 Still using CCACHE can help if you are doing multiple builds or have multiple target devices
-Build for the target you want. Valid names are mako (Nexus 4) grouper (Nexus 7) manta (Nexus 10) maguro (Galaxy Nexus)
+Build for the target you want. Valid names are mako (Nexus 4) flo (Nexus 7 2013) manta (Nexus 10) hammerhead (Neux 5) generic (Emulator).
 
  {{{
 $ export USE_CCACHE=1
 $ . build/envsetup.sh
-$ brunch mako
+$ lunch aosp_mako-userdebug
 }}}
 
 == Flashing the image ==
 
-After the build out/target/product/mako will have all device specific build artifacts such as boot.img, system.img, userdata.img, recovery.img which can be flashed using fastboot to the respective partitions like:
+After the build out/target/product/mako will have the device specific build artifacts such as boot.img, system.img, recovery.img which can be flashed using fastboot to the respective partitions like:
 
  {{{
 $ fastboot flash boot boot.img
-$ fastboot flash system system.img
-$ fastboot flash recovery recovery.img
-$ fastboot flash userdata userdata.img
-}}}
-
-Another way of installing the system is by just flashing recovery.img (a Clockworkmod image with some Ubuntu changes):
-
- {{{
 $ fastboot flash recovery recovery.img
 }}}
 
-via fastboot and then loading zip files via adb / Clockworkmod, either by explicitly installing from the menu, or pushing the image as autodeploy.zip. If you push it as autodeploy.zip, you can then reboot into recovery, and it will be automatically installed into the appropriate partitions. First install the Android image and then the Ubuntu image.
-The Android image is in the same out/target/produce/mako directory.
-The latest Ubuntu image can be found here:
-http://cdimage.ubuntu.com/ubuntu-touch-preview/daily-preinstalled/current/saucy-preinstalled-phablet-armhf.zip
-
+As our Ubuntu image is not built by the Android build system, the best approach is to just flash it directly using rootstock, like described bellow (from bootloader):
  {{{
-$ adb push cm-10.1-20130326-UNOFFICIAL-mako.zip /sdcard/autodeploy.zip
-$ adb reboot recovery
-$ adb push saucy-preinstalled-phablet-armhf.zip /sdcard/autodeploy.zip
-$ adb reboot recovery
+$ fastboot boot out/target/product/mako/recovery.img
+$ bzr branch lp:project-rootstock-ng
+$ cd project-rootstock-ng/
+$ ./rootstock-touch-install utopic-preinstalled-touch-armhf.tar.gz out/target/product/mako/system.img
 }}}
 
-Note that the android-only image may not boot successfully, which is OK - just reboot again into the recovery mode, and flash the ubuntu image.
+You can find the latest Ubuntu rootfs image at http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/utopic-preinstalled-touch-armhf.tar.gz.
 
-While development is active, you might find it useful to wipe the various user data / cache partitions when switching the device to Ubuntu. You can do this from fastboot:
+== Updating the Android system image ==
 
+Once you have a working Ubuntu Touch image on your device, do the following to update the Android system image (from bootloader):
  {{{
-$ fastboot -w
+$ fastboot flash boot out/target/product/mako/boot.img
+$ fastboot boot out/target/product/mako/recovery.img
+$ ./build/tools/update-system-img.sh out/target/product/mako/system.img
 }}}
-
-Before flashing the modified Android and then Ubuntu images.
 
 == Porting ==
 
