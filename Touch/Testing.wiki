@@ -85,7 +85,7 @@ Note: This is not a comprehensive list of preinstalled click packages. For that 
 {{{#!highlight bash
 # pulls tests                                                 # runs tests
 phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
-phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run calendar_app
+phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run -p address-book-service-dummy calendar_app
 phablet-click-test-setup --click com.ubuntu.clock;            phablet-test-run ubuntu_clock_app
 phablet-click-test-setup --click com.ubuntu.dropping-letters; phablet-test-run dropping_letters_app
 phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run filemanager

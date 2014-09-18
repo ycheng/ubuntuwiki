@@ -34,7 +34,19 @@ $ sudo apt-get install git gnupg flex bison gperf build-essential \
   python-markdown libxml2-utils xsltproc zlib1g-dev:i386 schedtool
 }}}
 
-You'll also need to [[../Install#Step_1_-_Desktop_Setup|set up the tools PPA]]. This will also install the {{{repo}}} tool, used to sync the Android repositories. [[http://source.android.com/source/using-repo.html|Learn more about the repo tool]].
+On Utopic (and maybe other) the 4.8 version of g++ is needed:
+ {{{
+$ sudo apt-get install g++-4.8-multilib
+}}}
+
+Before 14.04 Trusty you'll also need to [[../Install#Step_1_-_Desktop_Setup|set up the tools PPA]].
+
+Then you need to install phablet-tools:
+ {{{
+$ sudo apt-get install phablet-tools
+}}}
+
+This will also install the {{{repo}}} tool, used to sync the Android repositories. [[http://source.android.com/source/using-repo.html|Learn more about the repo tool]]. If you already have a repo tool in your {{{$PATH}}} from previous android development, be sure to remove it or make sure it's after the system repo command in the path. To check that the right repo command is used, you can issue {{{$ which repo}}}. This should return {{{/usr/bin/repo}}}.
 
 You can check out the source code using the repo and git tools already familiar to Android ROM developers, as described here
 
@@ -70,6 +82,7 @@ Build for the target you want. Valid names are mako (Nexus 4) flo (Nexus 7 2013)
 $ export USE_CCACHE=1
 $ . build/envsetup.sh
 $ lunch aosp_mako-userdebug
+$ make -j4 # Or any other amount of threads
 }}}
 
 == Flashing the image ==

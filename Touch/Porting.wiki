@@ -105,45 +105,7 @@ To support a wide range of devices, we decided to use Cyanogen``Mod as a base fo
 
 Everything we take from Android is just C/C++, so you'll notice that your Android build environment will be way smaller than when comparing to the traditional Android builds.
 
-For development you can run any 64-bit Desktop version of Ubuntu between 12.04 LTS and 13.10.
-
-It's not strictly necessary, but it's helpful to install ccache.
-(http://source.android.com/source/initializing.html#ccache in the general Android Setup guide should help with this.)
-
- * Enable installation of i386 debs (needed for the Android build) on x86_64 hosts:
-{{{
- $ sudo dpkg --add-architecture i386
- $ sudo apt-get update
-}}}
-
-Additional packages which are used to build the host tools: {{{
-$ sudo apt-get install git gnupg flex bison gperf build-essential \
-  zip bzr curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
-  libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
-  libgl1-mesa-dev g++-multilib mingw32 ubuntu-dev-tools tofrodos \
-  python-markdown libxml2-utils xsltproc zlib1g-dev:i386 schedtool bsdiff}}}
-
-You'll also need to [[../Install#Step_1_-_Desktop_Setup|set up the tools PPA]]. This will also install the {{{repo}}} tool, used to sync the Android repositories. [[http://source.android.com/source/using-repo.html|Learn more about the repo tool]].
-
-You can check out the source code using the repo and git tools already familiar to Android ROM developers, as
-described here
-
-https://wiki.ubuntu.com/Touch/AndroidDevel
-
-Alternately, all the Android code can be downloaded using the `phablet-dev-bootstrap` tool provided by the `phablet-tools` package installed in the previous step. This tool is a Python wrapper around repo and used to also check out bzr repositories before all code was managed by repo and git. For the purposes of getting the source code for development it is no longer needed.
-
-To get the code setup run:
- {{{
-phablet-dev-bootstrap --sources aosp --repo-branch phablet-4.4.2_r1 [target_directory]
-}}}
-
-If for some reason the sync ends midway, you can continue the sync with the `-c` switch, so the command would be:
- {{{
-phablet-dev-bootstrap --sources aosp --repo-branch phablet-4.4.2_r1 -c [target_directory]}}}
-
-Supported devices are downloaded with the sources following AOSPs development workflow
-
-The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
+You can set up your development environment by [[https://wiki.ubuntu.com/Touch/Building#Set_up_your_development_environment|Touch/Building]]
 
 
 === Enabling a new device ===
@@ -235,6 +197,10 @@ As a requirement from the Ubuntu userspace, we need to add a few extra kernel co
 ===== Config =====
 
 You can find your kernel config at {{{kernel/[manufacturer]/[codename]/arch/arm/configs/ cyanogenmod_[codename]_defconfig}}}. Please double check that it is indeed the default config file name in {{{device/[manufacturer]/[codename]/*.mk}}} (look for the TARGET_KERNEL_CONFIG variable).
+
+You can run this tool to check if your config is up to date:
+
+ https://github.com/janimo/check_ubuntu_touch_kernel_config
 
 Extra configs that need to be added '''AT THE END OF THE CONFIG FILE SO THEY DO NOT GET OVERRIDEN'''
 
@@ -334,6 +300,10 @@ QTWEBKIT_DPR=2.5
 For example GRID_UNIT_PX should be 27 for 1080p to be 40GU-wide. More information may be found in the description of [[http://design.ubuntu.com/apps/get-started/screen-sizes | resolution independence]] on the design site.
 
 === Build changes ===
+==== vendor/.. and device/... ====
+
+Remove all unneeded android packages like FMApp.
+
 ==== main.mk ====
 
 The main build file needs to be checked if updates are required to it to support new drivers or parts of the build not used before, it's path is: {{{build/core/main.mk}}}
@@ -371,8 +341,8 @@ index cae5772..4e7df71 100755
 Example for the mako target.
  {{{
 . build/envsetup.sh
-lunch mako
-make -j8
+lunch aosp_mako-userdebug 
+make -j8 # Or any other amount of threads
 }}}
 
 Sourcing the envsetup.sh file adds lunch and other functions useful when working with the Android source tree and building from scratch. See http://wiki.cyanogenmod.org/w/Envsetup_help
