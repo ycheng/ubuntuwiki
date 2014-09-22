@@ -147,6 +147,7 @@ Some notes:
 || '''[[http://en.wikipedia.org/wiki/Huawei_Ascend_P1|Huawei Ascend P1]]''' || [[/u9200|u9200]] || None needed ||  [[/u9200|u9200]]|| WIP || https://launchpad.net/~jani ||
 || Intermatrix U7 || barton || WIP || WIP || WIP || [[https://launchpad.net/~pdey|~pdey]]||
 || [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 7" || tate || WIP || WIP || WIP || [[https://launchpad.net/~hashcode0f|~hashcode0f]] ||
+|| Krillin || krillin || WIP || WIP || [[http://people.canonical.com/~jhm/barajas/|barajas]] || [[https://launchpad.net/~john.mcaleely|~john.mcaleely]] ||
 || [[http://www.gsmarena.com/lenovo_a390-5450.php|Lenovo A390]] || ??? || ??? || ??? || ??? || ||
 || [[http://www.gsmarena.com/lenovo_k900-5241.php|Lenovo K900]] || ??? || ??? || ??? || ??? || ||
 || Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || unlocked || ??? || ??? || ??? || ||
