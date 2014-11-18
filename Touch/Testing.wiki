@@ -24,8 +24,8 @@ These commands are to be run on the host computer (not the phone itself):
 
 
 {{{#!highlight bash
-# install the latest image:
-ubuntu-device-flash --channel="ubuntu-touch/devel-proposed"
+# install the latest image with enabled developer mode and a PIN set to 0000:
+ubuntu-device-flash --developer-mode --password 0000 --channel="ubuntu-touch/devel-proposed"
 
 # NOTE: please check in which channel your last green image actually is.
 # also check the exact version, use "ubuntu-device-flash -h" for the necessary flashing options.
@@ -33,9 +33,13 @@ ubuntu-device-flash --channel="ubuntu-touch/devel-proposed"
 # Disable the intro:
 phablet-config edges-intro --disable
 
-# Make image writable and reboot; only do this for testing debs,
-# if only testing click packages this can be skipped:
-phablet-config writable-image --ppa ppa:ci-train-ppa-service/landing-###
+# Disable the welcome wizard:
+phablet-config welcome-wizard --disable
+
+# Make image writable and reboot; only do this for testing debs, if only testing click 
+# packages this can be skipped (note that if you use the -p or --ppa options you also need to
+# supply the password/PIN of the device to install packages or PPAs):
+phablet-config writable-image -r 0000 --ppa ppa:ci-train-ppa-service/landing-###
 
 # Run this in another terminal window and leave it running to
 # make sure display stays on for the tests:
@@ -44,20 +48,20 @@ adb shell powerd-cli display on bright
 
 == Running Deb tests ==
 
-Make sure you unlock the screen on your device prior to running these commands on the host:
+Make sure you unlock the screen on your device prior to running these commands on the host (if you use a different PIN/password than 0000 the commands below need to be adjusted accordingly):
 
 {{{#!highlight bash
-phablet-test-run -p address-book-app-autopilot address_book_app
-phablet-test-run -p cordova-ubuntu-autopilot cordova_ubuntu
-phablet-test-run -p dialer-app-autopilot dialer_app
-phablet-test-run -p mediaplayer-app-autopilot mediaplayer_app
-phablet-test-run -p messaging-app-autopilot messaging_app
-phablet-test-run -p ubuntu-keyboard-autopilot ubuntu_keyboard
-phablet-test-run -p ubuntu-system-settings-autopilot ubuntu_system_settings
-phablet-test-run -p ubuntu-ui-toolkit-autopilot ubuntuuitoolkit
-phablet-test-run -p ubuntu-html5-ui-toolkit-autopilot ubuntu_html5_ui_toolkit
-phablet-test-run -p unity-webapps-qml-autopilot unity_webapps_qml
-phablet-test-run -p webbrowser-app-autopilot webbrowser_app
+phablet-test-run -r 0000 -p address-book-app-autopilot address_book_app
+phablet-test-run -r 0000 -p cordova-ubuntu-autopilot cordova_ubuntu
+phablet-test-run -r 0000 -p dialer-app-autopilot dialer_app
+phablet-test-run -r 0000 -p mediaplayer-app-autopilot mediaplayer_app
+phablet-test-run -r 0000 -p messaging-app-autopilot messaging_app
+phablet-test-run -r 0000 -p ubuntu-keyboard-autopilot ubuntu_keyboard
+phablet-test-run -r 0000 -p ubuntu-system-settings-autopilot ubuntu_system_settings
+phablet-test-run -r 0000 -p ubuntu-ui-toolkit-autopilot ubuntuuitoolkit
+phablet-test-run -r 0000 -p ubuntu-html5-ui-toolkit-autopilot ubuntu_html5_ui_toolkit
+phablet-test-run -r 0000 -p unity-webapps-qml-autopilot unity_webapps_qml
+phablet-test-run -r 0000 -p webbrowser-app-autopilot webbrowser_app
 }}}
 
 == Running Unity8 tests on Mir ==
@@ -65,7 +69,7 @@ phablet-test-run -p webbrowser-app-autopilot webbrowser_app
 {{{#!highlight bash
 # 1. reboot the device
 # 2. wait for the device mount to settle (nautilus pops up, at that point adb connection breaks)
-phablet-test-run -n -p unity8-autopilot unity8
+phablet-test-run -n -r 0000 -p unity8-autopilot unity8
 }}}
 
 == Running Click tests ==
@@ -85,7 +89,7 @@ Note: This is not a comprehensive list of preinstalled click packages. For that 
 {{{#!highlight bash
 # pulls tests                                                 # runs tests
 phablet-click-test-setup --click com.ubuntu.calculator;       phablet-test-run ubuntu_calculator_app
-phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run -p address-book-service-dummy calendar_app
+phablet-click-test-setup --click com.ubuntu.calendar;         phablet-test-run -r 0000 -p address-book-service-dummy calendar_app
 phablet-click-test-setup --click com.ubuntu.clock;            phablet-test-run ubuntu_clock_app
 phablet-click-test-setup --click com.ubuntu.dropping-letters; phablet-test-run dropping_letters_app
 phablet-click-test-setup --click com.ubuntu.filemanager;      phablet-test-run filemanager
@@ -99,7 +103,7 @@ phablet-click-test-setup --click com.ubuntu.camera;           phablet-test-run c
 
 # (on the device after finishing running all the tests)
 # clean up the downloaded tests (see notes below)
-rm -rf /home/phablet/autopilot
+adb shell rm -rf /home/phablet/autopilot
 
 }}}
 
@@ -137,7 +141,7 @@ ubuntu-app-launch <DESKTOP-FILENAME>
 
 Examples:
 {{{#!highlight bash
-su - phablet
+phablet-shell
 
 ubuntu-app-launch com.ubuntu.music
 ubuntu-app-launch dialer-app
@@ -149,7 +153,8 @@ ubuntu-app-launch dialer-app
 For application developers, we highly recommend to run at least your own application autopilot before submitting code.
 {{{#!highlight bash
 # install your autopilots (example if in a package); on target:
-apt-get install your-app-autopilot
+phablet-shell
+sudo apt-get install your-app-autopilot
 
 # unlock screen by hand and run on target through adb:
 phablet-test-run your_app
@@ -158,7 +163,8 @@ phablet-test-run your_app
 For indicator developers, we highly recommend to run at least your indicator tests, but also the unity8 test suite; also if your indicator collaborates with any application, also run their tests
 {{{#!highlight bash
 # install unity8 autopilot and two apps; on target:
-apt-get install unity8-autopilot webbrowser-app-autopilot camera-app-autopilot
+phablet-shell
+sudo apt-get install unity8-autopilot webbrowser-app-autopilot camera-app-autopilot
 
 # unlock screen by hand and run on target through adb:
 phablet-test-run webbrowser_app

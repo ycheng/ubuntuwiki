@@ -53,7 +53,7 @@ This server belongs to [[http://launchpad.net/~vbocek|Vojtech Bocek]] (Tassadar 
 
     ubuntu-device-flash --channel="ubuntu-touch/devel" --bootstrap --server="http://system-image.tasemnice.eu"
 
-Due to lack of disk space, it only hosts hosts two channels: `ubuntu-touch/devel` and `ubuntu-touch/devel-proposed`, which are aliases for current release name, e.g. `ubuntu-touch/devel` is currently alias for `ubuntu-touch/trusty`. You can always get current list of channels on the server by using this command:
+Due to lack of disk space, it only hosts these channels: `ubuntu-touch/devel`, `ubuntu-touch/devel-proposed`, `ubuntu-touch/ubuntu-rtm/devel` and `ubuntu-touch/ubuntu-rtm/devel-proposed` and their aliases (e.g. `ubuntu-touch/devel` -> `ubuntu-touch/trusty`). You can always get current list of channels on the server by examining http://system-image.tasemnice.eu/channels.json or by using this command:
 
     ubuntu-device-flash --list-channels --server="http://system-image.tasemnice.eu"
 
@@ -166,7 +166,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_II|Samsung Galaxy S II]] || i777 || WIP || WIP || WIP || [[https://launchpad.net/~vanhoof|~vanhoof]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] || i9300 || WIP || WIP || WIP || ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm AT&T) || d2att|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?p=39156949|XDA Forums]] || [[https://launchpad.net/~dankzegriefer|~dankzegriefer]]||
-|| [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora || WIP || WIP || WIP || [[https://launchpad.net/~firelmnt|~firelmnt]] ||
+|| [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora || WIP || WIP || WIP || [[http://forum.xda-developers.com/member.php?u=4883214|~haky86]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm TMO) || d2tmo|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2186277|XDA Forums]] || ||
 || Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
 || [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] || WIP || WIP || WIP || [[https://launchpad.net/~p3t3|P3T3]] ||
