@@ -19,9 +19,13 @@ bin/editmoin -d Touch/MakingPortsAvailable.wiki $P/Touch/MakingPortsAvailable.wi
 sleep 300
 
 bin/editmoin -d Touch/Porting.wiki $P/Touch/Porting ; sleep 5
+bin/editmoin -d Touch/DeprecatedPorting.wiki $P/Touch/DeprecatedPorting ; sleep 5
 bin/editmoin -d Touch/PortingNewTree.wiki $P/Touch/PortingNewTree ; sleep 5
 bin/editmoin -d Touch/ReleaseNotes.wiki $P/Touch/ReleaseNotes ; sleep 5
 bin/editmoin -d Touch/SdkFeatureStatus.wiki $P/Touch/SdkFeatureStatus ; sleep 5
 bin/editmoin -d Touch/Testing.wiki $P/Touch/Testing ; sleep 5
 bin/editmoin -d Touch.wiki $P/Touch/ ; sleep 5
+
+# Core
+bin/editmoin -d Touch/Core/UbuntuDebugAndroid.wiki $P/Touch/Core/UbuntuDebugAndroid ; sleep 5
 #editmoin -d Touch/.wiki $P/Touch/
