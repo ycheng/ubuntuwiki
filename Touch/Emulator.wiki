@@ -31,7 +31,11 @@ ubuntu-emulator run myinstance
 ==== Notes ====
 
  * By default the latest built image from devel channel is used.
-   This can be changed during creation with the --channel and --revision options.
+   This can be changed during creation with the following parameters:
+   {{{
+--channel, --revision
+   }}}
+   See [[http://developer.ubuntu.com/start/ubuntu-for-devices/image-channels]] for more details.
  * XDG_CACHE_DIR/ubuntuimage is used to download images; it is shared with ubuntu-device-flash.
  * Images are stored in XDG_DATA_DIR/ubuntu-emulator.
  * To update to a latest image; it is safe to create over the previous instance (upgrade option comming soon).
@@ -39,6 +43,11 @@ ubuntu-emulator run myinstance
  * All references to run-emulator.sh and build-emulator-sdcard.sh do no apply anymore.
  * Snapshotting is taken care of with the snapshot subcommand from ubuntu-emulator.
  * If `ubuntu-emulator run` fails with `libGL error: Couldn't dlopen libudev.so.1 or libudev.so.0, driver detection may be broken` on amd64, this is bug:1291333. You can work around this by doing `sudo apt-get install libudev1:i386`
+ * If 'ubuntu-emulator create' fails with "qemu-img: Invalid options for file format 'qcow2'", you may need to use a raw disk as per [[https://lists.launchpad.net/ubuntu-phone/msg08072.html]]
+ {{{
+--use-raw-disk
+ }}}
+ * The new emulator instance is created with the phablet user password set to: '''0000'''.  Passwords entered on the initial wizard security screen will be ignored.  A new option has been added to the latest version of ubuntu-emulator in vivid: ''--password='' which can be used to override the default password.
 
 ==== Maintenance ====
 
