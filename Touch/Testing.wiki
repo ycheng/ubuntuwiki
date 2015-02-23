@@ -178,3 +178,21 @@ phablet-test-run -n unity8
 
 
 For core developers, we highly recommend to run unity8, three random apps and whatever your own test suites are.
+
+= Running tests with autopkgtest =
+
+We are moving from all the above explicit setup and `phablet-test-run` towards defining the test metadata explicitly ([[http://dep.debian.net/deps/dep8/|DEP-8]]) for both [[https://people.debian.org/~mpitt/autopkgtest/README.package-tests.html|deb (spec)]] and [[https://people.debian.org/~mpitt/autopkgtest/README.click-tests.html|click (spec)]] packages. This will allow us to run tests on a read-only image, make tests easier to run as you don't need any particular preparation, allow running tests on other testbeds (such as LXC), and generally be more consistent with how we test non-Touch packages in Ubuntu.
+
+To do this you need at least autopkgtest 3.8.1 from Ubuntu 15.04. If you are running an earlier Ubuntu release, you can just [[https://packages.debian.org/sid/all/autopkgtest/download|download the latest deb]] and install it, it will work on Ubuntu 12.04 LTS and newer. The included documentation [[https://people.debian.org/~mpitt/autopkgtest/README.running-tests.html|shows how to run tests]] for a lot of possible scenarios, but for touch specific tests these are the most common use cases:
+
+ * Run tests of an already installed click package:
+
+ {{{
+ adt-run --click com.ubuntu.calculator --- ssh -s adb
+ }}}
+
+ * Run tests of a local click package; you need to specify the source directory first, then the built .click:
+
+ {{{
+  adt-run devel/ubuntu-calculator-app/ devel/com.ubuntu.calculator_1.3.339_all.click --- ssh -s adb
+ }}}

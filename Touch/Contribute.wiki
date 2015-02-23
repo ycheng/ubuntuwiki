@@ -56,7 +56,7 @@ Generally, please try to do your best to make sure you put enough information so
 
 However, if you have bugs which concern the image tools (ubuntu-device-flash), bug tracking is open and bugs are welcome; go to https://bugs.launchpad.net/phablet-tools/+filebug to open a new bug.
 
-If you want to help out with triaging bugs, that's great. Ask on IRC or the mailing list if you're unsure. We've got to work all together on this to make Ubuntu for Phones & Tablets truly rock!
+If you want to help out with reporting or triaging bugs, that's great. '''Ask on IRC or the mailing list if you're unsure.''' We've got to work all together on this to make Ubuntu for Phones & Tablets truly rock!
 
 = Where to discuss =
 <<Anchor(Discuss)>>

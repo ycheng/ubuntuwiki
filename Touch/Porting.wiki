@@ -1,6 +1,1 @@
-<<Include(Touch/Menu)>>
-||<tablebgcolor="#F1F1ED" tablewidth="40%" tablestyle="float:right;font-size:0.9em;margin:0 0 1em 1em;"style="padding:0.25em;"><<BR>><<TableOfContents>> ||
-
-Coming soon...
-
-The previous deprecated porting guide is at [[Touch/DeprecatedPorting]]
+#REFRESH 2 https://developer.ubuntu.com/en/start/ubuntu-for-devices/porting-new-device

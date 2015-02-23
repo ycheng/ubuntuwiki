@@ -1,1 +1,1 @@
-#refresh 0 http://developer.ubuntu.com/start/ubuntu-for-devices/installing-ubuntu-for-devices/
+#refresh 0 https://developer.ubuntu.com/en/start/ubuntu-for-devices/installing-ubuntu-for-devices/

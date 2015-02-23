@@ -118,7 +118,6 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0]] (p3110/p3113) || [[/p3110|p3110]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0 GSM]] (p3100) || [[/p3100|p3100]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_10.1|Samsung Galaxy Tab 2 10.1]] Wifi || [[/P5110|P5110]] ||
-|| [[http://en.wikipedia.org/wiki/Sony_Ericsson_Xperia_neo_V|Sony Xperia Neo V]] || [[/haida|haida]] ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_S|Sony Xperia S]] || [[/nozomi|nozomi]] ||
 || [[http://en.wikipedia.org/wiki/Sony_Xperia_T|Sony Xperia T]] || [[/mint|mint]] ||
 || '''[[http://en.wikipedia.org/wiki/Sony_Xperia_Tablet_Z|Sony Xperia Tablet Z]]''' || [[/pollux|pollux]], flipped, 4.4.2 ||
@@ -133,6 +132,7 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/ASUS_Eee_Pad_Transformer|Asus Transformer]] || [[/tf101|tf101]] || WIP || WIP || WIP || ||
 || [[http://en.wikipedia.org/wiki/Advent_Vega|Advent Vega]] || p10an01 || WIP || WIP || [[http://www.tabletroms.com/forums/vega-rom-development/6154-what-about-ubuntu-touch-vega.html|TabletRoms Forum]] || [[http://www.tabletroms.com/forums/members/hyperturtle.html|HyperTurtle]] ||
 || [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || WIP || WIP || WIP || [[https://launchpad.net/~fonix232|~fonix232]] ||
+|| [[http://www.bq.com/es/productos/aquaris-e4-5-ubuntu.html|BQ Aquaris E4.5 Ubuntu Edition]] || krillin || Not Needed || ubuntu-device-flash || [[http://people.canonical.com/~jhm/barajas/|barajas]] || [[https://launchpad.net/~john.mcaleely|~john.mcaleely]] ||
 || [[http://en.wikipedia.org/wiki/Nook_Color|Nook Color]] || encore || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2160703&page=2]] || ||
 || [[http://en.wikipedia.org/wiki/Nook_HD+|B&N Nook HD+]] || [[/ovation|ovation]] || WIP || WIP || TBA ||  ||
 || [[http://cat-sound.com/tablet-produkte/8-zoll-tablets/cat-phoenix|Cat® Phoenix Tablet PC 4]] || WIP || WIP || WIP || WIP || [[https://launchpad.net/~torsten.franz | Torsten Franz]] ||
@@ -147,7 +147,6 @@ Some notes:
 || '''[[http://en.wikipedia.org/wiki/Huawei_Ascend_P1|Huawei Ascend P1]]''' || [[/u9200|u9200]] || None needed ||  [[/u9200|u9200]]|| WIP || https://launchpad.net/~jani ||
 || Intermatrix U7 || barton || WIP || WIP || WIP || [[https://launchpad.net/~pdey|~pdey]]||
 || [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 7" || tate || WIP || WIP || WIP || [[https://launchpad.net/~hashcode0f|~hashcode0f]] ||
-|| Krillin || krillin || WIP || WIP || [[http://people.canonical.com/~jhm/barajas/|barajas]] || [[https://launchpad.net/~john.mcaleely|~john.mcaleely]] ||
 || [[http://www.gsmarena.com/lenovo_a390-5450.php|Lenovo A390]] || ??? || ??? || ??? || ??? || ||
 || [[http://www.gsmarena.com/lenovo_k900-5241.php|Lenovo K900]] || ??? || ??? || ??? || ??? || ||
 || Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || unlocked || ??? || ??? || ??? || ||
@@ -169,6 +168,7 @@ Some notes:
 || [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora || WIP || WIP || WIP || [[http://forum.xda-developers.com/member.php?u=4883214|~haky86]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm TMO) || d2tmo|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2186277|XDA Forums]] || ||
 || Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S5|Samsung Galaxy S5]] (SKTelecom) || galaxyz || WIP || WIP || N/A || Sam W. ||
 || [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] || WIP || WIP || WIP || [[https://launchpad.net/~p3t3|P3T3]] ||
 || [[http://en.wikipedia.org/wiki/Toshiba_Thrive|Toshiba Thrive]] || [[/antares|antares]] || WIP || WIP || [[http://www.thriveforums.org/forum/pio_masaki-development/18090-wip-ubuntu-touch-thrive-development-4.html#post167696|ThriveForums.org page ]] || pio_masaki on thriveforums.org ||
 Please add this: http://forum.xda-developers.com/showthread.php?t=2226413

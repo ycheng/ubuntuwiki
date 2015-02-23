@@ -2,7 +2,7 @@
 
 = Getting the emulator =
 
-== Minimal requirements for the emulator ==
+== Minimal System requirements for the emulator ==
 
  * 512MB of RAM dedicated for the emulator
  * 4GB of disk space
@@ -13,12 +13,12 @@
 === Instructions ===
 
  * Install the ubuntu-emulator package
- * Create an instance (and select the desired arch to use)
+ * Create an instance (and/or select the desired arch to use)
  * Run the emulator
 
 {{{
 sudo apt-get install ubuntu-emulator
-sudo ubuntu-emulator create myinstance
+sudo ubuntu-emulator create myinstance (you can use any name for "myinstance")
 ubuntu-emulator run myinstance
 }}}
 
@@ -30,7 +30,7 @@ ubuntu-emulator run myinstance
 
 ==== Notes ====
 
- * By default the latest built image from devel channel is used.
+ * By default, the latest built image from devel channel is used.
    This can be changed during creation with the following parameters:
    {{{
 --channel, --revision
@@ -122,10 +122,10 @@ Please check [[/Support|Support status]] to better know what is the current stat
 
 = Using the emulator =
 
-After starting the emulator with the wrapper script following should be available:
+After starting the emulator with the wrapper script, the following should be available:
 
  * Adb
-  Emulator will appear in the output of $ adb devices, and will, once fully booted allow
+  Emulator will appear in the output of $ adb devices, and will, once fully booted, allow
   {{{
 $ adb shell
   }}}
@@ -139,7 +139,7 @@ $ ssh phablet@localhost -p 9999
   }}}
 
  * Telnet access
-  Once launched graphical window title will show a port number, e.g. 5554. Connect to that over telnet, to send hardware events to the emulator
+  Once launched, the graphical window title will show a port number, e.g. 5554. Connect to that over telnet to send hardware events to the emulator
   {{{
 $ telnet 127.0.0.1 5554
 Trying 127.0.0.1...
