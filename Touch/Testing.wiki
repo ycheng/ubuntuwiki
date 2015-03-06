@@ -14,9 +14,7 @@ For functional testing you can utilize the autopilot tool. Originally developed 
 Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image.
 
 = Testing your Ubuntu Touch Code before submission =
-To test your code before submitting use phablet-tools.
-
-(instructions as of April 2014)
+To test your code before submitting using phablet-tools.
 
 == Preparation ==
 
@@ -73,6 +71,8 @@ phablet-test-run -n -r 0000 -p unity8-autopilot unity8
 }}}
 
 == Running Click tests ==
+
+NOTE: phablet-click-test-setup requires autopilot to be installed on the device. Installing the autopilot-touch package requires you turn on r/w mode for the image.
 
 {{{#!highlight bash
 # For click apps, this will download the tests for all your
@@ -196,3 +196,5 @@ To do this you need at least autopkgtest 3.8.1 from Ubuntu 15.04. If you are run
  {{{
   adt-run devel/ubuntu-calculator-app/ devel/com.ubuntu.calculator_1.3.339_all.click --- ssh -s adb
  }}}
+
+If you test an older image, downloading the test dependencies sometimes fails with "404 Not found", as the packages and test dependencies at image build time are no longer available in the archive. In that case you can use `adt-run --setup-commands ro-apt-update --click ...`, this will temporarily switch the device to r/w for running `apt-get update`, and switch back to r/o. If you still get uninstallable packages that way, there is nothing you can do, you have to move to a current image.

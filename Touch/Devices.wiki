@@ -30,14 +30,6 @@ The following devices all are working with `ubuntu-device-flash` script as expla
 || Emulator (ARM) || generic ||
 || Emulator (x86) || generic_x86 ||
 
-== Obsolete ==
-The following two devices used to be supported and are still installable by using the ubuntu-device-flash procedure, but are no-longer supported by the OTA update mechanism. The version which is currently installable on these is very outdated and incompatible with most apps developed against the [[http://developer.ubuntu.com/apps/platform/|Ubuntu App Platform]] guidlines.
-
-The Touch team has announced that these two devices are [[https://lists.launchpad.net/ubuntu-phone/msg05889.html|no longer supported]] by the project as of January 2014 and therefore the community needs to step-in to continue their maintenance.
-
-|| [[http://en.wikipedia.org/wiki/Galaxy_Nexus|Galaxy Nexus]] '''(deprecated)''' || maguro (GSM/HSPA+ Variant) ||
-|| [[http://en.wikipedia.org/wiki/Nexus_7|Nexus 7 2012 WiFi]] '''(deprecated)''' || grouper ||
-
 = Working ports w/ system-image server =
 These ports have their own system-image server owned by some community member, which means they support OTA updates and can be installed using `ubuntu-device-flash` script with `--server="<url>"` parameter.
 

@@ -59,6 +59,11 @@ To get the code setup run:
 phablet-dev-bootstrap [target_directory]
 }}}
 
+Note: You may need to specify it as:
+ {{{
+phablet-dev-bootstrap --repo-branch phablet-4.4.2_r1 --sources aosp [target_directory]
+}}}
+
 If for some reason the sync ends midway, you can continue the sync with the `-c` switch, so the command would be:
  {{{
 phablet-dev-bootstrap -c [target_directory]}}}
