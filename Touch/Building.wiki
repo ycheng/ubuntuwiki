@@ -75,6 +75,11 @@ phablet-dev-bootstrap -v [device codenames] [target_directory]
 
 The `phablet-dev-bootstrap` command will automatically use the `repo` tool with the Ubuntu Touch Preview custom manifest to download all the git repositories and needed data. '''Be aware that this step takes a long time and requires at least 15GB (plus 2-3GB for the binary output)'''.
 
+Finally, the binary blobs for the officially supported devices need to be downloaded separately, with this command from the target directory:
+ {{{
+bzr branch lp:~phablet-team/phablet-tools/aosp-vendor-4.4.2 vendor
+}}}
+
 == Building for an existing device ==
 
 Here's how to build Ubuntu Touch for the Nexus 4 (Android codename mako)

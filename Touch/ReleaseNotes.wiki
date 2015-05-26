@@ -1,9 +1,12 @@
 <<Include(Touch/Menu)>>
 ||<tablebgcolor="#F1F1ED" tablewidth="40%" tablestyle="float:right;font-size:0.9em;margin:0 0 1em 1em;"style="padding:0.25em;"><<BR>><<TableOfContents>> ||
 
+
+/!\ NOTE: These release notes are out-dated. They were published for 13.10 (that's a long time ago in Ubuntu land). Some things have changed since then. Do not use this guide for retail production bq phones.
+
 = Ubuntu Touch Release Notes for Saucy Salamander (A.K.A Phone 1.0) =
 
-13.10 represents a major step forward for the Ubuntu project, because it features the first image to support phones. Furthermore, the Ubuntu phone images feature a set of new technologies that solve many of the longstanding difficulties with Ubuntu distros. Specifically:
+13.10 represents a major step forward for the Ubuntu project, because it features the first image to support phones. Subsequent releases including 14.04 and 14.10 also have phone images. The current releases are based around 14.10 but will move to vivid (15.04) soon. Furthermore, the Ubuntu phone images feature a set of new technologies that solve many of the longstanding difficulties with Ubuntu distros. Specifically:
 
  * Image based updates
  * A complete SDK
@@ -12,7 +15,7 @@
  * Mir Display Server and Window Manager
  * Unity 8 
 
-For 13.10, Ubuntu primarily supports the Galaxy Nexus and Nexus 4 phones, though there are images available for other phones and tablets. 
+For 14.10, Ubuntu primarily supports the Nexus 4 phone and Nexus 7 and Nexus 10 tablets, though there are images available for other phones and tablets. 
 
 == Known Issues for 13.10 ==
 
@@ -32,55 +35,21 @@ This '''release uses Ubuntu 13.10 as its basis'''.  It introduces a revised vers
 
 === User Accounts ===
 
-The images have a pre-configured user account called `phablet`, with the account password also set to `phablet`.  
-There is a set of default sample accounts for the tablet, the login passwords are set to the first name in lowercase.  These are for demonstration purposes and do not affect the user session.
+The images have a pre-configured user account called `phablet`, with the account password also set to whatever you configure in System Settings -> Security & privacy -> Lock Phone.  
 
 <<Anchor(SshAccess)>>
 === Accessing the device over SSH ===
 
-The recommended way to get shell access to the device is through SSH.
+The following Askubuntu answer covers this.
 
-Whenever you're asked for a password, it's `phablet`.
-
-/!\ ```Note``` This process will not work if you have just flashed with "ubuntu-system" variant as that's a read-only filesystem. You can make the filesystem read/write using {{{adb shell touch /userdata/.writable_image}}} and then {{{adb reboot}}}. If you used the "cdimage-touch" variant, this doesn't apply, just carry on with the instructions.
-
-To setup secure shell access, do the following:
- 1. Follow the [[#AdbAccess|steps for access over ADB]]. From here, you should be in the phablet shell until step 4.
- 1. Skip this step if you've already installed the `openssh-server` and `ssh` package on both the device and your computer. Otherwise, run `sudo apt-get install openssh-server` and `sudo apt-get install ssh` as necessary.
- 1. After you connect your device to wifi, run `ifconfig wlan0` on the device's terminal or `ip addr show wlan0` on the phablet shell to get its IP address (inet addr:). You will need this number for step 5.  For the ifconfig option, you may need to enable the `/proc` filesystem by running: `sudo mount -t proc proc /proc`.
- 1. Press the Ctrl+D key combination 3 times to successively exit all shells. Alternatively, you can start a new terminal (Ctrl+Alt+T) to run the command in the next step.
- 1. Run `ssh phablet@ipaddress_of_device` to connect to the device. If you're connecting for the first time, you'll be prompted to add the device to your list of known hosts, so accept the prompt.
-
-You also can use adb port forwarding to allow SSH access to the Ubuntu container via USB.  To do this, run
-
- {{{
-adb forward tcp:8888 tcp:22
-ssh phablet@localhost -p 8888
-}}}
-
-<<Anchor(AdbAccess)>>
-=== Accessing the device over ADB ===
-
-It is recommended to access the device through SSH to properly see the Ubuntu PID namespace. However you can adb into the device as well for some tasks. Do the following:
-
- 1. Start a terminal on your computer by pressing the Ctrl+Alt+T key combination
- 1. If you have already set up your environment for flashing Ubuntu images, skip to the next step. Otherwise [[../Install#Setup_the_Touch_Developer_Preview_Tools_PPA|install the Touch Preview tools PPA]].
- 1. Run the following commands to connect to the device through ADB:
- {{{
-adb root
-adb shell}}}
- 1. Execute the following command to run as user `phablet` (required to run apps in an initialized session):
- {{{
-sudo -u phablet -i}}}
-
-NOTE: you will not be able to run `ps` or view processes by accessing the device in this manner; please [[#SshAccess|use SSH]] if you are intending to monitor processes. 
+http://askubuntu.com/a/599041
 
 === Applications ===
 
 The Developer Preview comes with the following functional applications:
 
  * Gallery
- * Phone (Dialer, SMS, Address Book)
+ * Dialer, SMS, Address Book
  * Camera
  * Browser
  * Media Player
@@ -88,6 +57,8 @@ The Developer Preview comes with the following functional applications:
  * Music app
  * Calculator
  * Weather app
+ * Clock
+ * Reminders
 
 === Installing new apps ===
 
@@ -99,10 +70,7 @@ See the [[#SdkAlpha|SDK documentation]] for information on how to install apps o
 
 Contacts can be added in the address book of the Phone application. 
 Launch the Phone application and swipe to the “Contacts” tab. You can manually enter your contacts from there.
-
-Alternatively you can import contacts from a csv file. The csv file should be in same format as `/usr/share/demo-assets/contacts-data/data.csv`.  Replace the sample `data.csv` file with your own version and run `manage-address-books.py create` to import your contacts.
-
-You can also import your Google Contacts: http://sergiusens.github.io/posts/google-contacts-on-ubuntu-touch.html
+Contacts can also be synced from Google via System Settings -> Accounts.
 
 ==== Photos ====
 
@@ -110,19 +78,7 @@ Photos can be added to the device and viewed in the Gallery application. They ca
 
 ==== Videos ====
 
-Videos can be copied onto the device into the `/home/phablet/Videos` folder and viewed with the Media Player application. They can be surfaced in the video lens by modifying the `/usr/share/unity/lenses/mockvideos/mockvideos.json` file to point at your installed videos (this process will be automatic in the future).
-
-Alternatively, you can run the Media Player from the shell by running the following command:
- {{{
-media-player <full_path_to_video_file> --desktop_file_hint=/usr/share/applications/media-player.desktop
-}}}
-
-=== Upgrades ===
-
-Some parts of the image can’t currently be upgraded, so it is best to [[Touch/Install|deploy a full updated image]].  Some individual apps can be updated with `apt`, though. First add the phablet-team ppa (https://launchpad.net/~phablet-team/+archive/ppa) to /etc/apt/sources.list. Then run the following command with root permissions to update apps:
- {{{
-# apt-get update && apt-get upgrade
-}}}
+Videos can be copied onto the device into the `/home/phablet/Videos` folder and viewed with the Media Player application. They are surfaced in the video scope and Gallery app.
 
 == Porting to other devices ==
 
@@ -130,87 +86,30 @@ If you are interested in getting the Touch Preview working on a new device, plea
 
 == Known Issues ==
 
-=== Memory Usage ===
-
-Memory usage has not yet been optimized for the devices. It is possible to experience application crashes due to having too many applications open at the same time. A workaround is to close apps that are not being used.
-
-=== Language and keyboard ===
-
-A Settings UI for selecting the language and keyboard/input method is currently in the works. In the meantime, the settings can be changed from the command line.
-
-==== Keyboard ====
-These instructions require you to be using a saucy version of Ubuntu Touch. If you are on raring, please upgrade to the latest Ubuntu Touch for saucy with `phablet-flash`.
-
- 1. settings work via gsettings cli:
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit auto-capitalization false
-
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit auto-completion false
-
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit key-press-feedback false
-
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit predictive-text true
-
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit spell-checking false
-
-    * adb shell sudo -iu phablet gsettings set com.canonical.keyboard.maliit enabled-languages "['en_us', 'es', 'fr', 'pt', 'de', 'zh_cn_pinyin']"
-
- 1. Restart the phone: adb reboot
-
-==== Language ====
-
-To set your system language to display localized strings (where available) in applications, do the following. In the example we'll be changing the language to Simplified Chinese (language code {{{zh_CN}}}). For any other language, replace the {{{zh_CN}}} by your language's ISO 639 code. E.g. {{{it}}} for Italian, {{{pt_BR}}} for Brazilian Portuguese, etc. 
-
- 1. [[#SshAccess|Access your device through SSH]] or start the Terminal app on your device
- 1. Then on the terminal connected to your device run:
- {{{
-sudo apt-get install fonts-droid # Required only if your language requires additional fonts
-sudo locale-gen zh_CN
-sudo vi /etc/default/locale # Then change LANG="en_US.UTF-8" to LANG="zh_CN.UTF-8"
-sudo vi /etc/environment # Then change LANG="zh_CN.UTF-8" and LANGUAGE="zh_CN"
-reboot
-make sure (using env) that LANGUAGE is set to the desired locale.
-}}}
-
 === Networking ===
 
 The Developer Preview  has support for Wi-Fi networking via the new network indicator, which supports basic Wi-Fi connections (Open, WEP and WPA Personal).  It is possible to configure more advanced settings, however at this time this requires working directly with Network Manager system connection files. 
 
 The following network features are not yet included in the Developer Preview:
 
- * Airplane Mode/Wi-Fi Power Control
  * Advanced Settings (e.g. Hidden SSIDs, Manual IP, VPN…)
- * Bluetooth
  * Hot Spot/Tethering
-
 
 === Telephony ===
 
-The Developer Preview currently only supports '''limited voice and SMS over GSM and WCDMA'''. 
+The Developer Preview currently only supports '''voice and SMS over GSM and WCDMA'''. 
 
 The following Radio technologies  are not yet included in the Developer Preview:
  * CDMA
- * LTE 
- * Airplane Mode
- * Settings ( eg. APN choice, 2G only, … ) 
-
-'''Mobile data is generally not supported, data is available via Wi-Fi only.'''  However, for instructions on how to enable 3G on devices, please see the following [[https://plus.google.com/100264483712374857174/posts/3o1tjYo9Ghx|G+ post]] by Ricardo Salveti.
 
 These Call features are not yet supported:
- * Emergency Call Support ( ie. ability to dial emergency numbers without a valid SIM card ).
- * PIN/PUK support for locked SIMs
  * No SIM filesystem support
 
 These SMS features are not yet implemented:
- * MMS
  * Send error handling
  * Delivery Reports
 
-
 == Device Specific Issues ==
-
-=== Galaxy Nexus ===
-
- * The 802.11a protocol (i.e. 5GHz) is currently not working.
 
 === Nexus 4 ===
 
@@ -220,54 +119,14 @@ These SMS features are not yet implemented:
 === Nexus 10 ===
 
  * Taking pictures with the camera application causes an issue with audio. The volume indicator and volume keys will not work to control the sound until reboot.
- * People lens sometimes comes up empty after first flashing the device and booting. Rebooting fixes the issue.
 
 === Nexus 7 ===
 
  * Runs in portrait mode by default (no side stage)
- * Camera and video decoding do not function.
- * No multi-user login. 
-
-=== Devices with 1080 screens ===
-
-Set the GRID_UNIT_PX environment variable to an appropriate value for the device (i.e. 30 for a 5” handset screen) in the `/usr/bin/ubuntu-session` script and in the `/home/phablet/.bashrc` file. 
 
 <<Anchor(SdkAlpha)>>
 == Ubuntu SDK Alpha ==
 
-You can now install and execute applications on your device from a computer running Qt Creator:
+You can now install and execute applications on your device from a computer running Qt Creator, the following page covers this topic in detail:-
 
- 1. '''Plug in''' your mobile device running Ubuntu on the '''USB''' port of your computer
- 1. Make sure your device is also '''connected to a wireless network''' (SSH key pairing happens over the air)
- 1. Start Qt Creator from the Dash, and select the new '''Devices''' tab
- 1. Press the '''Enable''' button to activate '''Developer Mode'''
- 1. Develop your QML projects as usual (best way is to use one of the '''Ubuntu application templates''' in the File > New File or Project... menu entry). They will ensure that there is an {{{ApplicationName.desktop}}} file (where {{{ApplicationName}}} is the name of your application) with content similar to the following one: {{{
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Terminal=false
-Exec=/usr/bin/qmlscene
-Name=ApplicationName
-GenericName=ApplicationName
-Comment=My project description
-Icon=ubuntu-qmlrunner
-}}}
- 1. Once the device is connected, you can press '''Ctrl+F12''' to install and execute your app on the remote device
-
-Alternatively, you can manually install Qt5/QML-based apps and run them on the device.
-
-  1. Use `adb push` to copy your package or files to the device
-  1. [[#SshAccess|SSH into your device]]  as user `phablet`
-  1. To run, use 
-{{{
-qmlscene --desktop_file_hint=/usr/share/applications/qmlscene.desktop YourApp.qml
-}}}
-
-Applications will be launched minimized by default. Go to the '''Apps lens''' and select your app from the list of '''Running Applications''' to bring it to the foreground
-
-=== Known Issues ===
- * Applications launched on the device from Qt Creator start up in a non-focused mode. Remotely-executed apps are in thumbview mode in the Running Apps section on the Apps lens
- * The remotely-executed apps can not be focused by tapping on the thumbview, they need to be focused with a right-edge swipe
- * Documentation for the remote deployment feature is not yet available
- *Qt Creator does not use the system fonts
- * The welcome screen needs some visual improvements coming up soon
+https://developer.ubuntu.com/en/apps/sdk/tutorials/running-apps-from-the-sdk/
