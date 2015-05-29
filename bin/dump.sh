@@ -18,6 +18,7 @@ bin/editmoin -d Touch/MakingPortsAvailable.wiki $P/Touch/MakingPortsAvailable.wi
 
 sleep 300
 
+bin/editmoin -d Touch/ChannelSchemaSpec.wiki $P/Touch/ChannelSchemaSpec ; sleep 5
 bin/editmoin -d Touch/Porting.wiki $P/Touch/Porting ; sleep 5
 bin/editmoin -d Touch/DeprecatedPorting.wiki $P/Touch/DeprecatedPorting ; sleep 5
 bin/editmoin -d Touch/PortingNewTree.wiki $P/Touch/PortingNewTree ; sleep 5
