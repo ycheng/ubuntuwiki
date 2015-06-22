@@ -112,7 +112,7 @@ $ cd project-rootstock-ng/
 $ ./rootstock-touch-install utopic-preinstalled-touch-armhf.tar.gz out/target/product/mako/system.img
 }}}
 
-You can find the latest Ubuntu rootfs image at http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/utopic-preinstalled-touch-armhf.tar.gz.
+You can find the latest Ubuntu rootfs image at http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/utopic-preinstalled-touch-armhf.tar.gz (broken link).
 
 == Updating the Android system image ==
 
