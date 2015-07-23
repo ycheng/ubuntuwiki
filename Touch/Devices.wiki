@@ -23,15 +23,17 @@ A few points to bear in mind are:
 
 The following devices all are working with `ubuntu-device-flash` script as explained in Install instructions [[Touch/Install|here]]. The latest status for what is working is [[Touch/Devices/Nexus|here]]. They are using system-image system for installation and support OTA updates. They are hosted at https://system-image.ubuntu.com
 
-|| '''Device''' || '''Board name''' || '''Production''' || '''Source''' || '''Supported Until (EOL)''' ||
-|| [[http://en.wikipedia.org/wiki/Nexus_4|Nexus 4]] || mako || No || Ubuntu Archive || Unknown ||
-|| [[http://en.wikipedia.org/wiki/Nexus_7_(2013_version)|Nexus 7 2013 (WiFi only)]] || flo || No || Ubuntu Archive || Unknown ||
-|| [[http://en.wikipedia.org/wiki/Nexus_10|Nexus 10]] || manta || No || Ubuntu Archive || Unknown ||
-|| Emulator (ARM) || generic || No || Ubuntu Archive ||  Likely indefinitely ||
-|| Emulator (x86) || generic_x86 || No || Ubuntu Archive || Likely indefinitely ||
-|| [[http://www.bq.com/es/productos/aquaris-e4-5-ubuntu.html|BQ Aquaris E4.5 Ubuntu Edition]] || krillin || Yes || [[https://github.com/bq/aquaris-E4.5|github.com/bq/aquaris-E4.5]] ([[https://github.com/bq/aquaris-E4.5/tree/aquaris-E4.5-ubuntu-rtm|Ubuntu Branch]]) || Unknown ||
+|| '''Device''' || '''Board name''' || '''Production''' || '''Source''' || '''Supported Until (EOL)''' || '''adb Recovery''' ||
+|| [[http://en.wikipedia.org/wiki/Nexus_4|Nexus 4]] || mako || No || Ubuntu Archive || Unknown || n/a ||
+|| [[http://en.wikipedia.org/wiki/Nexus_7_(2013_version)|Nexus 7 2013 (WiFi only)]] || flo || No || Ubuntu Archive || Unknown || n/a ||
+|| [[http://en.wikipedia.org/wiki/Nexus_10|Nexus 10]] || manta || No || Ubuntu Archive || Unknown || n/a ||
+|| Emulator (ARM) || generic || No || Ubuntu Archive ||  Likely indefinitely || n/a ||
+|| Emulator (x86) || generic_x86 || No || Ubuntu Archive || Likely indefinitely || n/a ||
+|| [[http://www.bq.com/es/productos/aquaris-e4-5-ubuntu.html|BQ Aquaris E4.5 Ubuntu Edition]] || krillin || Yes || [[https://github.com/bq/aquaris-E4.5|github.com/bq/aquaris-E4.5]] ([[https://github.com/bq/aquaris-E4.5/tree/aquaris-E4.5-ubuntu-master|Ubuntu Branch]]) || Unknown || [[http://people.canonical.com/~jhm/barajas/recovery-krillin.img|recovery-krillin.img]] ||
+|| [[http://www.meizu.com/en/ubuntu/features.html|Meizu MX4 Ubuntu Edition]] || m75/arale || Yes || [[https://github.com/meizuosc/m75|github.com/meizuosc/m75]] || Unknown || [[http://people.canonical.com/~alextu/tangxi/recovery/recovery.img|recovery.img]] ||
+|| [[http://www.bq.com/gb/aquaris-e5-ubuntu-edition|BQ Aquaris E5 Ubuntu Edition]] || vegetahd || Yes || [[https://github.com/bq/aquaris-E5|github.com/bq/aquaris-E5]] ([[https://github.com/bq/aquaris-E5/tree/aquaris-E5-ubuntu-master|Ubuntu Branch]]) || Unknown || [[http://people.canonical.com/~jhm/barajas/recovery-vegetahd.img|recovery-vegetahd.img]] ||
 
-Note that production devices (currently only krillin) need an adb enabled recovery to work with ubuntu-device-flash, as discussed on [[http://askubuntu.com/questions/602035/how-do-i-use-ubuntu-device-flash-with-the-bq-aquaris-e4-5|askubuntu here]].
+Note that production devices need an adb enabled recovery to work with ubuntu-device-flash, as discussed on [[http://askubuntu.com/questions/602035/how-do-i-use-ubuntu-device-flash-with-the-bq-aquaris-e4-5|askubuntu here]].
 
 = Working ports w/ system-image server =
 These ports have their own system-image server owned by some community member, which means they support OTA updates and can be installed using `ubuntu-device-flash` script with `--server="<url>"` parameter.
@@ -146,7 +148,6 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/LG_Optimus_4X_HD|LG Optimus 4x HD]] || p880 || [[http://forum.xda-developers.com/showthread.php?t=2245836 | Click Here]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || ashley.johnson [at] madmedialabs [dot] com ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2162777|XDA Forums]]|| [[https://launchpad.net/~ruggles92|~rugglez]] ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ||
-|| Meizu || m75/Arale || WIP || WIP || [[https://github.com/meizuosc/m75|github]] || [[https://launchpad.net/~alextu|alextu]] ||
 || [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus || WIP || WIP || WIP || [[https://launchpad.net/~501st-alpha1|Scott Weldon]] ||
 || [[http://en.wikipedia.org/wiki/Moto_G|Motorola Moto G]] || falcon || ??? || [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|XDA Forums]] || [[https://github.com/h2o64/android_local_h2o64|code]] / [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|Image linked at XDA Forums]] || [[http://forum.xda-developers.com/member.php?u=4792450|h2o64 on XDA Forums]] ||
 || [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo || WIP|| WIP || WIP || [[https://launchpad.net/~michaelevans|~michaelevans]] ||
@@ -165,6 +166,6 @@ Some notes:
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S5|Samsung Galaxy S5]] (SKTelecom) || galaxyz || WIP || WIP || N/A || Sam W. ||
 || [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] || WIP || WIP || WIP || [[https://launchpad.net/~p3t3|P3T3]] ||
 || [[http://en.wikipedia.org/wiki/Toshiba_Thrive|Toshiba Thrive]] || [[/antares|antares]] || WIP || WIP || [[http://www.thriveforums.org/forum/pio_masaki-development/18090-wip-ubuntu-touch-thrive-development-4.html#post167696|ThriveForums.org page ]] || pio_masaki on thriveforums.org ||
-|| VegetaHD || vegetahd || WIP || WIP || [[https://github.com/bq/aquaris-E5|github]] || [[https://launchpad.net/~john.mcaleely|john.mcaleely]] ||
+
 
 Please add this: http://forum.xda-developers.com/showthread.php?t=2226413
