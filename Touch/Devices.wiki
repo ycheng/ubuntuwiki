@@ -72,100 +72,102 @@ Some notes:
  * Device names in '''bold''' can be flashed by using `phablet-flash community --device <vendor>` (ie: i9100).
 
 || '''Device''' || '''Status page''' ||
-|| Acer Iconia A700 || [[/a700|a700]] ||
 || [[http://en.wikipedia.org/wiki/Asus_Transformer_Infinity#Successors|Asus Transformer Infinity]] || [[/tf700t|tf700t]] ||
-|| [[http://en.wikipedia.org/wiki/Asus_Transformer_Infinity#Successors|Asus Transformer Pad TF300T]] || [[/tf300t|tf300t]] ||
-|| [[http://en.wikipedia.org/wiki/Nook_Tablet|B&N Nook Tablet]] || [[/acclaim|acclaim]] ||
-|| Dell Streak 7 || [[/streak7|streak7]] ||
 || [[http://en.wikipedia.org/wiki/Galaxy_Nexus|Galaxy Nexus]] || [[/toro|toro]] ||
-|| Galaxy Nexus || [[/toroplus|toroplus]] ||
-|| [[http://en.wikipedia.org/wiki/HTC_Desire|HTC Desire]] || [[/bravo|bravo]] ||
-|| [[http://en.wikipedia.org/wiki/HTC_Desire_S|HTC Desire S]] || [[/saga|saga]] ||
 || '''[[http://en.wikipedia.org/wiki/HTC_Desire_Z|HTC Desire Z]]''' (use --wipe with phablet-flash or boot will most likely fail!) || [[/flipped_vision|vision]] (deprecated, unflipped port: [[/vision|vision]]) ||
-|| [[http://en.wikipedia.org/wiki/HTC_Evo_4G_LTE|HTC Evo LTE]] || [[/jewel|jewel]] ||
-|| HTC One || [[/M7|M7]] ||
-|| [[http://en.wikipedia.org/wiki/HTC_One_X|HTC One X]] || [[/endeavoru|endeavoru]] ||
-|| Huawei Ascend G300 || [[/u8815|u8815]] ||
-|| [[http://en.wikipedia.org/wiki/Kindle_Fire|Kindle Fire]] 1st Gen || [[/otter|otter]] ||
-|| Kindle Fire 2nd Gen || [[/otter2|otter2]] ||
-|| [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 8.9" || [[/jem|jem]] ||
-|| LG Nitro/Optimus HD || [[/p930|p930]] ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_L9|LG Optimus L9]] || [[/P760|P760]] ||
-|| LG Spectrum 4G || [[/i_vzw|i_vzw]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_3|Motorola Droid 3]] || [[/solana|solana]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_4|Motorola Droid 4]] || [[/maserati|maserati]] ||
-|| [[http://en.wikipedia.org/wiki/Motorola_Droid_Bionic|Motorola Droid Bionic]] || [[/targa|targa]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_Razr|Motorola Droid RAZR]] || [[/spyder|spyder]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_Razr|Motorola RAZR (GSM/International)]] || [[/umts_spyder|umts_spyder]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_Razr_HD|Motorola Droid Razr HD/Maxx HD CDMA]] || [[/xt926|xt926]] ||
-|| [[http://en.wikipedia.org/wiki/Droid_Razr_M|Motorola Droid Razr M]] || [[/xt907|xt907]] ||
-|| [[http://en.wikipedia.org/wiki/Motorola_Xoom|Motorola Xoom]] || [[/wingray|wingray]] ||
-|| [[http://en.wikipedia.org/wiki/Nexus_One|Nexus One]] || [[/passion|passion]] ||
-|| [[http://www.gsmarena.com/oppo_find_5-5161.php|Oppo Find 5]] || [[/find5|find5]] ||
 || [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Note|Samsung Galaxy Note]] || [[/n7000|n7000]] ||
 || '''[[http://en.wikipedia.org/wiki/Samsung_Galaxy_Note_10.1|Samsung Galaxy Note 10.1]]''' || [[/n8000|n8000]], flipped ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Note_II|Samsung Galaxy Note II]] || [[/n7100|n7100]] ||
-|| Samsung Galaxy S (GT-I9000) || [[/galaxysmtd|galaxysmtd]] ||
-|| Samsung Galaxy S B (GT-I9000B) || [[/galaxysbmtd|galaxysbmtd]] ||
-|| '''[[http://en.wikipedia.org/wiki/Samsung_Galaxy_S2|Samsung Galaxy S2]] (GT-I9100)''' || [[/i9100|i9100]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S3]] (GT-I9300) || [[/i9300|i9300]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_IV|Samsung Galaxy S4]] (GT-I9505) || [[/i9505|i9505]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_7.7|Samsung Galaxy Tab 7.7]] (GT-P6800) || [[/p6800|p6800]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_10.1|Samsung Galaxy Tab 10.1]] Wifi (GT-P7510) || [[/p4wifi|p4wifi]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0]] (p3110/p3113) || [[/p3110|p3110]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0 GSM]] (p3100) || [[/p3100|p3100]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_10.1|Samsung Galaxy Tab 2 10.1]] Wifi || [[/P5110|P5110]] ||
-|| [[http://en.wikipedia.org/wiki/Sony_Xperia_S|Sony Xperia S]] || [[/nozomi|nozomi]] ||
-|| [[http://en.wikipedia.org/wiki/Sony_Xperia_T|Sony Xperia T]] || [[/mint|mint]] ||
 || '''[[http://en.wikipedia.org/wiki/Sony_Xperia_Tablet_Z|Sony Xperia Tablet Z]]''' || [[/pollux|pollux]], flipped, 4.4.2 ||
-|| [[http://en.wikipedia.org/wiki/Sony_Xperia_Z|Sony Xperia Z]] || [[/yuga|yuga]], flipped ||
-|| [[http://en.wikipedia.org/wiki/Sony_Xperia_ZL|Sony Xperia ZL]] || [[/odin|odin]], flipped ||
-|| VZ SGSIII || [[/d2vzw|d2vzw]] ||
+
 
 = Work in progress =
 ''Please try to keep the tables sorted.''
 
 || '''Device''' || '''Code name''' || '''Unlocking instructions''' || '''Install instructions''' || '''Code/Image''' || '''Contact person''' ||
-|| [[http://en.wikipedia.org/wiki/ASUS_Eee_Pad_Transformer|Asus Transformer]] || [[/tf101|tf101]] || WIP || WIP || WIP || ||
-|| [[http://en.wikipedia.org/wiki/Advent_Vega|Advent Vega]] || p10an01 || WIP || WIP || [[http://www.tabletroms.com/forums/vega-rom-development/6154-what-about-ubuntu-touch-vega.html|TabletRoms Forum]] || [[http://www.tabletroms.com/forums/members/hyperturtle.html|HyperTurtle]] ||
-|| [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || WIP || WIP || WIP || [[https://launchpad.net/~fonix232|~fonix232]] ||
-|| [[http://en.wikipedia.org/wiki/Nook_Color|Nook Color]] || encore || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2160703&page=2]] || ||
-|| [[http://en.wikipedia.org/wiki/Nook_HD+|B&N Nook HD+]] || [[/ovation|ovation]] || WIP || WIP || TBA ||  ||
-|| [[http://en.wikipedia.org/wiki/HTC_Butterfly|HTC DNA]] || [[/dlx|dlx]] || WIP || WIP || || ||
-|| [[http://en.wikipedia.org/wiki/HP_Touchpad|HP Touchpad]] || [[/tenderloin|tenderloin]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2175277]] || ||
-|| [[http://en.wikipedia.org/wiki/HTC_One|HTC One]] || [[/m7spr|m7spr]] || [[http://www.youtube.com/watch?v=0zdhyDky2MI|HTCOneRoot]] || WIP || WIP || [[https://launchpad.net/~vthompson|~vthompson]]||
-|| [[http://en.wikipedia.org/wiki/HTC_One_X+#One_X.2B|HTC One X+]] || enrc2b || WIP || WIP || WIP || [[https://launchpad.net/~spirit2457|~Lloir]]||
-|| [[http://en.wikipedia.org/wiki/HTC_One_X+#One_X.2B|HTC One X+]] || evitareul || WIP || WIP || WIP || [[https://launchpad.net/~spirit2457|~Lloir]]||
-|| [[http://en.wikipedia.org/wiki/HTC_One_XL#One_XL|HTC One XL]] || evita || WIP || WIP || WIP || [[https://launchpad.net/~rohan32|~rohan32]]||
-|| [[http://en.wikipedia.org/wiki/HTC_Sensation_4G|HTC Sensation 4G]] || pyramid || WIP || WIP || http://www.droidevs.com/showthread.php?t=1107 || [[https://launchpad.net/~rms-android-engineering|DragünKorr]]||
-|| [[http://en.wikipedia.org/wiki/HTC_Sensation_XL|HTC Sensation XL]] || runnymede || WIP || WIP || WIP || [[https://launchpad.net/~lexmazter|~lexmazter]]||
-|| '''[[http://en.wikipedia.org/wiki/Huawei_Ascend_P1|Huawei Ascend P1]]''' || [[/u9200|u9200]] || None needed ||  [[/u9200|u9200]]|| WIP || https://launchpad.net/~jani ||
-|| Intermatrix U7 || barton || WIP || WIP || WIP || [[https://launchpad.net/~pdey|~pdey]]||
-|| [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 7" || tate || WIP || WIP || WIP || [[https://launchpad.net/~hashcode0f|~hashcode0f]] ||
-|| [[http://www.gsmarena.com/lenovo_a390-5450.php|Lenovo A390]] || ??? || ??? || ??? || ??? || ||
-|| [[http://www.gsmarena.com/lenovo_k900-5241.php|Lenovo K900]] || ??? || ??? || ??? || ??? || ||
-|| Lenovo Thinkpad [[http://www.thinkwiki.org/wiki/Category%3aX_Series|X*]] Tablet PC || unlocked || ??? || ??? || ??? || ||
-|| [[http://en.wikipedia.org/wiki/LG_Optimus_4X_HD|LG Optimus 4x HD]] || p880 || [[http://forum.xda-developers.com/showthread.php?t=2245836 | Click Here]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/ | Bookmark Me]] || ashley.johnson [at] madmedialabs [dot] com ||
-|| [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2162777|XDA Forums]]|| [[https://launchpad.net/~ruggles92|~rugglez]] ||
 || [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ||
-|| [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus || WIP || WIP || WIP || [[https://launchpad.net/~501st-alpha1|Scott Weldon]] ||
 || [[http://en.wikipedia.org/wiki/Moto_G|Motorola Moto G]] || falcon || ??? || [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|XDA Forums]] || [[https://github.com/h2o64/android_local_h2o64|code]] / [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|Image linked at XDA Forums]] || [[http://forum.xda-developers.com/member.php?u=4792450|h2o64 on XDA Forums]] ||
-|| [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo || WIP|| WIP || WIP || [[https://launchpad.net/~michaelevans|~michaelevans]] ||
-|| [[http://en.wikipedia.org/wiki/Nokia_N800|Nokia N800]]/[[http://en.wikipedia.org/wiki/Nokia_N900|N900]] || ??? || ??? || ??? || ??? || ||
-|| Notion Ink Adam PQi 3G || adam_3g || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
-|| Notion Ink Adam PQi Wifi || adam || WIP|| WIP || WIP || [[https://launchpad.net/~borkata|~borkata]] ||
 || [[https://en.wikipedia.org/wiki/Pantech Vega Racer|Pantech Vega Racer]]|| VR || WIP || WIP || http://cafe.naver.com/skydevelopers/284127 ||  [Alteration] ||
-|| [[https://en.wikipedia.org/wiki/Samsung_Galaxy_S#Epic_4G|Samsung Galaxy S Epic 4G ]] || [[/epicmtd|epicmtd]] || WIP || WIP || WIP || [[https://launchpad.net/~annerjb|~annerajb]] ||
-|| Samsung Galaxy S SCL (GT-I9003) || `galaxysl` || WIP || WIP || WIP || [[LaunchpadHome:dpm|David Planella]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_II|Samsung Galaxy S II]] || i777 || WIP || WIP || WIP || [[https://launchpad.net/~vanhoof|~vanhoof]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] || i9300 || WIP || WIP || WIP || ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm AT&T) || d2att|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?p=39156949|XDA Forums]] || [[https://launchpad.net/~dankzegriefer|~dankzegriefer]]||
-|| [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora || WIP || WIP || WIP || [[http://forum.xda-developers.com/member.php?u=4883214|~haky86]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm TMO) || d2tmo|| WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2186277|XDA Forums]] || ||
-|| Samsung Galaxy S4 I9505 || jfltexx || unlocked || WIP .zip || [[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]] ||  [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]] ||
-|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S5|Samsung Galaxy S5]] (SKTelecom) || galaxyz || WIP || WIP || N/A || Sam W. ||
-|| [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] || WIP || WIP || WIP || [[https://launchpad.net/~p3t3|P3T3]] ||
-|| [[http://en.wikipedia.org/wiki/Toshiba_Thrive|Toshiba Thrive]] || [[/antares|antares]] || WIP || WIP || [[http://www.thriveforums.org/forum/pio_masaki-development/18090-wip-ubuntu-touch-thrive-development-4.html#post167696|ThriveForums.org page ]] || pio_masaki on thriveforums.org ||
 
 
-Please add this: http://forum.xda-developers.com/showthread.php?t=2226413
+
+= Seemingly Abandoned Ports =
+
+Many ports were creating during the initial buzz of the Ubuntu Touch developer preview in mid 2013, but have not been updated since then. These ports are now very out of date, will probably lack features such click/snap support, and will require a lot of work to bring them up to date. Feel free to update the status pages and move them back to the active section if you know of activity on these ports.
+
+|| '''Device''' || '''Status page''' || '''Last Change''' ||
+|| Acer Iconia A700 || [[/a700|a700]] || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Advent_Vega|Advent Vega]] || p10an01 ([[http://www.tabletroms.com/forums/vega-rom-development/6154-what-about-ubuntu-touch-vega.html|1]],[[http://www.tabletroms.com/forums/members/hyperturtle.html|2]]) || Apr 2013 ||
+|| [[http://en.wikipedia.org/wiki/Alcatel_One_Touch|Alcatel One Touch]] 995 || [[/cocktail|cocktail]] || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/ASUS_Eee_Pad_Transformer|Asus Transformer]] || [[/tf101|tf101]] || Apr 2013, Broken download links ||
+|| [[http://en.wikipedia.org/wiki/Asus_Transformer_Infinity#Successors|Asus Transformer Pad TF300T]] || [[/tf300t|tf300t]] || Apr 2013 ||
+|| [[http://en.wikipedia.org/wiki/Nook_HD+|B&N Nook HD+]] || [[/ovation|ovation]] || Nov 2013 ||
+|| [[http://en.wikipedia.org/wiki/Nook_Color|B&N Nook Color]] || encore ([[http://forum.xda-developers.com/showthread.php?t=2160703&page=2|1]]) || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Nook_Tablet|B&N Nook Tablet]] || [[/acclaim|acclaim]] || May 2013 ||
+|| Dell Streak 7 || [[/streak7|streak7]] || Sep 2013 ||
+|| [[http://en.wikipedia.org/wiki/HP_Touchpad|HP Touchpad]] || [[/tenderloin|tenderloin]] || Aug 2013 ||
+|| [[http://en.wikipedia.org/wiki/HTC_Butterfly|HTC DNA]] || [[/dlx|dlx]] || Mar 2013, Broken download links ||
+|| [[http://en.wikipedia.org/wiki/HTC_Desire|HTC Desire]] || [[/bravo|bravo]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/HTC_Desire_S|HTC Desire S]] || [[/saga|saga]] || Jun 2013 ||
+|| [[http://en.wikipedia.org/wiki/HTC_Evo_4G_LTE|HTC Evo LTE]] || [[/jewel|jewel]] || Mar 2013 ||
+|| HTC One || [[/M7|M7]] || Aug 2013 ||
+|| [[http://en.wikipedia.org/wiki/HTC_One|HTC One]] || [[/m7spr|m7spr]]  || Jun 2013 ||
+|| [[http://en.wikipedia.org/wiki/HTC_One_X|HTC One X]] || [[/endeavoru|endeavoru]] || Discontinued by author ||
+|| [[http://en.wikipedia.org/wiki/HTC_One_X+#One_X.2B|HTC One X+]] || enrc2b ([[https://launchpad.net/~spirit2457|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/HTC_One_X+#One_X.2B|HTC One X+]] || evitareul ([[https://launchpad.net/~spirit2457|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/HTC_One_XL#One_XL|HTC One XL]] || evita ([[https://launchpad.net/~rohan32|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/HTC_Sensation_4G|HTC Sensation 4G]] || pyramid ([[http://www.droidevs.com/showthread.php?t=1107|1]],[[https://launchpad.net/~rms-android-engineering|2]]) || Mar 2013, Broken download links ||
+|| [[http://en.wikipedia.org/wiki/HTC_Sensation_XL|HTC Sensation XL]] || runnymede ([[https://launchpad.net/~lexmazter|1]]) || No activity ||
+|| Huawei Ascend G300 || [[/u8815|u8815]] || Jun 2013 ||
+|| '''[[http://en.wikipedia.org/wiki/Huawei_Ascend_P1|Huawei Ascend P1]]''' || [[/u9200|u9200]] || Aug 2013, No images ||
+|| Intermatrix U7 || barton ([[https://launchpad.net/~pdey|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Kindle_Fire|Kindle Fire]] 1st Gen || [[/otter|otter]] || Feb 2013 ||
+|| Kindle Fire 2nd Gen || [[/otter2|otter2]] || Feb 2013 ||
+|| [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 7" || tate ([[https://launchpad.net/~hashcode0f|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Kindle_Fire_HD|Kindle Fire HD]] 8.9" || [[/jem|jem]] || Feb 2013, Download links broken ||
+|| LG Nitro/Optimus HD || [[/p930|p930]] || Feb 2013 ||
+|| [[http://en.wikipedia.org/wiki/LG_Optimus_2X|LG Optimus 2x]] || p990 ([[http://forum.xda-developers.com/showthread.php?t=2162777|1]], [[https://launchpad.net/~ruggles92|2]]) || Jun 2013 ||
+|| [[http://en.wikipedia.org/wiki/LG_Optimus_4X_HD|LG Optimus 4x HD]] || p880 ([[http://forum.xda-developers.com/showthread.php?t=2245836|1]], [[http://elbuntuprojects.com/install-ubuntu-touch-on-lg-optimus-4xhd/|2]], ashley.johnson [at] madmedialabs [dot] com) || ???, Broken link to instructions ||
+|| LG Spectrum 4G || [[/i_vzw|i_vzw]] || Feb 2013 ||
+|| [[http://en.wikipedia.org/wiki/Motorola_Atrix|Motorola Atrix]] || olympus ([[https://launchpad.net/~501st-alpha1|1]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Droid_3|Motorola Droid 3]] || [[/solana|solana]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Droid_4|Motorola Droid 4]] || [[/maserati|maserati]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Motorola_Droid_Bionic|Motorola Droid Bionic]] || [[/targa|targa]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Droid_Razr|Motorola Droid RAZR]] || [[/spyder|spyder]] || March 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Droid_Razr|Motorola RAZR (GSM/International)]] || [[/umts_spyder|umts_spyder]] || March 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Droid_Razr_HD|Motorola Droid Razr HD/Maxx HD CDMA]] || [[/xt926|xt926]] || March 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Droid_Razr_M|Motorola Droid Razr M]] || [[/xt907|xt907]] || Nov 2013 ||
+|| [[http://en.wikipedia.org/wiki/Motorola_Xoom|Motorola Xoom]] || [[/wingray|wingray]] || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Nexus_One|Nexus One]] || [[/passion|passion]] || July 2013 ||
+|| [[http://en.wikipedia.org/wiki/Nexus_S|Nexus S]] || crespo ([[https://launchpad.net/~michaelevans|1]]) || No activity ||
+|| Notion Ink Adam PQi 3G || adam_3g ([[https://launchpad.net/~borkata|1]]) || No activity ||
+|| Notion Ink Adam PQi Wifi || adam ([[https://launchpad.net/~borkata|1]]) || No activity ||
+|| [[http://www.gsmarena.com/oppo_find_5-5161.php|Oppo Find 5]] || [[/find5|find5]] || ???, Download links broken ||
+|| Samsung Galaxy Nexus || [[/toroplus|toroplus]] || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Note_II|Samsung Galaxy Note II]] || [[/n7100|n7100]] || Feb 2013 ||
+|| Samsung Galaxy S (GT-I9000) || [[/galaxysmtd|galaxysmtd]] || Discontinued by author ||
+|| Samsung Galaxy S B (GT-I9000B) || [[/galaxysbmtd|galaxysbmtd]] || Feb 2013 ||
+|| [[https://en.wikipedia.org/wiki/Samsung_Galaxy_S#Epic_4G|Samsung Galaxy S Epic 4G ]] || [[/epicmtd|epicmtd]] || No activity ||
+|| Samsung Galaxy S SCL (GT-I9003) || `galaxysl` ([[LaunchpadHome:dpm|David Planella]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_II|Samsung Galaxy S II]] || i777 ([[https://launchpad.net/~vanhoof|~vanhoof]]) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm AT&T) || d2att ([[http://forum.xda-developers.com/showthread.php?p=39156949|1]],[[https://launchpad.net/~dankzegriefer|~dankzegriefer]]) || Mar 2013, Broken download links ||
+|| '''[[http://en.wikipedia.org/wiki/Samsung_Galaxy_S2|Samsung Galaxy S2]] (GT-I9100)''' || [[/i9100|i9100]] || Sep 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S3]] (GT-I9300) || [[/i9300|i9300]] || Jun 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_III|Samsung Galaxy S III]] (Qualcomm TMO) || d2tmo ([[http://forum.xda-developers.com/showthread.php?t=2186277|XDA Forums]]) || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S_IV|Samsung Galaxy S4]] (GT-I9505) || [[/i9505|i9505]] || Dec 2013 ||
+|| Samsung Galaxy S4 I9505 || jfltexx ([[http://forum.xda-developers.com/showthread.php?t=2564187 | Xda Dev ]], [[http://forum.xda-developers.com/member.php?u=4912348 | Ryan Granger]]) || Dec 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_S5|Samsung Galaxy S5]] (SKTelecom) || galaxyz (Sam W.) || No activity ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_7.7|Samsung Galaxy Tab 7.7]] (GT-P6800) || [[/p6800|p6800]] || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_10.1|Samsung Galaxy Tab 10.1]] Wifi (GT-P7510) || [[/p4wifi|p4wifi]] || Jul 2013, Discontinued by author ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0]] (p3110/p3113) || [[/p3110|p3110]] || Apr 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_7.0|Samsung Galaxy Tab 2 7.0 GSM]] (p3100) || [[/p3100|p3100]] || May 2013 ||
+|| [[http://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_2_10.1|Samsung Galaxy Tab 2 10.1]] Wifi || [[/P5110|P5110]] || Feb 2013 ||
+|| [[http://http://en.wikipedia.org/wiki/Samsung_Galaxy_W|Samsung Galaxy W]] (GT-i8150) || ancora ([[http://forum.xda-developers.com/member.php?u=4883214|~haky86]]) || No activity ||
+|| Sony Xperia 2011 || ???, ([[http://forum.xda-developers.com/showthread.php?t=2226413|1]]) || Oct 2013, Discontinued by author ||
+|| [[http://en.wikipedia.org/wiki/Sony_Xperia_S|Sony Xperia S]] || [[/nozomi|nozomi]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Sony_Xperia_T|Sony Xperia T]] || [[/mint|mint]] || Feb 2013, Download links broken ||
+|| [[http://en.wikipedia.org/wiki/Sony_Xperia_Z|Sony Xperia Z]] || [[/yuga|yuga]], flipped || Sep 2013 ||
+|| [[http://en.wikipedia.org/wiki/Sony_Xperia_ZL|Sony Xperia ZL]] || [[/odin|odin]], flipped || Sep 2013 ||
+|| [[http://en.wikipedia.org/wiki/Toshiba_AC100|Toshiba AC100]] || [[/paz00|paz00]] ([[https://launchpad.net/~p3t3|1]]) || Mar 2013 ||
+|| [[http://en.wikipedia.org/wiki/Toshiba_Thrive|Toshiba Thrive]] || [[/antares|antares]] ([[http://www.thriveforums.org/forum/pio_masaki-development/18090-wip-ubuntu-touch-thrive-development-4.html#post167696|1]], pio_masaki on thriveforums.org) || Jun 2013 ||
+|| VZ SGSIII || [[/d2vzw|d2vzw]] || Feb 2013, Download links broken ||
