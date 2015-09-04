@@ -30,3 +30,4 @@ bin/editmoin -d Touch.wiki $P/Touch/ ; sleep 5
 # Core
 bin/editmoin -d Touch/Core/UbuntuDebugAndroid.wiki $P/Touch/Core/UbuntuDebugAndroid ; sleep 5
 #editmoin -d Touch/.wiki $P/Touch/
+bin/editmoin -d Touch/FAQ.wiki $P/Touch/FAQ ; sleep 5

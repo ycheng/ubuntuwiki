@@ -2,13 +2,13 @@
 ||<tablebgcolor="#F1F1ED" tablewidth="40%" tablestyle="float:right;font-size:0.9em;margin:0 0 1em 1em;"style="padding:0.25em;"><<BR>><<TableOfContents>> ||
 Contribute to development of Ubuntu on mobile devices. Join us and be part of the revolution! 
 
-If you want to port the Ubuntu for Phones & Tablets to other devices than those currently supported, be sure to check out our [[../Porting|Porting guide]].
+If you want to port the Ubuntu for Phones & Tablets to other devices than those currently supported, be sure to check out our [[Touch/Porting|Porting guide]].
 
 The following sections describe how to the code and infrastructure for Ubuntu for Phones & Tablets is currently published and used.
 
 = Code overview =
 
-The Touch Developer Preview is currently built from Ubuntu Utopic combined with some modified and new packages and some Android components to enable specific devices. In the past we have promoted developer images to be 'stable' in sync with Ubuntu 13.10 (Saucy Salamander) and 14.04 (Trusty Tahr). We no longer support those images, but instead encourage developers and users to use an up to date image based on 14.10 (Utopic Unicorn).
+Ubuntu Touch is currently built from the Ubuntu archive combined with some modified and new packages and some Android components to enable specific devices. In the past we promoted developer images to be 'stable' in sync with Ubuntu 13.10 (Saucy Salamander) and 14.04 (Trusty Tahr). Now the phone images have there own release cycle, culminating in an OTA update for all devices on the stable channel.
 
 == Source code ==
 
@@ -18,56 +18,32 @@ Ubuntu for Phones & Tablets currently consists of a collection of open source pr
 
 Most Ubuntu packages are unmodified, and their source code is found directly in the Ubuntu archive.  Contributions should [[http://packaging.ubuntu.com/html/fixing-a-bug.html|follow the usual patch submission guidelines for these packages]].
 
-New software and packages are developed in using the [[https://help.launchpad.net/Code|Bazaar]] distributed version control system, in various [[https://launchpad.net/|Launchpad]] sub-projects from the '''[[http://launchpad.net/ubuntu-touch-preview|Ubuntu Touch Developer Preview project group]]'''. The Ubuntu Touch Developer Preview project group provides a list of those projects used to build the preview. From there you can easily find the code and everything else.
+New software and packages are developed in using the [[https://help.launchpad.net/Code|Bazaar]] distributed version control system, in various [[https://launchpad.net/|Launchpad]] sub-projects.
 
-To hack on these ''system apps'', you can pick the one you're interested in from [[http://launchpad.net/ubuntu-touch-preview|the list]], check out the code using Bazaar and submit a merge proposal in Launchpad.
+To hack on these ''system apps'', you can pick the one you're interested in from [[Touch/Components|the list]], check out the code using Bazaar and submit a merge proposal in Launchpad. You may be especially interested in the [[Touch/CoreApps|core apps]].
 
 === Android layer ===
 
-You can find all the needed Android code on the [[http://phablet.ubuntu.com/|Android layer's public git repositories]]. This is essentially a mirror of the !CyanogenMod 10.1, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
+You can find all the needed Android code on the [[https://code-review.phablet.ubuntu.com/#/admin/projects/|Android layer's public git repositories]]. This is essentially a mirror of the CyanogenMod, but containing only the needed low level services used by Android (e.g. no Dalvik at all).
 
-For any Android related project at our git server, you'll find a branch named `phablet-10.1`. This branch contains a static known git HEAD and the required changes needed for Ubuntu, including [[http://phablet.ubuntu.com/gitweb?p=CyanogenMod/android.git;a=blob;f=default.xml;hb=refs/heads/phablet-10.1|our custom Android manifest]].
-
-A porting guide for adapting this layer to other devices can be found at [[../Porting|Porting guide]].
+A porting guide for adapting this layer to other devices can be found at [[Touch/Porting|Porting guide]].
 
 == Image building ==
 
 === Building and publishing Ubuntu images ===
 
-Images are currently built in the Canonical data center, they are utopic-based images. Full builds are published on `cdimage.ubuntu.com`.
+Images are currently built in the Canonical data center. Full builds are published on `cdimage.ubuntu.com`.
 
 The images are built from an internal Jenkins instance and are automatically copied to cdimage.ubuntu.com. 
 
-If you have any questions about the images or would like to get images added, [[#Discuss|ask us on the mailing list]].
+If you have any questions about the images or would like to get images added, [[Touch/GetHelp|get in touch with us]].
 
-The [[../Porting|Porting Guide]] will contains more information about this.
+The [[Touch/Porting|Porting Guide]] contains more information about this.
 
 = How to report bugs =
 
 We expect a large amount of feedback and will do our best to go through it!
 
-/!\ Please DO NOT file bugs at the "ubuntu-touch-preview" project. This project is no longer monitored, bugs should be filed in the individual affected packages.
+/!\ Bugs should be filed in the individual affected packages.
 
-The [[Avengers|Avengers]] page contains a tabulated list of packages with handy links for where to file bugs.
-
-Include the steps to reproduce, an automated testcase (if possible) and the frequency of the bug. 
-
-Generally, please try to do your best to make sure you put enough information so we can track the hardware and build, for example give "mako #120" in the subject to indicate you're using a Nexus 4 and image #120. You can find out what image you're running in System Settings -> About.
-
-However, if you have bugs which concern the image tools (ubuntu-device-flash), bug tracking is open and bugs are welcome; go to https://bugs.launchpad.net/phablet-tools/+filebug to open a new bug.
-
-If you want to help out with reporting or triaging bugs, that's great. '''Ask on IRC or the mailing list if you're unsure.''' We've got to work all together on this to make Ubuntu for Phones & Tablets truly rock!
-
-= Where to discuss =
-<<Anchor(Discuss)>>
-
-If you got lost somewhere, you found a bug or need some help, we're happy to help you. Ubuntu [[Touch]] is put together by a community of many, who are eager to work together with you on this.
-
-Simply:
- * Join us on '''IRC''' in [[http://webchat.freenode.net/?channels=ubuntu-touch|#ubuntu-touch]] on irc.freenode.net and/or
- * Join our '''mailing list''' by
-  1. Joining the [[https://launchpad.net/~ubuntu-phone|ubuntu-phone team]] on Launchpad and
-  1. leaving the "Subscribe me to the team's mailing list" option checked.
- * Join those '''Telegram''' groups ''(You can use the [[http://www.webupd8.org/2015/01/install-official-telegram-desktop-app.html|desktop app]] or the [[https://uappexplorer.com/app/com.ubuntu.telegram|phone app]] on ubuntu, or choose the right client for you system [[https://telegram.org/apps|here]])'' :
-  1. [[https://telegram.me/joinchat/03644e0d00e995c81a5ad9dad42a9680|Ubuntu App Dev]]
-  1. [[https://telegram.me/joinchat/03644e0d01b52680f48d0b63f39735eb|Ubuntu Porting group]]
+See [[Touch/Bugs]] for more information and help on filing.

@@ -7,11 +7,19 @@
 ----
 '''Wondering how to run tests on a phone? [[https://wiki.ubuntu.com/Touch/Testing/Autopilot/TestRunners|See this page]].'''
 
-== Unit Testing ==
+== For everyone ==
+=== OTA Testing ===
+Help test OTA releases! Here's the information to get you started using [[https://wiki.ubuntu.com/QATeam/PhoneTesting|checkbox]].
+
+=== Community Exploratory testing ===
+Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image.
+
+=== Translations Testing ===
+Help make ubuntu readable in all languages! [[https://wiki.ubuntu.com/Translations/Phone#Testing_translations|Join us!]]
+
+== For developers ==
+=== Unit Testing ===
 Unit testing is a requirement for proper test-driven development. To learn how to utilize the tools Qt and the SDK make available for this, see [[https://wiki.ubuntu.com/Touch/Testing/QML|this page]].
 
-== Functional testing ==
+=== Functional testing ===
 For functional testing you can utilize the autopilot tool. Originally developed for the testing unity, autopilot has become a useful tool for functionally testing many different types of applications; including QML! [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|See this page]] for more information on how to [[https://wiki.ubuntu.com/Touch/Testing/Autopilot|get started using autopilot]].
-
-== Community Exploratory testing ==
-Interested in helping prevent regressions and ensure new features land bugfree everyday? [[https://wiki.ubuntu.com/QATeam/TouchTesting|Join us in doing manual exploratory testing]] of each new stable image.
