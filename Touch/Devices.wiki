@@ -85,7 +85,7 @@ Some notes:
 ''Please try to keep the tables sorted.''
 
 || '''Device''' || '''Code name''' || '''Unlocking instructions''' || '''Install instructions''' || '''Code/Image''' || '''Contact person''' ||
-|| [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ||
+|| [[http://en.wikipedia.org/wiki/LG_Optimus_G|LG Optimus G]] || [[/e973|e973]] , [[/e975|e975]] || WIP || WIP || [[http://forum.xda-developers.com/showthread.php?t=2600702&highlight=ubuntu+touch|XDA Forums]] , [[http://forum.xda-developers.com/optimus-g-intl/general/ubuntu-phone-coming-soon-t3043554|XDA Forums > lastest WIP]]|| [[http://forum.xda-developers.com/member.php?u=4153704|Haze028 ]] ,[[http://forum.xda-developers.com/member.php?u=1928021|mordesku ]] ||
 || [[http://en.wikipedia.org/wiki/Moto_G|Motorola Moto G]] || falcon || ??? || [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|XDA Forums]] || [[https://github.com/h2o64/android_local_h2o64|code]] / [[http://forum.xda-developers.com/moto-g/development/ubuntu-touch-utopic-ubuntu-touch-falcon-t2820359|Image linked at XDA Forums]] || [[http://forum.xda-developers.com/member.php?u=4792450|h2o64 on XDA Forums]] ||
 || [[https://en.wikipedia.org/wiki/Pantech Vega Racer|Pantech Vega Racer]]|| VR || WIP || WIP || http://cafe.naver.com/skydevelopers/284127 ||  [Alteration] ||
 
