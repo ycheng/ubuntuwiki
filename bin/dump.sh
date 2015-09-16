@@ -4,6 +4,7 @@ bin/editmoin -d Touch/AdbNetworking.wiki $P/Touch/AdbNetworking ; sleep 5
 bin/editmoin -d Touch/AOSPBuild.wiki $P/Touch/AOSPBuild ; sleep 5
 bin/editmoin -d Touch/Building.wiki $P/Touch/Building ; sleep 5
 bin/editmoin -d Touch/Contribute.wiki $P/Touch/Contribute ; sleep 5
+bin/editmoin -d Touch/ContainerArchitecture.wiki $P/Touch/ContainerArchitecture ; sleep 5
 bin/editmoin -d Touch/CoreApps.wiki $P/Touch/CoreApps ; sleep 5
 bin/editmoin -d Touch/DailyDriver.wiki $P/Touch/DailyDriver ; sleep 5
 bin/editmoin -d Touch/Devices.wiki $P/Touch/Devices ; sleep 5
