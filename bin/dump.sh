@@ -32,3 +32,12 @@ bin/editmoin -d Touch.wiki $P/Touch/ ; sleep 5
 bin/editmoin -d Touch/Core/UbuntuDebugAndroid.wiki $P/Touch/Core/UbuntuDebugAndroid ; sleep 5
 #editmoin -d Touch/.wiki $P/Touch/
 bin/editmoin -d Touch/FAQ.wiki $P/Touch/FAQ ; sleep 5
+
+# release note
+bin/editmoin -d Touch/ReleaseNotes.wiki $P/Touch/ReleaseNotes ; sleep 5
+bin/editmoin -d Touch/ReleaseNotes/13.10.wiki $P/Touch/ReleaseNotes/13.10 ; sleep 5
+bin/editmoin -d Touch/ReleaseNotes/OTA-5.wiki $P/Touch/ReleaseNotes/OTA-5 ; sleep 5
+bin/editmoin -d Touch/ReleaseNotes/OTA-6.wiki $P/Touch/ReleaseNotes/OTA-6 ; sleep 5
+bin/editmoin -d Touch/ReleaseNotes/OTA-7.wiki $P/Touch/ReleaseNotes/OTA-7 ; sleep 5
+
+
