@@ -1,3 +1,5 @@
+~-See [[SimpleSbuild]] for more sbuild details-~
+
 == One-time setup ==
 
 {{{#!sh
@@ -54,9 +56,21 @@ With above tricks, one can build packages with simply:
 $ sbuild --host armhf *.dsc
 }}}
 
+== Example ==
+
+{{{
+bzr branch lp:camera-app
+cd camera-app
+bzr bd -S
+cd ../build-area/
+sbuild --host armhf camera-app_*.dsc
+}}}
+
+
 == Common resolutions ==
 
  1. If you need python3 interpreter -> Build-Depend on "python3:any"
+ 1. Use cmake, not qmake
  1. Multi-arch all of your libraries
  1. Make sure that your builds pass without building/running test-suite (as during cross-compilation it will not be possible to execute e.g. compiled test binaries)
  1. At the moment, it's not possible to cross-compile and generate gobject bindings (gir-* packages)

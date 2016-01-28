@@ -28,7 +28,31 @@ $ ssh <GERRIT USERNAME>@code-review.phablet.ubuntu.com -p 29418 gerrit version
   {{{
 gerrit version 2.7
 }}}
+  If you get an error like "no matching key exchange method found. Their offer: diffie-hellman-group1-sha1", it means that you are probably running Ubuntu 16.04 or greater and need to tell SSH to allow talking to the older gerrit server:
+  {{{
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 <GERRIT USERNAME>@code-review.phablet.ubuntu.com -p 29418 gerrit version
+}}}
+  To fix this when using git, you need to set an evironment variable:
+  {{{
+export GIT_SSH_COMMAND="ssh -oKexAlgorithms=+diffie-hellman-group1-sha1"
+}}}
  1. Verify that you don't have untrusted OpenIDs associated with your account. If there're any untrusted identity, your group permissions will be void, and you won't have permissions even for basic operations. Go to Settings -> Identities. If you see any identities marked as "UNTRUSTED", remove them. If your current identity is marked as "UNTRUSTED", so you cannot remove it, instead click "Link Another Identity", and link your https://launhpad.net/~ identity, then login with it and remove the untrusted identity.
+
+=== Making and building checkout - repo tool ===
+
+ 1. Make and enter a directory for your workspace
+ 1. {{{
+sudo apt-get install g++-4.8 lib32stdc++-4.8-dev lib32z1-dev # assuming you are on amd64
+}}}
+ 1. {{{
+repo init -u https://code-review.phablet.ubuntu.com/p/aosp/platform/manifest.git -b phablet-4.4.2_r1
+repo sync -j4
+}}}
+ 1. {{{
+. build/envsetup.sh
+lunch <select machine>
+make -j4
+}}}
 
 === Setting up your environment for submitting ===
 Before you start submitting code, it is preferable and highly recommended that you add a "commit-msg" file to your ".git/hooks" directory in order to generated a "Change-Id" automatically.

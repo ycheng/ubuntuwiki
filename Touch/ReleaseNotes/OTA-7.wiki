@@ -5,8 +5,6 @@
 
 = Ubuntu Touch OTA-7 Update =
 
-Please note that this image is not yet officially published, final testing still on progress. Release: October 19th.
-
 == Image numbers ==
 
 As each channel and device has separate versioning, the following list shows the respective image numbers corresponding to the released update:

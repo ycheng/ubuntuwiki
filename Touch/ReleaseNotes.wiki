@@ -12,3 +12,10 @@ The release notes from earlier ETA's and preview releases weren't wikified, howe
 [[Touch/ReleaseNotes/OTA-6|OTA-6]]
 
 [[Touch/ReleaseNotes/OTA-7|OTA-7]]
+
+[[Touch/ReleaseNotes/OTA-8|OTA-8]]
+
+[[Touch/ReleaseNotes/OTA-8.5|OTA-8.5 (hotfix)]]
+
+
+[[Touch/ReleaseNotes/OTA-9|OTA-9]]

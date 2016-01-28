@@ -6,7 +6,7 @@ Ubuntu Touch Developer is currently running on the devices listed below.
 
 For the list of supported devices (not including ports), please see [[http://developer.ubuntu.com/start/ubuntu-for-devices/devices/ | developer.ubuntu.com/start ]].
 
-Images are currently built in the Canonical data center and they are based on `trusty`. Over the next days all necessary changes for Ubuntu Touch are going to go into Ubuntu `utopic` and images will be built using `utopic` as a basis. They are published on `cdimages.ubuntu.com` and `system-image.ubuntu.com`
+Images are currently built in the Canonical data center and they are based on `vivid` plus `ppa:ci-train-ppa-service/stable-phone-overlay`. They are published on `cdimages.ubuntu.com` and `system-image.ubuntu.com`
 
 == Adding your image ==
 
@@ -37,6 +37,13 @@ Note that production devices need an adb enabled recovery to work with ubuntu-de
 
 = Working ports w/ system-image server =
 These ports have their own system-image server owned by some community member, which means they support OTA updates and can be installed using `ubuntu-device-flash` script with `--server="<url>"` parameter.
+
+=== Server at https://system-image.ubports.com ===
+This server belongs to [[https://ubports.com/|The UBports project]] 
+Channels: stable, rc-proposed, devel-proposed
+
+|| '''Device''' || '''Board name''' ||
+|| [[https://wiki.ubports.com/w/OnePlus_One|Oneplus One]] || bacon ||
 
 === Server at http://system-image.tasemnice.eu ===
 This server belongs to [[http://launchpad.net/~vbocek|Vojtech Bocek]] (Tassadar on irc.freenode.net). It is configured to follow `devel` and `devel-proposed` channels of system-image.ubuntu.com server and builds releases for following devices:
